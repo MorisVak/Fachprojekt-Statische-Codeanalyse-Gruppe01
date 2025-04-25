@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <profile name="sbt 1" modules="Fachprojekt,fachprojekt-statische-codeanalyse-gruppe01,fachprojekt-statische-codeanalyse-gruppe01_9338,opal-demo" />
+  </component>
+</project>
