@@ -1,7 +1,6 @@
-import org.opalj.br.BaseType
 import org.opalj.br.analyses.Project
 
-import scala.io.StdIn.{readInt, readLine}
+import scala.io.StdIn.readInt
 
 object godclasstest {
 
@@ -40,12 +39,18 @@ object godclasstest {
     project.allClassFiles.foreach { classFile =>
 
       val fieldSize = classFile.fields.size
+
       val staticFieldCount = classFile.fields.count(_.isStatic)
+
       val methodCount = classFile.methods.size
+
       val foreignFieldCount = classFile.fields.count { field =>
         val fieldType = field.fieldType
-        fieldType.isReferenceType && fieldType != classFile.thisType // checks if a field references a diff. object
+        field.fieldType.toString.contains("ObjectType") &&
+          fieldType != classFile.thisType &&
+          !fieldType.toString.contains("java/") // checks if a field references a different object
       }
+
       // Limit Checks for a classFile
       if (fieldSize >= fieldLimit ||
         staticFieldCount >= staticFieldLimit ||
