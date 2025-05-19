@@ -24,8 +24,8 @@ object criticalMethods{
     var containsCriticalMethod = false
     var criticalMethodUsed = false
     //Sets to safe results
-    val setOfContainedMethods = mutable.Set.empty[(String,String)]
-    val setOfUsedMethods = mutable.Set.empty[(String,String)]
+    val setOfContainedMethods = mutable.Set.empty[(String,String, String)]
+    val setOfUsedMethods = mutable.Set.empty[(String,String,String)]
 
 
     //INVOKESTATIC FOR SYSTEM.securityManager
@@ -43,7 +43,8 @@ object criticalMethods{
 
     val performInvocationsDomain = classOf[DefaultPerformInvocationsDomainWithCFGAndDefUse[_]]
 
-    val jarFile = new java.io.File("pdfbox-2.0.24.jar")
+    val jarFile = new java.io.File("SecManagerTestClass.jar")
+    //val jarFile = new java.io.File("pdfbox-2.0.24.jar")
     //val jarFile = new java.io.File("SecurityTest.class")
     val project = Project(jarFile, GlobalLogContext, config)
 
@@ -51,7 +52,6 @@ object criticalMethods{
       case None               ⇒ Set(performInvocationsDomain)
       case Some(requirements) ⇒ requirements + performInvocationsDomain
     }
-
     //Look through all classes
     val classFiles = project.allClassFiles
     classFiles.foreach{ classFile =>
@@ -64,7 +64,7 @@ object criticalMethods{
               //check if the critical methods are contained in the project.
               criticalCands.foreach(cand => if(cand == invokedMethod.name){
                 containsCriticalMethod = true
-                setOfContainedMethods += ((cand, classFile.fqn))
+                setOfContainedMethods += ((cand, method.fullyQualifiedSignature ,classFile.fqn))
               })
             case _ =>
           }
@@ -85,7 +85,7 @@ object criticalMethods{
           p._2.foreach(u => {
             setOfContainedMethods.foreach(potentialMethod => {
               if(u.method.name == potentialMethod._1 ){
-                setOfUsedMethods += potentialMethod
+                setOfUsedMethods += ((potentialMethod._1,potentialMethod._2, potentialMethod._3))
                 criticalMethodUsed = true
               }
             })
@@ -94,15 +94,21 @@ object criticalMethods{
       })
       if(criticalMethodUsed){
         println("WARNING CRITICAL METHODS ARE BEING USED : ")
-        setOfUsedMethods.foreach(contained => println(s"- ${contained._1} in class ${contained._2} "))
+        setOfUsedMethods.foreach(contained => println(s"- ${contained._1} in method ${contained._2}" +
+          s" in class ${contained._3} "))
       }else{
         println("CRITICAL METHODS EXIST BUT ARE NOT BEING USED")
         println("please check : ")
         setOfContainedMethods.foreach(method =>
-          println(s"- ${method._1} in class ${method._2} "))
+          println(s"- ${method._1} in method ${method._2} in class ${method._3} "))
       }
     }else{
       println("\n No critical methods found :)")
     }
   }
+
+  /*
+  * Case wo man es benutzen könnte --> explizite Testung des Systems
+  * Umsetzung --> constraints.txt in der die Cases stehen, wo die Prüfung ausgesetzt werden soll.
+  * */
 }

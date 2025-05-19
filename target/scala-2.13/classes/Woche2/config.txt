@@ -1,2 +1,4 @@
 getSecurityManager
 setSecurityManager
+setSecurityHandler
+getSecurityHandler
