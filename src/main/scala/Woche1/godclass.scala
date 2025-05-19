@@ -36,7 +36,7 @@ object godclass {
     val classFiles = project.allClassFiles
     //Iterate over all the classes
     classFiles.foreach { classFile =>
-      results += (classFile.toString() -> Array.empty[String])
+        results += (classFile.fqn -> Array.empty[String])
       //Count amount of fields
       val countFields = totalFields(classFile.fields)
       val countDifferentObjectFields = checkAndCountForeignFieldTypes(classFile.fields, classFile)
@@ -103,16 +103,12 @@ object godclass {
   }
 
   def totalClasses(methods: br.Methods): Int = {
-    val count = methods.count(method => true)
+    val count = methods.size
     return count
   }
 
   def totalFields(fields: br.Fields): Int = {
-    val count = fields.count(field => true)
-    fields.foreach { field =>
-      //println(s"FIELD NAME : ${field.name} FIELD TYPE : ${field.fieldType} " +
-        //s"IS BASE TYPE : ${field.fieldType.isBaseType} IS REFERENCE TYPE : ${field.fieldType.isReferenceType}")
-    }
+    val count = fields.size
     return count
   }
 
@@ -120,15 +116,12 @@ object godclass {
     var count = 0
 
     fields.foreach{field =>
-      if(field.fieldType.isReferenceType){
-        if(!field.fieldType.toString.contains("java/") && !field.fieldType.isBaseType && !field.fieldType.isArrayType){
+        if(!field.fieldType.toString.contains("java/") && field.fieldType.toString.contains("ObjectType")){
           if(fieldClass.thisType.toString != field.fieldType.toString){
-            //println("YUP")
+            println(s"TYPE ________   ${field.fieldType} _____________")
 
             count += 1
           }
-          //println(s"DIFFERENT OBJECT : ${field.fieldType}")
-        }
       }
     }
     return count
