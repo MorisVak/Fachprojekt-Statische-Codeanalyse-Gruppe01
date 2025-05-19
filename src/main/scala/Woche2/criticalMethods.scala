@@ -14,12 +14,19 @@ import org.opalj.tac.cg.RTACallGraphKey
 object criticalMethods{
   def main(args: Array[String]):Unit = {
     var criticalCands = Array.empty[String]
+    var suppressedMethods = Array.empty[String]
     //Get input of the config.txt file
     val source = Source.fromFile("src/main/scala/Woche2/config.txt")
     try
       criticalCands = source.getLines().toArray
     finally
       source.close()
+
+    val source2 = Source.fromFile("src/main/scala/Woche2/supressedMethods.txt")
+    try
+      suppressedMethods = source2.getLines().toArray
+    finally
+      source2.close()
 
     var containsCriticalMethod = false
     var criticalMethodUsed = false
@@ -56,7 +63,7 @@ object criticalMethods{
     val classFiles = project.allClassFiles
     classFiles.foreach{ classFile =>
       val methods  = classFile.methods
-      methods.foreach{method =>
+      methods.filter(method => !suppressedMethods.contains(method.name)).foreach{method =>
         val body = method.body
         body.foreach{
           line => line.instructions.foreach{
