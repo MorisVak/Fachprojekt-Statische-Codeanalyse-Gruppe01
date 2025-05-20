@@ -15,6 +15,7 @@ object criticalMethods{
   def main(args: Array[String]):Unit = {
     var criticalCands = Array.empty[String]
     var suppressedMethods = Array.empty[String]
+    var file = "Array.empty[String]"
     //Get input of the config.txt file
     val source = Source.fromFile("src/main/scala/Woche2/config.txt")
     try
@@ -22,21 +23,27 @@ object criticalMethods{
     finally
       source.close()
 
+    //Get input of the supressedMethods.txt
     val source2 = Source.fromFile("src/main/scala/Woche2/supressedMethods.txt")
     try
       suppressedMethods = source2.getLines().toArray
     finally
       source2.close()
 
+    //Get input of the file.txt
+    val source3 = Source.fromFile("src/main/scala/Woche2/file.txt")
+      try
+        file = source3.getLines().mkString
+      finally
+        source3.close()
+
+    println(file)
+
     var containsCriticalMethod = false
     var criticalMethodUsed = false
     //Sets to safe results
     val setOfContainedMethods = mutable.Set.empty[(String,String, String)]
     val setOfUsedMethods = mutable.Set.empty[(String,String,String)]
-
-
-    //INVOKESTATIC FOR SYSTEM.securityManager
-    //ÍNVOKEVIRTUAL for SECURITYHandler
 
     implicit val config: Config =
       BaseConfig.withValue(
@@ -50,9 +57,7 @@ object criticalMethods{
 
     val performInvocationsDomain = classOf[DefaultPerformInvocationsDomainWithCFGAndDefUse[_]]
 
-    val jarFile = new java.io.File("SecManagerTestClass.jar")
-    //val jarFile = new java.io.File("pdfbox-2.0.24.jar")
-    //val jarFile = new java.io.File("SecurityTest.class")
+    val jarFile = new java.io.File(file)
     val project = Project(jarFile, GlobalLogContext, config)
 
     project.updateProjectInformationKeyInitializationData(AIDomainFactoryKey) {
