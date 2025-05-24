@@ -1,0 +1,5 @@
+hibernate-core-5.6.15.Final
+
+spring-core-5.3.30
+
+org.javassist3.30.2-GA
