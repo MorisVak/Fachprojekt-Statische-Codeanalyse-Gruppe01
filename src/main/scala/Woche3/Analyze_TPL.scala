@@ -53,6 +53,7 @@ object thirdParty {
       val libNameNoExt = jar.getName.split("-")(0)
       totalMethodsPerLibrary(libNameNoExt) = methodCount
     }
+    // Speicher zu jeder library die class types
     val libraryClasses: Map[String, Set[Type]] = libraryJars.map { jarFile =>
       val libName = jarFile.getName.stripSuffix(".jar")
       val libProj = Project(jarFile)
