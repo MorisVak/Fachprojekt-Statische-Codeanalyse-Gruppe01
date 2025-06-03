@@ -20,7 +20,7 @@ import java.net.URL
 object thirdParty {
   def main(args: Array[String]): Unit = {
     // Pfade zu Projekt- und Bibliotheks-JARs
-    val projectJar = new File("openmrs-api-2.8.0-SNAPSHOT.jar")
+    val projectJar = new File("TinfourCore-2.1.9-SNAPSHOT.jar")
     val libraryJarNames = Source.fromFile("libraries.txt").getLines().map(_.trim).filter(_.nonEmpty).toSet
     val libraryJars = libraryJarNames.map(name => new File(s"$name.jar"))
 
@@ -37,20 +37,7 @@ object thirdParty {
     // 3. Alle JARs in eine java.util.List konvertieren
     val project = Project(projectJar, GlobalLogContext, config)
     var typeOfCallgraph: String = ""
-    while (!(typeOfCallgraph.toLowerCase.contains("cha") ||
-      typeOfCallgraph.toLowerCase.contains("rta") ||
-      typeOfCallgraph.toLowerCase.contains("xta") ||
-      typeOfCallgraph.toLowerCase.contains("1-1-cfa"))) {
-        print("\nPlease enter type of callgraph (CHA, RTA, XTA, 1-1-CFA): ")
-        typeOfCallgraph = StdIn.readLine()
-    }
-    println(s"\nType of callgraph: ${typeOfCallgraph.toUpperCase}")
-    val callGraph = typeOfCallgraph match{
-      case "cha" => project.get(CHACallGraphKey)
-      case "rta" => project.get(RTACallGraphKey)
-      case "xta" => project.get(XTACallGraphKey)
-      case "1-1-cfa" => project.get(CFA_1_1_CallGraphKey)
-    }
+
 
     //val callGraph = project.get(CHACallGraphKey)
     println(s"Number of classfiles: ${project.classFilesCount}")
@@ -61,11 +48,9 @@ object thirdParty {
     libraryJars.foreach { jar =>
       val libProject = Project(jar)
       var methodCount = 0
-      libProject.allClassFiles.foreach { libClassFile =>
-        methodCount += libClassFile.methods.size
-      }
+      methodCount = libProject.methodsCount
 
-      val libNameNoExt = jar.getName.stripSuffix(".jar")
+      val libNameNoExt = jar.getName.split("-")(0)
       totalMethodsPerLibrary(libNameNoExt) = methodCount
     }
     val libraryClasses: Map[String, Set[Type]] = libraryJars.map { jarFile =>
@@ -79,19 +64,41 @@ object thirdParty {
       libName -> typesInLib
     }.toMap
 
+    var list = scala.collection.mutable.ListBuffer[String]()
+    libraryJarNames.foreach { jar =>
+      list += jar.split("-")(0).replace(".jar","")
 
+    }
+    val allSetsOfMethods: Map[String, mutable.Set[String]] = list.map(k => k -> mutable.Set.empty[String]).toMap
+    while (!(typeOfCallgraph.toLowerCase.contains("cha") ||
+      typeOfCallgraph.toLowerCase.contains("rta") ||
+      typeOfCallgraph.toLowerCase.contains("xta") ||
+      typeOfCallgraph.toLowerCase.contains("1-1-cfa"))) {
+      print("\nPlease enter type of callgraph (CHA, RTA, XTA, 1-1-CFA): ")
+      typeOfCallgraph = StdIn.readLine().toLowerCase
+    }
+    println(s"\nType of callgraph: ${typeOfCallgraph.toUpperCase}")
     val start = System.nanoTime()
+    val callGraph = typeOfCallgraph match {
+      case "cha" => project.get(CHACallGraphKey)
+      case "rta" => project.get(RTACallGraphKey)
+      case "xta" => project.get(XTACallGraphKey)
+      case "1-1-cfa" => project.get(CFA_1_1_CallGraphKey)
+    }
     // Durchlaufe den Callgraphen, um verwendete Methoden zu identifizieren
     callGraph.reachableMethods.foreach { rm =>
       callGraph.calleesOf(rm.method).foreach { case (_, callees) =>
         callees.foreach { callee =>
           val calleeType: Type = callee.method.declaringClassType
-
           // Schaue für jede Library, ob calleeType IN DER MENGE aller Klassen dieser Library ist:
           libraryClasses.foreach { case (libName, classSet) =>
+            println(calleeType.toString)
             if (classSet.contains(calleeType)) {
-              // Fund: diese callee-Methode kommt aus genau dieser Library
-              usedMethodsPerLibrary(libName) += 1
+              list.foreach { item =>
+                if (calleeType.toString.contains(s"org/${item}")){
+                  allSetsOfMethods(item) += callee.method.toString
+                }
+              }
             }
           }
         }
@@ -102,9 +109,9 @@ object thirdParty {
     println(s"Laufzeit des Callgraphs: $duration Millisekunden")
     // Ergebnisse ausgeben
     println("=== Ergebnisse der TPL-Analyse ===")
-    libraryJarNames.toSeq.sorted.foreach { libName =>
+    list.toSeq.sorted.foreach { libName =>
       val total = totalMethodsPerLibrary.getOrElse(libName, 0)
-      val used = usedMethodsPerLibrary.getOrElse(libName, 0)
+      val used = allSetsOfMethods(libName).size
       val percent =
         if (total > 0) BigDecimal(used.toDouble / total * 100)
           .setScale(2, BigDecimal.RoundingMode.HALF_UP)
