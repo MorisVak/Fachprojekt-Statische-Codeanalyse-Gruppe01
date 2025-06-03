@@ -17,14 +17,18 @@ object thirdParty{
       "XTA" -> XTACallGraphKey,
       "CFA" -> CFA_1_1_CallGraphKey
     )
+
+    //powermock-reflect-2.0.9 -> Anzahl an Methoden
     //SETS TO SAFE DATA
-    val setOfusedMethodsHibernate = mutable.Set.empty[(String, String)]
+    val setOfusedMethodsHibernate = mutable.Set.empty[String]
     val setOfpublicApiMethodsHibernate = mutable.Set.empty[(String, String,String)]
     val setOfContainedMethodsHibernate = mutable.Set.empty[(String,String,String)]
-    val setOfusedMethodsSpring = mutable.Set.empty[(String, String)]
+
+    val setOfusedMethodsSpring = mutable.Set.empty[String]
     val setOfpublicApiMethodsSpring = mutable.Set.empty[(String, String,String)]
     val setOfContainedMethodsSpring = mutable.Set.empty[(String,String,String)]
-    val setOfusedMethodsPowerMock = mutable.Set.empty[(String, String)]
+
+    val setOfusedMethodsPowerMock = mutable.Set.empty[String]
     val setOfpublicApiMethodsPowerMock = mutable.Set.empty[(String, String,String)]
     val setOfContainedMethodsPowerMock = mutable.Set.empty[(String,String,String)]
 
@@ -50,6 +54,21 @@ object thirdParty{
         "org.opalj.br.analyses.cg.InitialInstantiatedTypesKey.analysis",
         ConfigValueFactory.fromAnyRef("org.opalj.br.analyses.cg.LibraryInstantiatedTypesFinder")
       )
+
+    //val allSetsOfMethods: Map[String, Set[String]] = libraryJarNames.map(k => k -> Set.empty[String]).toMap
+    /*
+    *
+    * hibernate-core-5.6.15.Final
+
+      spring-core-5.3.30
+
+      powermock-reflect-2.0.9
+    *
+    *
+    * spring
+    * */
+
+
     //LOADING IN PROJECTS
     val project = Project(jarFile, GlobalLogContext, config)
     val hibernateProject = Project (hibernateFile)
@@ -111,13 +130,13 @@ object thirdParty{
       cg.calleesOf(c.method).foreach(p => {
         p._2.foreach(u => {
           //CHECKING IF HIBERNATE METHOD
-          if(u.method.toString.contains("org.hibernate")) {
+          if(u.method.toString.contains("org/spring")) {
             setOfContainedMethodsHibernate.foreach((entry) => {
               if (entry._2 == u.method.name && u.method.toString().contains(entry._3)){
 
                 //println(s"USED --- ${u.method} \n Name of the Method :  ${u.method.name} \n ")
                 //println(s"FQN : ${entry._1} NAME : ${entry._2} CLASS : ${entry._3} \n")
-                setOfusedMethodsHibernate += ((u.method.toString, u.method.name))
+                setOfusedMethodsHibernate += (u.method.toString)
               }
             })
             //println(s"--- ${u.toString} \n Name of the Method :  ${u.method.name} \n ")
@@ -129,7 +148,7 @@ object thirdParty{
 
                 //println(s"USED --- ${u.method} \n Name of the Method :  ${u.method.name} \n ")
                 //println(s"FQN : ${entry._1} NAME : ${entry._2} CLASS : ${entry._3} \n")
-                setOfusedMethodsSpring += ((u.method.toString, u.method.name))
+                setOfusedMethodsSpring += (u.method.toString)
               }
             })
             //println(s"--- ${u.toString} \n Name of the Method :  ${u.method.name} \n ")
@@ -141,7 +160,7 @@ object thirdParty{
 
                 //println(s"USED --- ${u.method} \n Name of the Method :  ${u.method.name} \n ")
                 //println(s"FQN : ${entry._1} NAME : ${entry._2} CLASS : ${entry._3} \n")
-                setOfusedMethodsPowerMock += ((u.method.toString, u.method.name))
+                setOfusedMethodsPowerMock += (u.method.toString)
               }
             })
             //println(s"--- ${u.toString} \n Name of the Method :  ${u.method.name} \n ")
@@ -150,9 +169,9 @@ object thirdParty{
         })
       })
 
-    /*setOfContainedMethodsPowerMock.foreach((entry) => {
+    setOfContainedMethodsPowerMock.foreach((entry) => {
       println(s"USED --- ${entry._1} \n Name of the Method :  ${entry._2} \n ")
-    })*/
+    })
 
     println(s"Projects Method total : ${project.methodsCount}")
     println(s"Used ${cgStrategy} callgraph \n --------------------------------------------------\n")
