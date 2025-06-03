@@ -1,0 +1,2 @@
+hibernate-core-5.6.15.Final
+spring-core-5.3.30
