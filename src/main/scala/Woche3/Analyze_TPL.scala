@@ -20,7 +20,7 @@ import java.net.URL
 object thirdParty {
   def main(args: Array[String]): Unit = {
     // Pfade zu Projekt- und Bibliotheks-JARs
-    val projectJar = new File("TinfourCore-2.1.9-SNAPSHOT.jar")
+    val projectJar = new File("openmrs-api-2.8.0-SNAPSHOT.jar")
     val libraryJarNames = Source.fromFile("libraries.txt").getLines().map(_.trim).filter(_.nonEmpty).toSet
     val libraryJars = libraryJarNames.map(name => new File(s"$name.jar"))
 
@@ -92,7 +92,6 @@ object thirdParty {
           val calleeType: Type = callee.method.declaringClassType
           // Schaue für jede Library, ob calleeType IN DER MENGE aller Klassen dieser Library ist:
           libraryClasses.foreach { case (libName, classSet) =>
-            println(calleeType.toString)
             if (classSet.contains(calleeType)) {
               list.foreach { item =>
                 if (calleeType.toString.contains(s"org/${item}")){
