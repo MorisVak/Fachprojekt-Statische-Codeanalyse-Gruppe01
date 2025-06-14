@@ -1,0 +1,1 @@
+class: ForbiddenMethods$, methods: {fbOne, fbTwo, fbThree}
