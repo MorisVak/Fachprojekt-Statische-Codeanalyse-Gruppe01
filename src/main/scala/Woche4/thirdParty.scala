@@ -1,0 +1,58 @@
+package Woche4
+
+import com.typesafe.config.{Config, ConfigValueFactory}
+import org.opalj.BaseConfig
+import org.opalj.br.analyses.Project
+import org.opalj.log.GlobalLogContext
+import org.opalj.tac.cg._
+
+import scala.collection.mutable
+import scala.io.Source
+
+
+object thirdParty{
+  def main(args: Array[String]):Unit = {
+    implicit val config: Config =
+      BaseConfig.withValue(
+        "org.opalj.br.analyses.cg.InitialEntryPointsKey.analysis",
+        ConfigValueFactory.fromAnyRef("org.opalj.br.analyses.cg.LibraryEntryPointsFinder")
+      ).withValue(
+        "org.opalj.br.analyses.cg.InitialInstantiatedTypesKey.analysis",
+        ConfigValueFactory.fromAnyRef("org.opalj.br.analyses.cg.LibraryInstantiatedTypesFinder")
+      )
+
+
+    val project = Project(new java.io.File("openmrs-api-2.8.0-SNAPSHOT.jar"), GlobalLogContext, config)
+    val firstProject = Project(new java.io.File("openmrs-api-2.8.0-SNAPSHOT.jar"))
+    val hibernateProject = Project(new java.io.File ("hibernate-core-5.6.15.Final.jar"))
+
+    val setOfusedMethodsHibernate = mutable.Set.empty[String]
+
+    hibernateProject.packages
+
+    println(hibernateProject.packages)
+
+    val cg = project.get(RTACallGraphKey)
+    cg.reachableMethods.foreach(c => {
+      cg.calleesOf(c.method).foreach(p => {
+        p._2.foreach(u => {
+          //println("--------------------------")
+          //println(s" PACKAGE :: ${u.method.declaringClassType.packageName}")
+          hibernateProject.packages.foreach(pack => {
+            //println(pack)
+            if (u.method.declaringClassType.packageName == pack){
+              setOfusedMethodsHibernate += u.method.toString
+            }
+          } )
+        })
+      })
+    })
+
+    setOfusedMethodsHibernate.foreach(string => {
+      println(string)
+    })
+    println(s"FINAL AMOUNT = ${setOfusedMethodsHibernate.size}")
+
+  }
+
+}
