@@ -5,6 +5,10 @@ import org.opalj.BaseConfig
 import org.opalj.br.analyses.Project
 import org.opalj.log.GlobalLogContext
 import org.opalj.tac.cg._
+import org.opalj.ba._
+import org.opalj.br._
+import org.opalj.br.instructions._
+
 
 import scala.collection.mutable
 import scala.io.Source
@@ -41,7 +45,7 @@ object thirdParty{
           hibernateProject.packages.foreach(pack => {
             //println(pack)
             if (u.method.declaringClassType.packageName == pack){
-              setOfusedMethodsHibernate += u.method.toString
+              setOfusedMethodsHibernate += u.method.descriptor.toString()
             }
           } )
         })
@@ -53,6 +57,18 @@ object thirdParty{
     })
     println(s"FINAL AMOUNT = ${setOfusedMethodsHibernate.size}")
 
+
+    val hibernateClassFiles = hibernateProject.allClassFiles
+    hibernateClassFiles.foreach{ file =>
+      file.methods.foreach( method => {
+        setOfusedMethodsHibernate.foreach( usedMethod => {
+          //println(s" Method used :${file.fqn} ${method.name} --- ${usedMethod}")
+          if( usedMethod == method.descriptor.toString){
+            println("WE ARE THE SAME")
+          }
+        })
+      })
+    }
   }
 
 }
