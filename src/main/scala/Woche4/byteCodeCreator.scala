@@ -14,136 +14,112 @@ import org.opalj.br.instructions._
 import org.opalj.util.InMemoryClassLoader
 
 import java.io.IOException
+import java.net.URL
 import java.nio.file.{Files, Paths}
 import java.nio.file.StandardOpenOption
 import scala.collection.mutable
 import scala.io.Source
 
 object byteCodeCreator {
-  def main(args: Array[String]):Unit = {
-    implicit val config: Config =
-      BaseConfig.withValue(
-        "org.opalj.br.analyses.cg.InitialEntryPointsKey.analysis",
-        ConfigValueFactory.fromAnyRef("org.opalj.br.analyses.cg.LibraryEntryPointsFinder")
-      ).withValue(
-        "org.opalj.br.analyses.cg.InitialInstantiatedTypesKey.analysis",
-        ConfigValueFactory.fromAnyRef("org.opalj.br.analyses.cg.LibraryInstantiatedTypesFinder")
-      )
 
-
-    val project = Project(new java.io.File("openmrs-api-2.8.0-SNAPSHOT.jar"), GlobalLogContext, config)
-    val firstProject = Project(new java.io.File("openmrs-api-2.8.0-SNAPSHOT.jar"))
-    val TPLproject = Project(new java.io.File ("hibernate-core-5.6.15.Final.jar"))
-
-    val setOfusedMethodsTPL = mutable.Set.empty[String]
-
-    TPLproject.packages
-
-    println(TPLproject.packages)
-
-    val cg = project.get(RTACallGraphKey)
-    cg.reachableMethods.foreach(c => {
-      cg.calleesOf(c.method).foreach(p => {
-        p._2.foreach(u => {
-          //println("--------------------------")
-          //println(s" PACKAGE :: ${u.method.declaringClassType.packageName}")
-          TPLproject.packages.foreach(pack => {
-            //println(pack)
-            if (u.method.declaringClassType.packageName == pack){
-              setOfusedMethodsTPL += u.method.descriptor.toString()
-            }
-          } )
-        })
-      })
-    })
-
-    setOfusedMethodsTPL.foreach(string => {
-      println(string)
-    })
-    setOfusedMethodsTPL.toSet
-    println(s"FINAL AMOUNT = ${setOfusedMethodsTPL.size}")
-
-    var count = 0
-
-    val hibernateClassFiles = TPLproject.allClassFiles
-    var hasUsage = false
-    hibernateClassFiles.foreach{ file =>
-      var arr = Array[Method]()
-      hasUsage = false
-      file.methods.foreach( method => {
-        setOfusedMethodsTPL.foreach( usedMethod => {
-          //println(s" Method used :${file.fqn} ${method.name} --- ${usedMethod}")
-          if( usedMethod == method.descriptor.toString()){
-            arr = arr.appended(method)
-            hasUsage = true
-          }
-        })
-      })
-      if(hasUsage) {
-        createClass(file, arr)
-        count += 1
-      }
-
-    }
-    println(count)
-    println("hib files:" + hibernateClassFiles.size)
-//    val cb = CLASS(
-//      accessModifiers = PUBLIC,
-//      thisType = "Test",
-//      methods = METHODS(
-//        METHOD(PUBLIC, "<init>", "()V", CODE(
-//          // The following instruction is annotated with some meta information
-//          // which can later be used; e.g., to check that some static analysis
-//          // produced an expected result when this instruction is reached.
-//          RETURN -> null
-//        ))
-//      )
-//    )
-//
-//    val (daClassFile, codeAnnotations) = cb.toDA()
-//    val rawClassFile : Array[Byte] = org.opalj.bc.Assembler(daClassFile)
-//
-//    val outputFile = Paths.get("src/main/scala/Woche4/Test.class")
-//    Files.createDirectories(outputFile.getParent)
-//    Files.write(outputFile, rawClassFile)
-
+  def loadProject(path: String,config : Config): Project[URL] = {
+    Project(new java.io.File(path), GlobalLogContext, config)
   }
 
-  def createClass(file: ClassFile, arr: Array[Method]): Unit = {
-    val generatedMethods = arr.map { m =>
-      // Für jede vorhandene Methode erzeugen wir eine Dummy-Methode im neuen Bytecode
-      val descriptor = m.descriptor.toJVMDescriptor
-      val name = m.name
+  def loadTPLProject(path: String): Project[URL] = {
+    Project(new java.io.File(path))
+  }
 
-      METHOD(PUBLIC, name, descriptor, CODE(
-        RETURN -> null
-      ))
+  def main(args: Array[String]): Unit = {
+
+    implicit val config: Config = defaultConfig
+    val project = loadProject("openmrs-api-2.8.0-SNAPSHOT.jar", config)
+    val TPLproject = loadTPLProject("hibernate-core-5.6.15.Final.jar")
+
+    val usedMethods = analyzeCallGraph(project, TPLproject)
+
+    println(s"Classes Amount = ${usedMethods.map(_._1.fqn).size}")
+    println(s"FINAL AMOUNT = ${usedMethods.size}")
+
+    generateDummyClasses(usedMethods)
+
+    println(usedMethods.size)
+
+    println("Done.")
+  }
+
+  def defaultConfig: Config = {
+    BaseConfig.withValue(
+      "org.opalj.br.analyses.cg.InitialEntryPointsKey.analysis",
+      ConfigValueFactory.fromAnyRef("org.opalj.br.analyses.cg.LibraryEntryPointsFinder")
+    ).withValue(
+      "org.opalj.br.analyses.cg.InitialInstantiatedTypesKey.analysis",
+      ConfigValueFactory.fromAnyRef("org.opalj.br.analyses.cg.LibraryInstantiatedTypesFinder")
+    )
+  }
+
+  def analyzeCallGraph(project: Project[URL], TPLproject: Project[URL]):
+  (Set[(ObjectType, String, MethodDescriptor)]) = {
+
+    val setOfUsedMethods = mutable.Set.empty[(ObjectType, String, MethodDescriptor)]
+
+
+    val cg = project.get(RTACallGraphKey)
+
+    cg.reachableMethods.foreach { c =>
+      cg.calleesOf(c.method).foreach { p =>
+        p._2.foreach { u =>
+          val declaringType = u.method.declaringClassType
+          val methodTriple = (declaringType, u.method.name, u.method.descriptor)
+
+
+          if (TPLproject.packages.contains(declaringType.packageName)) {
+            setOfUsedMethods += methodTriple
+          }
+        }
+      }
     }
 
+    (setOfUsedMethods.toSet)
+  }
+
+  def generateDummyClasses(usedMethods: Set[(ObjectType, String, MethodDescriptor)]): Unit = {
+    val grouped = usedMethods.groupBy(_._1)
+
+    grouped.foreach { case (objType, methods) =>
+      createClassFromTriples(objType, methods)
+    }
+  }
+
+  def createClassFromTriples(objectType: ObjectType, methods: Iterable[(ObjectType, String, MethodDescriptor)]): Unit = {
+    val generatedMethods = methods.collect {
+      case (_, name, descriptor) =>
+        METHOD(PUBLIC, name, descriptor.toJVMDescriptor, CODE(RETURN -> null))
+    }.toSeq
+
+    // Wenn KEIN Konstruktor dabei ist, darf keiner erzeugt werden.
     val cb = CLASS(
       accessModifiers = PUBLIC,
-      thisType = file.fqn,
-      methods = METHODS(
-        generatedMethods.toSeq: _* // alle Methoden einfügen
-      )
+      thisType = objectType.fqn,
+      methods = METHODS(generatedMethods: _*)
     )
+
     val (daClassFile, _) = cb.toDA()
     val rawClassFile: Array[Byte] = Assembler(daClassFile)
-    val sanName = sanitizeForFilename(file.thisType.simpleName)
+    val sanName = sanitizeForFilename(objectType.simpleName)
     val outputPath = Paths.get("src/main/scala/Woche4/dummies", sanName + ".class")
+
     try {
       Files.createDirectories(outputPath.getParent)
       Files.write(outputPath, rawClassFile)
     } catch {
       case e: IOException =>
-        println(s" Konnte Datei für ${file.fqn} nicht schreiben: ${e.getMessage}")
+        println(s"Konnte Datei für ${objectType.fqn} nicht schreiben: ${e.getMessage}")
     }
-
   }
 
   def sanitizeForFilename(name: String): String = {
-    // Erlaubt nur Buchstaben, Zahlen, Unterstriche und Punkte
     name.replaceAll("[^a-zA-Z0-9_.]", "_")
   }
-
 }
+
