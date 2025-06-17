@@ -29,7 +29,7 @@ object bytecode_mod {
       val clsName = line.split(",")(0).replace("class:", "").trim
       Some(clsName -> methods)
     }.toMap
-    println(forbiddenMapStr)
+
 
     //Erstelle Projekt:
     val projectJar = new File("ForbiddenMethods.jar")
@@ -46,13 +46,10 @@ object bytecode_mod {
       }
       forbiddenMethodsMap += (classFile -> methodSet)
     }
-
+    println(forbiddenMethodsMap)
     forbiddenMethodsMap.foreach { classFile =>
-      println("1")
       val newClassFileA = modifyCode(forbiddenMethodsMap(classFile._1).toArray)
-      println("2")
       val newClassFileABytes: Array[Byte] = Assembler(toDA(newClassFileA))
-      println("3")
       Files.write(Paths.get(s"${classFile._1.thisType.simpleName}_copy.class"), newClassFileABytes)
     }
   }
