@@ -94,6 +94,8 @@ object thirdParty{
           }
         })
       })
+
+      println( s"!!!!!!!!!!!!!!!!!!!!!! ${file.fqn}")
       val cb = CLASS (thisType = s"${file.fqn}",
       methods = METHODS (ArraySeq.from(methodsToUse)))
       val (daClassFile, codeAnnotations) = cb.toDA()
