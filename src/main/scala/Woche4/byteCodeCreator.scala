@@ -94,7 +94,12 @@ object byteCodeCreator {
   def createClassFromTriples(objectType: ObjectType, methods: Iterable[(ObjectType, String, MethodDescriptor)]): Unit = {
     val generatedMethods = methods.collect {
       case (_, name, descriptor) =>
-        METHOD(PUBLIC, name, descriptor.toJVMDescriptor, CODE(RETURN -> null))
+        if(name.contains("void")) {
+          METHOD(PUBLIC, name, descriptor.toJVMDescriptor, CODE(RETURN))
+        } else {
+          METHOD(PUBLIC, name, descriptor.toJVMDescriptor, CODE(ACONST_NULL, ARETURN))
+        }
+
     }.toSeq
 
     // Wenn KEIN Konstruktor dabei ist, darf keiner erzeugt werden.

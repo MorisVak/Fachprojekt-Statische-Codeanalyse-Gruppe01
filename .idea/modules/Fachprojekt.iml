@@ -62,6 +62,5 @@
     <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-mustmatchers_2.13:3.2.19:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-compatible:3.2.19:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="sbt: org.scalactic:scalactic_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" name="hibernate-core-5.6.15.Final (2)" level="project" />
   </component>
 </module>
