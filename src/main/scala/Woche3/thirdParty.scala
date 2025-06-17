@@ -38,6 +38,12 @@ object thirdParty{
     val springFile = new java.io.File ("spring-core-5.3.30.jar")
     val powerMockFile = new java.io.File ("powermock-reflect-2.0.9.jar")
 
+    val jarFiles = List(
+      new java.io.File("openmrs-api-2.8.0-SNAPSHOT.jar"),
+      new java.io.File ("hibernate-core-5.6.15.Final.jar"),
+      new java.io.File ("spring-core-5.3.30.jar")
+    )
+
     //GETTING THE INPUT
     var cgStrategy = ""
     val source3 = Source.fromFile("src/main/scala/Woche3/call-graph.txt")
