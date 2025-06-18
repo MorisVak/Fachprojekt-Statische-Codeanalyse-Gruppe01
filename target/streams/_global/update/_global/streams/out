@@ -1,3 +1,8 @@
-[debug] not up to date. inChanged = true, force = false
-[debug] Updating ...
-[debug] Done updating 
+[0m[[0m[0mdebug[0m] [0m[0mnot up to date. inChanged = true, force = false[0m
+[0m[[0m[0mdebug[0m] [0m[0mUpdating ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone updating [0m
+[0m[[0m[33mwarn[0m] [0m[0mfound version conflict(s) in library dependencies; some are suspected to be binary incompatible:[0m
+[0m[[0m[33mwarn[0m] [0m[0m	* org.scala-lang.modules:scala-xml_2.13:2.3.0 (early-semver) is selected over {1.3.0}[0m
+[0m[[0m[33mwarn[0m] [0m[0m	    +- org.scoverage:scalac-scoverage-reporter_2.13:2.1.1 (depends on 2.3.0)[0m
+[0m[[0m[33mwarn[0m] [0m[0m	    +- de.opal-project:common_2.13:5.0.0                  (depends on 1.3.0)[0m
+[0m[[0m[33mwarn[0m] [0m[0m	    +- de.opal-project:bytecode-representation_2.13:5.0.0 (depends on 1.3.0)[0m
