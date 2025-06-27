@@ -31,7 +31,7 @@ object AccessibilityTest {
     val j=10
     i+=j
     if(i>=11){
-      println("Das ist erreichbar!")
+      println("Das ist erreichbar!") 
     }
   }
   def mFour(): Unit = {
