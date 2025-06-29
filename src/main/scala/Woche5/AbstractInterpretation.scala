@@ -6,13 +6,27 @@ import org.opalj.br.analyses.Project
 
 import java.io.File
 import java.nio.file.{Files, Path}
+import scala.io.Source
+import play.api.libs.json._
 
 object AbstractInterpretation {
 
   def main(args: Array[String]): Unit = {
     val domainDescriptions = DomainRegistry.domainDescriptions
 
-    val input = 5
+    val source = Source.fromFile("config.json")
+    val content = source.mkString
+    source.close()
+
+    println(content)
+
+    val json: JsValue = Json.parse(content)
+    val domain = (json \ "domain").as[Int]
+    println(domain)
+
+    val jar = (json \ "usedJar").as[String] // Hier ein Array von jars erstellen, um mehrere Dateien einzulesen
+
+
 
     var cnt = 0
     val domainMap = domainDescriptions.map{ descr =>
@@ -20,7 +34,7 @@ object AbstractInterpretation {
       cnt += 1
       t
     }.toMap
-    if(input < 0 || input >= cnt - 1) {
+    if(domain < 0 || domain >= cnt - 1) {
       println("Invalid domain number selected, exiting.")
       System.exit(1)
     }
@@ -30,14 +44,14 @@ object AbstractInterpretation {
       println(s"\t [${tuple._1}] - ${tuple._2}")
     }
 
-    val projectJar = new File("pdfbox-2.0.24.jar")
+    val projectJar = new File(jar)
 
     val project = Project(projectJar)
 
     val ai = new BaseAI(true, false)
 
     // Select a domain for the abstract interpretation
-    var domainIdentifierStr = domainMap(input)
+    var domainIdentifierStr = domainMap(domain)
 
     // This is needed because there is likely a bug in the way OPAL 5.0.0 handles domain identifiers.
     domainIdentifierStr = domainIdentifierStr.substring(domainIdentifierStr.indexOf("]") + 2)
