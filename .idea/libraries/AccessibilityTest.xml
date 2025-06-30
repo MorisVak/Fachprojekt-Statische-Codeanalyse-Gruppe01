@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="AccessibilityTest">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/AccessibilityTest.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
