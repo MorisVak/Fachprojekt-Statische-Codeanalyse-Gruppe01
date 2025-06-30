@@ -9,6 +9,5 @@ case class MethodWithDeadCode(
                                numberOfDeadInstructions: Int,
                                enclosingTypeName: String,
                                deadInstructions: mutable.Set[DeadInstruction]
-
                              ) {
 }

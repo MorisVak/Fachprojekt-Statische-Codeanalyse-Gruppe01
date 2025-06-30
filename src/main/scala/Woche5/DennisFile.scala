@@ -30,7 +30,7 @@ object DennisFile {
       println(s"\t [${tuple._1}] - ${tuple._2}")
     }
 
-    val projectJar = new File("AccessibilityTest.jar")
+    val projectJar = new File("AccessibilityTest$.jar")
 
     val project = Project(projectJar)
 
@@ -63,9 +63,9 @@ object DennisFile {
           // If the abstract interpretation evaluated (looked at) less instructions than there are in the code, that means
           // there are instructions that are not reachable at all!
           if(evaluatedInstructionPCs.size < methodCode.size){
-            println(s"${methodCode.size - evaluatedInstructionPCs.size} instructions not reachable in ${method.fullyQualifiedSignature}")
+            println(s"${methodCode.size - evaluatedInstructionPCs.size} instructions not reachable in ${method.name} ")
           }
-          println(s"Methode: ${method.name} in Klasse: ${classFile.thisType.simpleName} mit Code Size: ${methodCode.size}")
+          //println(s"Methode: ${method.name} in Klasse: ${classFile.thisType.simpleName} mit Code Size: ${methodCode.size}")
 
           //          val rep = XHTML.dump(classFile, method, "Abstract Interpretation Succeeded", result).toString()
           //

@@ -1,126 +1,126 @@
 package Woche5
 import java.io.File
 import org.opalj.br.analyses.Project
-
 import org.opalj.ai.AIResult
 import org.opalj.ai.BaseAI
 import org.opalj.ai.common.DomainRegistry
-import org.opalj.ai.common.XHTML
+import org.opalj.br.instructions.Instruction
+import org.opalj.collection.BitSet
 
-import java.nio.file.{Files, Path}
+import java.time.LocalDateTime
+import scala.collection.mutable
 import scala.io.StdIn
 
+import io.circe.generic.auto._
+import io.circe.syntax._
+import io.circe.{Encoder, Json} // für den LocalDateTime-Encoder
+import java.io.{BufferedWriter, FileWriter}
 
-/**
- * Demonstrates how to execute an abstract interpretation run for all methods of a program.
- *
- * Based on: https://github.com/opalj/opal/blob/develop/DEVELOPING_OPAL/demos/src/main/java/org/opalj/br/analyses/ProjectDemo.java
- *
- * @author Michael Eichberg, Johannes Düsing
- */
-object AnalyzeDeadCode extends App {
+object AnalyzeDeadCode {
 
-  /**
-   * Simple method to select which domain shall be used for abstract interpretation. In interactive mode, the user can
-   * select one of the available domains from the DomainRegistry. In non-interactive mode, the first domain is automatically
-   * selected.
-   *
-   * Domains dictate how precise the tracking of variable values is during abstract interpretation.
-   *
-   * @param interactive True if interactive selection shall be used
-   * @return A string identifier of the selected domain
-   */
-  def selectDomain(interactive: Boolean): String = {
+  def main(args: Array[String]): Unit = {
+    // *** KORREKTUR: Erstelle eine neue Instanz der Dialog-Klasse ***
+    val userInputOpt = new InputWindow().showAndGetInput()
+    val allFiles: mutable.Set[String] = mutable.Set.empty
+    // Der Rest der Methode bleibt exakt gleich
+    userInputOpt match {
+      case Some(input) =>
+        println("\n--- GUI-Eingabe erhalten. Starte Analyse... ---")
+        println(s"Gewählter Domain-Index: ${input.someNumber}")
+        println("Dateien:")
+        input.filePaths.foreach(file => allFiles += file)
+        runAnalysis(input.someNumber, allFiles)
+
+      case None =>
+        println("\nAnalyse vom Benutzer abgebrochen.")
+    }
+  }
+
+  private def runAnalysis(domainIndex: Int, allFiles: mutable.Set[String]): Unit = {
     val domainDescriptions = DomainRegistry.domainDescriptions
-
     var cnt = 0
-    val domainMap = domainDescriptions.map{ descr =>
+    val domainMap = domainDescriptions.map { descr =>
       val t = (cnt, descr)
       cnt += 1
       t
     }.toMap
 
-    println("The available domains are: ")
-    domainMap.foreach{ tuple =>
-      println(s"\t [${tuple._1}] - ${tuple._2}")
-    }
-    if(interactive){
-      println("Enter domain number to proceed")
-      val input = StdIn.readInt()
-      if(input < 0 || input >= cnt - 1){
-        println("Invalid domain number selected, exiting.")
-        System.exit(1)
-      }
-      domainMap(input)
-    } else {
-      val theDomain = domainDescriptions.head
-      println(s"Automatically selected domain $theDomain")
-      theDomain
-    }
-  }
 
-  /// --- START OF ACTUAL APPLICATION CODE
+    val ai = new BaseAI(true, false)
 
-/*
-  if(args.length < 1 || args(0).isBlank) {
-    println("USAGE: AiDemo <path-to-jar-or-class> [--interactive] [--write-results]")
-    System.exit(-1)
-  }
+    var domainIdentifierStr = domainMap(domainIndex)
 
-  val useInteractive = args.exists(_.equalsIgnoreCase("--interactive"))
-  val writeResults = args.exists(_.equalsIgnoreCase("--write-results"))
+    domainIdentifierStr = domainIdentifierStr.substring(domainIdentifierStr.indexOf("]") + 2)
+    val programStart = LocalDateTime.now.getNano
+    val methodsWithDeadCode: mutable.Set[MethodWithDeadCode] = mutable.Set.empty
+    var methodCnt = 0
 
- */
-  val useInteractive = true
-  val writeResults = false
-  // Create a simple Project instance for the file given via CLI arguments
-  //val project = Project(new File(args(0)))
-  val project = Project(new File("AccessibilityTest.jar"))
-  // Create an abstract interpreter (the same instance can be reused)
-  val ai = new BaseAI(true, false)
+    allFiles.foreach { fileName =>
+      val project = Project(new File(fileName))
+      val filesAnalyzed: List[String] = project.allClassFiles.map(_.fqn).toList
+      project.allClassFiles.foreach { classFile =>
+        classFile.methods.foreach { method =>
+          if (method.body.isDefined) {
+            methodCnt += 1
+            val domain = DomainRegistry.newDomain(domainIdentifierStr, project, method)
+            println(method.name)
+            val result: AIResult = ai(method, domain)
+            val methodCode = result.code
+            val evaluatedInstructionPCs = result.evaluatedPCs
 
+            if (evaluatedInstructionPCs.size < methodCode.size) {
+              println(s"${methodCode.size - evaluatedInstructionPCs.size} instructions not reachable in ${method.fullyQualifiedSignature}")
+              val evaluated: BitSet = result.evaluatedInstructions
+              val instructions: Seq[Instruction] = methodCode.instructions
+              val allSet: mutable.Set[Instruction] = mutable.Set(instructions: _*)
+              val deadInstructions: mutable.Set[DeadInstruction] = mutable.Set.empty
+              evaluated.iterator.foreach { idx =>
+                if (idx >= 0 && idx < instructions.length) {
+                  allSet -= instructions(idx)
+                }
+              }
+              allSet.foreach { deadInstruction =>
+                if (deadInstruction != null) {
+                  deadInstructions += DeadInstruction(deadInstruction.toString, methodCnt)
+                }
+              }
 
-  // Select a domain for the abstract interpretation
-  var domainIdentifierStr = selectDomain(useInteractive)
-
-  // This is needed because there is likely a bug in the way OPAL 5.0.0 handles domain identifiers.
-  domainIdentifierStr = domainIdentifierStr.substring(domainIdentifierStr.indexOf("]") + 2)
-
-  var methodCnt = 0
-
-  // Iterate over all class files in the project
-  project.allClassFiles.foreach{ classFile =>
-
-    // Iterate over all methods in the project
-    classFile.methods.foreach{ method =>
-      // We can only start abstract interpretation when there is code inside the method
-      if(method.body.isDefined){
-        // Build the domain object
-        val domain = DomainRegistry.newDomain(domainIdentifierStr, project, method)
-
-        // Run the actual abstract interpretation for the current method using the interpreter and domain defined above
-        val result: AIResult = ai(method, domain)
-
-        val methodCode = result.code
-        val evaluatedInstructionPCs = result.evaluatedPCs
-
-        // If the abstract interpretation evaluated (looked at) less instructions than there are in the code, that means
-        // there are instructions that are not reachable at all!
-        println(s"Methodenname: ${method.name}, evalPCs: ${evaluatedInstructionPCs.size}, methodCode: ${methodCode.size}")
-        if(evaluatedInstructionPCs.size < methodCode.size){
-          println(s"${methodCode.size - evaluatedInstructionPCs.size} instructions not reachable in ${method.fullyQualifiedSignature}")
+              methodsWithDeadCode += MethodWithDeadCode(
+                method.fullyQualifiedSignature,
+                method.body.get.instructions.length,
+                methodCode.size - evaluatedInstructionPCs.size,
+                //TODO: Enclosing irgendwas
+                method.name,
+                deadInstructions
+              )
+            }
+          }
         }
-
-        // If specified via CLI arguments, an HTML report will be written for every method
-        if(writeResults){
-          val rep = XHTML.dump(classFile, method, "Abstract Interpretation Succeeded", result).toString()
-
-          Files.writeString(Path.of("ai-data", s"$methodCnt-${method.name.replace("<", "").replace(">", "")}.html"), rep)
-          methodCnt += 1
-        }
-
       }
+      val timeFinished = LocalDateTime.now
+      val programEnd = LocalDateTime.now.getNano
+      val programRuntime: Long = (programEnd - programStart) / 1000000
+      val dcr = DeadCodeReport(filesAnalyzed, domainIdentifierStr, timeFinished, programRuntime, methodsWithDeadCode)
+
+      val namedJsonReport = NamedJsonReport(s"dead_code_report_${fileName.split(".")(0)}", dcr)
+      saveJsonReport(namedJsonReport)
+    }
+
+  }
+  private def saveJsonReport(namedJsonReport: NamedJsonReport): Unit = {
+    val reportAsJson: Json = namedJsonReport.asJson
+    val jsonString = reportAsJson.spaces2 // .spaces2 für Einrückung mit 2 Leerzeichen
+    val file = new java.io.File(s"${namedJsonReport.name}.json")
+    val writer = new BufferedWriter(new FileWriter(file))
+    try {
+      writer.write(jsonString)
+      println(s"JSON-Report wurde erfolgreich in '${file.getAbsolutePath}' gespeichert.")
+    } finally {
+      writer.close()
     }
   }
-
+  private case class NamedJsonReport(
+                              name: String,
+                              resultJson: DeadCodeReport
+                            )
 }
