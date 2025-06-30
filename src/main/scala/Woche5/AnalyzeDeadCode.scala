@@ -102,7 +102,7 @@ object AnalyzeDeadCode {
       val programRuntime: Long = (programEnd - programStart) / 1000000
       val dcr = DeadCodeReport(filesAnalyzed, domainIdentifierStr, timeFinished, programRuntime, methodsWithDeadCode)
 
-      val namedJsonReport = NamedJsonReport(s"dead_code_report_${fileName.split(".")(0)}", dcr)
+      val namedJsonReport = NamedJsonReport(s"dead_code_report_${fileName.replace(".jar","")}", dcr)
       saveJsonReport(namedJsonReport)
     }
 
