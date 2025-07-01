@@ -114,12 +114,12 @@ object AnalyzeDeadCode {
       val dcr = DeadCodeReport(allFiles.toList, domainIdentifierStr, timeFinished, programRuntime, methodsWithDeadCode)
 
       val namedJsonReport = NamedJsonReport(s"dead_code_report_domain_${domainIndex}_${fileName.replace(".jar","")}", dcr)
-      saveJsonReport(namedJsonReport)
+      saveJsonReport(namedJsonReport, dcr)
     }
 
   }
-  private def saveJsonReport(namedJsonReport: NamedJsonReport): Unit = {
-    val reportAsJson: Json = namedJsonReport.asJson
+  private def saveJsonReport(namedJsonReport: NamedJsonReport, dcr :DeadCodeReport): Unit = {
+    val reportAsJson: Json = dcr.asJson
     val jsonString = reportAsJson.spaces2
     val file = new java.io.File(s"${namedJsonReport.name}.json")
     val writer = new BufferedWriter(new FileWriter(file))
@@ -130,7 +130,7 @@ object AnalyzeDeadCode {
       writer.close()
     }
 
-    val writeToDb = true
+    val writeToDb = false
     if (writeToDb) {
 
       try {
