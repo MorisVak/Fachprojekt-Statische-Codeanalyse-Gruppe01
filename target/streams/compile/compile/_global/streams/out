@@ -1,4 +1,0 @@
-[error] E:\UniStuff\FP_01\src\main\scala\Woche4\byteCodeCreatorTest.scala:3:35: not found: type AnyFunSuite
-[error] class byteCodeCreatorTest extends AnyFunSuite{
-[error]                                   ^
-[error] one error found
