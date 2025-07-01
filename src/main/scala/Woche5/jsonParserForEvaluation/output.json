@@ -1,0 +1,26 @@
+{
+  "uses intervals for int values; tracks nullness and must alias information for reference types; records the ai-time def-use information; uses refined signature information": {
+    "domainNumber": "0",
+    "totalMethods": 3962,
+    "totalRuntimeSeconds": 18.307000000000002,
+    "totalDeadInstructions": 5447
+  },
+  "computations related to reference types track nullness, must alias and origin information": {
+    "domainNumber": "10",
+    "totalMethods": 4930,
+    "totalRuntimeSeconds": 10.249999999999998,
+    "totalDeadInstructions": 6140
+  },
+  "computations related to int/long values are done using sets": {
+    "domainNumber": "3",
+    "totalMethods": 3971,
+    "totalRuntimeSeconds": 13.668,
+    "totalDeadInstructions": 5473
+  },
+  "computations are done at the type level; cfg and def/use information is recorded": {
+    "domainNumber": "5",
+    "totalMethods": 6548,
+    "totalRuntimeSeconds": 11.126,
+    "totalDeadInstructions": 8059
+  }
+}

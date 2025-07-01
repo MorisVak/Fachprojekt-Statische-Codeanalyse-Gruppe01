@@ -1,13 +1,18 @@
 const fs = require("fs");
 const path = require("path");
 
-const inputFolder = "/Desktop/small json parser/Reports"; // 🔁 Change this to your folder path
-const outputFile = "summary_output.json";
+const inputFolder = "./Reports";
+const outputFile = "output.json";
 
 const summary = {};
 
+//parses json from inputFolder and prints out the output as Domain { domainNumber, totalMethods, totalRuntimeSeconds, totalDeadInstructions}
+
 fs.readdirSync(inputFolder).forEach((file) => {
   if (file.endsWith(".json")) {
+    console.log(file);
+    const domainVal = file.split("_")[4];
+
     const filePath = path.join(inputFolder, file);
     try {
       const rawData = fs.readFileSync(filePath, "utf-8");
@@ -23,12 +28,16 @@ fs.readdirSync(inputFolder).forEach((file) => {
       const runtimeMs = result.totalRuntimeMs || 0;
       const runtimeSec = runtimeMs / 1000;
 
-      const totalDeads = result.methodsFound.reduce(
-        (prev, curr) => prev + curr.numberOfDeadInstructions,
-        0
-      );
+      const totalDeads = Array.isArray(result.methodsFound)
+        ? result.methodsFound.reduce(
+            (prev, curr) => prev + curr.numberOfDeadInstructions,
+            0
+          )
+        : 0;
+
       if (!summary[domain]) {
         summary[domain] = {
+          domainNumber: domainVal,
           totalMethods: 0,
           totalRuntimeSeconds: 0,
           totalDeadInstructions: 0,
