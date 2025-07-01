@@ -8,6 +8,7 @@ import org.opalj.br.instructions.Instruction
 import org.opalj.collection.BitSet
 import requests._
 import scala.io.Source
+import org.joda.time.{DateTime, Duration}
 
 import java.net.{HttpURLConnection, URL}
 import java.io.{OutputStreamWriter, BufferedReader, InputStreamReader}
@@ -57,11 +58,11 @@ object AnalyzeDeadCode {
     var domainIdentifierStr = domainMap(domainIndex)
 
     domainIdentifierStr = domainIdentifierStr.substring(domainIdentifierStr.indexOf("]") + 2)
-    val programStart = LocalDateTime.now.getNano
     val methodsWithDeadCode: mutable.Set[MethodWithDeadCode] = mutable.Set.empty
     var methodCnt = 0
 
     allFiles.foreach { fileName =>
+      val programStart = DateTime.now()
       val project = Project(new File(fileName))
       val filesAnalyzed: List[String] = project.allClassFiles.map(_.fqn).toList
       project.allClassFiles.foreach { classFile =>
@@ -96,19 +97,23 @@ object AnalyzeDeadCode {
                 method.body.get.instructions.length,
                 methodCode.size - evaluatedInstructionPCs.size,
                 //TODO: Enclosing irgendwas
-                method.name,
+                classFile.thisType.fqn,
                 deadInstructions
               )
             }
           }
         }
       }
-      val timeFinished = LocalDateTime.now
-      val programEnd = LocalDateTime.now.getNano
-      val programRuntime: Long = (programEnd - programStart) / 1000000
-      val dcr = DeadCodeReport(filesAnalyzed, domainIdentifierStr, timeFinished, programRuntime, methodsWithDeadCode)
 
-      val namedJsonReport = NamedJsonReport(s"dead_code_report_${fileName.replace(".jar","")}", dcr)
+      // 0 3 5 10
+      val timeFinished = LocalDateTime.now
+      val programEnd = DateTime.now()
+
+      val totalRuntime: Duration = new Duration(programStart, programEnd)
+      val programRuntime: Long = totalRuntime.getMillis
+      val dcr = DeadCodeReport(allFiles.toList, domainIdentifierStr, timeFinished, programRuntime, methodsWithDeadCode)
+
+      val namedJsonReport = NamedJsonReport(s"dead_code_report_domain_${domainIndex}_${fileName.replace(".jar","")}", dcr)
       saveJsonReport(namedJsonReport)
     }
 

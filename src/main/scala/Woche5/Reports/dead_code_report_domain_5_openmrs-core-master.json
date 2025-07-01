@@ -1,0 +1,23 @@
+{
+  "name" : "dead_code_report_domain_5_openmrs-core-master",
+  "resultJson" : {
+    "filesAnalyzed" : [
+      "openmrs-core-master.jar",
+      "openmrs-api-2.8.0-SNAPSHOT.jar",
+      "TinfourCore-2.1.9-SNAPSHOT.jar",
+      "pdfbox-2.0.24.jar",
+      "hibernate-core-5.6.15.Final.jar",
+      "metadata-extractor-2.19.0.jar",
+      "junit-4.13.1.jar",
+      "junit-jupiter-engine-5.6.0.jar",
+      "junit-jupiter-api-5.6.0.jar",
+      "spring-core-5.3.30.jar",
+      "org.javassist-3.30.2-GA.jar"
+    ],
+    "domainUsed" : "computations are done at the type level; cfg and def/use information is recorded",
+    "timeFinished" : "2025-07-01T16:51:10.2286769",
+    "totalRuntimeMs" : 404,
+    "methodsFound" : [
+    ]
+  }
+}
