@@ -1,5 +1,4 @@
 {
-  "name" : "dead_code_report_domain_10_junit-jupiter-api-5.6.0",
   "resultJson" : {
     "filesAnalyzed" : [
       "openmrs-core-master.jar",

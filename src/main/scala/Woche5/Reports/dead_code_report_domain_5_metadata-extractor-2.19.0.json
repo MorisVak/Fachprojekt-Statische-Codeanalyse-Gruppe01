@@ -1,5 +1,4 @@
 {
-  "name" : "dead_code_report_domain_5_metadata-extractor-2.19.0",
   "resultJson" : {
     "filesAnalyzed" : [
       "openmrs-core-master.jar",

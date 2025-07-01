@@ -1,5 +1,4 @@
 {
-  "name" : "dead_code_report_domain_3_mockito-core-5.18.0",
   "resultJson" : {
     "filesAnalyzed" : [
       "log4j-1.2.17.jar",

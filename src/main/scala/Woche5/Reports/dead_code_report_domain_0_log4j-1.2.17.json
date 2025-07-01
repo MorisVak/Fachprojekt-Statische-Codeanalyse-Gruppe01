@@ -1,5 +1,4 @@
 {
-  "name" : "dead_code_report_domain_0_log4j-1.2.17",
   "resultJson" : {
     "filesAnalyzed" : [
       "log4j-1.2.17.jar",

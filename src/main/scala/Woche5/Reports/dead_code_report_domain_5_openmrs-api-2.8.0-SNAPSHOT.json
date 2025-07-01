@@ -1,5 +1,4 @@
 {
-  "name" : "dead_code_report_domain_5_openmrs-api-2.8.0-SNAPSHOT",
   "resultJson" : {
     "filesAnalyzed" : [
       "openmrs-core-master.jar",

@@ -1,5 +1,4 @@
 {
-  "name" : "dead_code_report_domain_0_org.javassist-3.30.2-GA",
   "resultJson" : {
     "filesAnalyzed" : [
       "openmrs-core-master.jar",
