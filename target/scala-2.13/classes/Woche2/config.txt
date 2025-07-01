@@ -1,4 +1,0 @@
-getSecurityManager
-setSecurityManager
-setSecurityHandler
-getSecurityHandler

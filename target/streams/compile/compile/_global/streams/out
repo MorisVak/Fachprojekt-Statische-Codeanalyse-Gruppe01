@@ -1,20 +1,20 @@
 [0m[[0m[0minfo[0m] [0m[0mscoverage excludedSymbols: List(scala.reflect.api.Exprs.Expr, scala.reflect.api.Trees.Tree, scala.reflect.macros.Universe.Tree)[0m
-[0m[[0m[0minfo[0m] [0m[0mCleaning datadir [C:\Users\denni\OneDrive\Dokumente\Software Praktikum\KotlinProjects\Fachprojekt-Statische-Codeanalyse-Gruppe01\target\scala-2.13/scoverage-data][0m
+[0m[[0m[0minfo[0m] [0m[0mCleaning datadir [E:\UniStuff\FP_01\target\scala-2.13/scoverage-data][0m
 [0m[[0m[0minfo[0m] [0m[0mBeginning coverage instrumentation[0m
-[0m[[0m[0minfo[0m] [0m[0mInstrumentation completed [729 statements][0m
-[0m[[0m[0minfo[0m] [0m[0mWrote instrumentation file [C:\Users\denni\OneDrive\Dokumente\Software Praktikum\KotlinProjects\Fachprojekt-Statische-Codeanalyse-Gruppe01\target\scala-2.13\scoverage-data\scoverage.coverage][0m
-[0m[[0m[0minfo[0m] [0m[0mWill write measurement data to [C:\Users\denni\OneDrive\Dokumente\Software Praktikum\KotlinProjects\Fachprojekt-Statische-Codeanalyse-Gruppe01\target\scala-2.13/scoverage-data][0m
+[0m[[0m[0minfo[0m] [0m[0mInstrumentation completed [948 statements][0m
+[0m[[0m[0minfo[0m] [0m[0mWrote instrumentation file [E:\UniStuff\FP_01\target\scala-2.13\scoverage-data\scoverage.coverage][0m
+[0m[[0m[0minfo[0m] [0m[0mWill write measurement data to [E:\UniStuff\FP_01\target\scala-2.13/scoverage-data][0m
 [0m[[0m[33mwarn[0m] [0m[0m6 deprecations (since 2.13.0)[0m
-[0m[[0m[33mwarn[0m] [0m[0m5 deprecations (since 2.13.3)[0m
-[0m[[0m[33mwarn[0m] [0m[0m11 deprecations in total; re-run with -deprecation for details[0m
+[0m[[0m[33mwarn[0m] [0m[0m7 deprecations (since 2.13.3)[0m
+[0m[[0m[33mwarn[0m] [0m[0m13 deprecations in total; re-run with -deprecation for details[0m
 [0m[[0m[33mwarn[0m] [0m[0mthree warnings found[0m
-[0m[[0m[33mwarn[0m] [0m[0mC:\Users\denni\OneDrive\Dokumente\Software Praktikum\KotlinProjects\Fachprojekt-Statische-Codeanalyse-Gruppe01\src\main\scala\testScripts\SecurityTest.java:8:1: getSecurityManager() in java.lang.System ist veraltet und wurde zum Entfernen markiert[0m
+[0m[[0m[33mwarn[0m] [0m[0mE:\UniStuff\FP_01\src\main\scala\testScripts\SecurityTest.java:8:1: getSecurityManager() in java.lang.System ist veraltet und wurde zum Entfernen markiert[0m
 [0m[[0m[33mwarn[0m] [0m[0mSystem.getSecurityManager[0m
-[0m[[0m[33mwarn[0m] [0m[0mC:\Users\denni\OneDrive\Dokumente\Software Praktikum\KotlinProjects\Fachprojekt-Statische-Codeanalyse-Gruppe01\src\main\scala\testScripts\SecurityTest.java:9:1: java.lang.SecurityManager in java.lang ist veraltet und wurde zum Entfernen markiert[0m
+[0m[[0m[33mwarn[0m] [0m[0mE:\UniStuff\FP_01\src\main\scala\testScripts\SecurityTest.java:9:1: java.lang.SecurityManager in java.lang ist veraltet und wurde zum Entfernen markiert[0m
 [0m[[0m[33mwarn[0m] [0m[0mSecurityManager[0m
-[0m[[0m[33mwarn[0m] [0m[0mC:\Users\denni\OneDrive\Dokumente\Software Praktikum\KotlinProjects\Fachprojekt-Statische-Codeanalyse-Gruppe01\src\main\scala\testScripts\SecurityTest.java:9:1: setSecurityManager(java.lang.SecurityManager) in java.lang.System ist veraltet und wurde zum Entfernen markiert[0m
+[0m[[0m[33mwarn[0m] [0m[0mE:\UniStuff\FP_01\src\main\scala\testScripts\SecurityTest.java:9:1: setSecurityManager(java.lang.SecurityManager) in java.lang.System ist veraltet und wurde zum Entfernen markiert[0m
 [0m[[0m[33mwarn[0m] [0m[0mSystem.setSecurityManager[0m
-[0m[[0m[33mwarn[0m] [0m[0mC:\Users\denni\OneDrive\Dokumente\Software Praktikum\KotlinProjects\Fachprojekt-Statische-Codeanalyse-Gruppe01\src\main\scala\testScripts\SecurityTest.java:11:1: java.lang.SecurityManager in java.lang ist veraltet und wurde zum Entfernen markiert[0m
+[0m[[0m[33mwarn[0m] [0m[0mE:\UniStuff\FP_01\src\main\scala\testScripts\SecurityTest.java:11:1: java.lang.SecurityManager in java.lang ist veraltet und wurde zum Entfernen markiert[0m
 [0m[[0m[33mwarn[0m] [0m[0mSecurityManager[0m
-[0m[[0m[33mwarn[0m] [0m[0mC:\Users\denni\OneDrive\Dokumente\Software Praktikum\KotlinProjects\Fachprojekt-Statische-Codeanalyse-Gruppe01\src\main\scala\testScripts\SecurityTest.java:11:1: setSecurityManager(java.lang.SecurityManager) in java.lang.System ist veraltet und wurde zum Entfernen markiert[0m
+[0m[[0m[33mwarn[0m] [0m[0mE:\UniStuff\FP_01\src\main\scala\testScripts\SecurityTest.java:11:1: setSecurityManager(java.lang.SecurityManager) in java.lang.System ist veraltet und wurde zum Entfernen markiert[0m
 [0m[[0m[33mwarn[0m] [0m[0mSystem.setSecurityManager[0m

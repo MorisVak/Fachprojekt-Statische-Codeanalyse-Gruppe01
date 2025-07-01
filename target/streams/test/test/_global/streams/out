@@ -1,12 +1,18 @@
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(ByteCodeCreatorTest, org.scalatest.tools.Framework$$anon$1@54e713d5, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(ByteCodeCreatorTest, org.scalatest.tools.Framework$$anon$1@691ef0ad, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(AbstractInterpretationTest, org.scalatest.tools.Framework$$anon$1@691ef0ad, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAbstractInterpretationTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- Report has been created[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- With invalid Domain1[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- With invalid Domain2[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mByteCodeCreatorTest:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- Count of TPL-Classes Assertion[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- Count of TPL Methods[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- All Methods Used[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 33 seconds, 67 milliseconds.[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 3[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 3, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 38 seconds, 881 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 6[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 2, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 6, failed 0, canceled 0, ignored 0, pending 0[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ByteCodeCreatorTest[0m
+[0m[[0m[0mdebug[0m] [0m[0m	AbstractInterpretationTest[0m

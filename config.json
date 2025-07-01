@@ -1,5 +1,4 @@
 {
-  "usedJar" : "pdfbox-2.0.24.jar",
-  "test" : ["openmrs-api-2.8.0-SNAPSHOT.jar","pdfbox-2.0.24.jar"],
+  "usedJars" : ["openmrs-api-2.8.0-SNAPSHOT.jar","pdfbox-2.0.24.jar"],
   "domain" : 0
 }

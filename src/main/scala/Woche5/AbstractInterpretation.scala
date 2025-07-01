@@ -1,38 +1,44 @@
 package Woche5
 
-//import com.github.nscala_time.time.Imports.{DateTime, Duration, Interval, richDateTime, richReadableInstant}
 import org.opalj.ai.{AIResult, BaseAI}
-import org.opalj.ai.common.{DomainRegistry, XHTML}
+import org.opalj.ai.common.DomainRegistry
 import org.opalj.br.analyses.Project
 import play.api.libs.json._
 import org.joda.time.{DateTime, Duration}
-import org.opalj.br.Method
+import org.opalj.ai.common.DomainRegistry.domainDescriptions
 
 import java.io.{File, PrintWriter}
-import java.nio.file.{Files, Path}
 import scala.collection.mutable
 import scala.io.Source
 
 object AbstractInterpretation {
 
   def main(args: Array[String]): Unit = {
-    val domainDescriptions = DomainRegistry.domainDescriptions
-
     val source = Source.fromFile("config.json")
     val content = source.mkString
     source.close()
 
-    println(content)
 
     val json: JsValue = Json.parse(content)
     val domain = (json \ "domain").as[Int]
     println(domain)
 
-    val jar = (json \ "usedJar").as[String] // Hier ein Array von jars ers
-    val ts = (json \ "test").as[List[String]]
+    val ts = (json \ "usedJars").as[List[String]]
 
-    println(jar)
-    println(ts)
+
+    val reportJson = runAnalysis(domain, ts)
+
+    val jsonString = Json.prettyPrint(reportJson)
+
+    val writer = new PrintWriter("report.json")
+    try writer.write(jsonString)
+    finally writer.close()
+
+  }
+
+  def runAnalysis(domain : Int, ts : List[String]): JsValue = {
+
+    val domainDescriptions = DomainRegistry.domainDescriptions
 
     var cnt = 0
     val domainMap = domainDescriptions.map{ descr =>
@@ -40,15 +46,13 @@ object AbstractInterpretation {
       cnt += 1
       t
     }.toMap
-    if(domain < 0 || domain >= cnt - 1) {
-      println("Invalid domain number selected, exiting.")
-      System.exit(1)
-    }
+    require(domain >= 0 && domain < cnt, s"Invalid domain number: $domain")
 
     println("The available domains are: ")
     domainMap.foreach{ tuple =>
       println(s"\t [${tuple._1}] - ${tuple._2}")
     }
+
     //set for keeping all the info needed for report
     val foundMethods = mutable.Set.empty[(String, Int, Int, String, mutable.Set[(String, Int)])]
 
@@ -137,13 +141,7 @@ object AbstractInterpretation {
       "totalRuntimeMs" -> totalRuntimeMs,
       "methodsFound" -> methodJsons
     )
-
-    val jsonString = Json.prettyPrint(reportJson)
-
-    val writer = new PrintWriter("report.json")
-    try writer.write(jsonString)
-    finally writer.close()
-
+    return reportJson
   }
 
 }
