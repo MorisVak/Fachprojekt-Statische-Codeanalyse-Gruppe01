@@ -1,0 +1,63 @@
+{
+  "name" : "dead_code_report_domain_3_log4j-1.2.17",
+  "resultJson" : {
+    "filesAnalyzed" : [
+      "log4j-1.2.17.jar",
+      "guava-33.4.8-jre.jar",
+      "mockito-core-5.18.0.jar"
+    ],
+    "domainUsed" : "computations related to int/long values are done using sets",
+    "timeFinished" : "2025-07-01T17:34:36.0740108",
+    "totalRuntimeMs" : 1489,
+    "methodsFound" : [
+      {
+        "fullSignature" : "void org.apache.log4j.pattern.FormattingInfo.format(int,java.lang.StringBuffer)",
+        "numberOfTotalInstructions" : 137,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/apache/log4j/pattern/FormattingInfo",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(45)",
+            "programCounter" : 734
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.apache.log4j.net.JMSSink.main(java.lang.String[])",
+        "numberOfTotalInstructions" : 125,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/apache/log4j/net/JMSSink",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-26)",
+            "programCounter" : 856
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.apache.log4j.FileAppender.setFile(java.lang.String,boolean,boolean,int)",
+        "numberOfTotalInstructions" : 193,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/apache/log4j/FileAppender",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(6)",
+            "programCounter" : 1440
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.apache.log4j.jdbc.JDBCAppender.flushBuffer()",
+        "numberOfTotalInstructions" : 127,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/apache/log4j/jdbc/JDBCAppender",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-82)",
+            "programCounter" : 873
+          }
+        ]
+      }
+    ]
+  }
+}

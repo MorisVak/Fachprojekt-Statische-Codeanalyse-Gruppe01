@@ -1,0 +1,75 @@
+{
+  "name" : "dead_code_report_domain_10_log4j-1.2.17",
+  "resultJson" : {
+    "filesAnalyzed" : [
+      "log4j-1.2.17.jar",
+      "guava-33.4.8-jre.jar",
+      "mockito-core-5.18.0.jar"
+    ],
+    "domainUsed" : "computations related to reference types track nullness, must alias and origin information",
+    "timeFinished" : "2025-07-01T17:35:04.6578766",
+    "totalRuntimeMs" : 1263,
+    "methodsFound" : [
+      {
+        "fullSignature" : "void org.apache.log4j.pattern.FormattingInfo.format(int,java.lang.StringBuffer)",
+        "numberOfTotalInstructions" : 137,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/apache/log4j/pattern/FormattingInfo",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(45)",
+            "programCounter" : 774
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.String org.apache.log4j.lf5.viewer.categoryexplorer.CategoryPath.toString()",
+        "numberOfTotalInstructions" : 117,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/apache/log4j/lf5/viewer/categoryexplorer/CategoryPath",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(10)",
+            "programCounter" : 331
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.apache.log4j.jdbc.JDBCAppender.flushBuffer()",
+        "numberOfTotalInstructions" : 127,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/apache/log4j/jdbc/JDBCAppender",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-82)",
+            "programCounter" : 875
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.apache.log4j.net.JMSSink.main(java.lang.String[])",
+        "numberOfTotalInstructions" : 125,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/apache/log4j/net/JMSSink",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-26)",
+            "programCounter" : 896
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.apache.log4j.FileAppender.setFile(java.lang.String,boolean,boolean,int)",
+        "numberOfTotalInstructions" : 193,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/apache/log4j/FileAppender",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(6)",
+            "programCounter" : 1435
+          }
+        ]
+      }
+    ]
+  }
+}

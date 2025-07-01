@@ -5,8 +5,8 @@
       "brick-breaker.jar"
     ],
     "domainUsed" : "uses intervals for int values; tracks nullness and must alias information for reference types; records the ai-time def-use information; uses refined signature information",
-    "timeFinished" : "2025-07-01T17:14:11.6581569",
-    "totalRuntimeMs" : 637,
+    "timeFinished" : "2025-07-01T17:15:57.8749499",
+    "totalRuntimeMs" : 636,
     "methodsFound" : [
     ]
   }

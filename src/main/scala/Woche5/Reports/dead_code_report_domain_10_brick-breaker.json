@@ -1,0 +1,13 @@
+{
+  "name" : "dead_code_report_domain_10_brick-breaker",
+  "resultJson" : {
+    "filesAnalyzed" : [
+      "brick-breaker.jar"
+    ],
+    "domainUsed" : "computations related to reference types track nullness, must alias and origin information",
+    "timeFinished" : "2025-07-01T17:16:37.6572378",
+    "totalRuntimeMs" : 537,
+    "methodsFound" : [
+    ]
+  }
+}
