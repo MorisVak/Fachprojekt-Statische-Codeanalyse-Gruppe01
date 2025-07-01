@@ -3,6 +3,7 @@ package Woche5
 import scala.swing._
 import scala.swing.event._
 import scala.collection.mutable.ArrayBuffer
+import scala.io.Source // Import for reading files
 
 // Eine Case-Klasse, um die eingegebenen Daten sauber zu transportieren
 case class UserInput(someNumber: Int, filePaths: List[String])
@@ -14,7 +15,7 @@ class InputWindow extends Dialog {
   resizable = false
   modal = true // Stellt sicher, dass der Dialog den Programmfluss blockiert
 
-  // --- 2. UI-Komponenten (bleiben identisch) ---
+  // --- 2. UI-Komponenten ---
   private val numberLabel = new Label("Domain-Index (z.B. 0):")
   private val numberField = new TextField { columns = 10 }
   private val filesLabel = new Label("Zu analysierende Dateien:")
@@ -26,6 +27,7 @@ class InputWindow extends Dialog {
   private val newFileField = new TextField { columns = 25 }
   private val addButton = new Button("Hinzufügen")
   private val removeButton = new Button("Entfernen")
+  private val loadButton = new Button("Load") // NEU: Der Load-Button
   private val okButton = new Button("Analyse starten")
   private val cancelButton = new Button("Abbrechen")
 
@@ -51,19 +53,21 @@ class InputWindow extends Dialog {
 
     contents += Swing.VStrut(10)
 
-    // File addition/removal section
-    contents += new FlowPanel(FlowPanel.Alignment.Left)() { // Added () here
+    // File addition/removal/load section
+    contents += new FlowPanel(FlowPanel.Alignment.Left)() {
       contents += newFileField
       contents += Swing.HStrut(5)
       contents += addButton
       contents += Swing.HStrut(5)
       contents += removeButton
+      contents += Swing.HStrut(5) // NEU: Abstand zum Load-Button
+      contents += loadButton // NEU: Load-Button hinzugefügt
     }
 
     contents += Swing.VStrut(15) // More vertical space before action buttons
 
     // Bottom section: Action buttons
-    contents += new FlowPanel(FlowPanel.Alignment.Right)() { // Added () here
+    contents += new FlowPanel(FlowPanel.Alignment.Right)() {
       contents += okButton
       contents += Swing.HStrut(10) // Space between buttons
       contents += cancelButton
@@ -72,9 +76,10 @@ class InputWindow extends Dialog {
 
   centerOnScreen()
 
-  // --- 4. Event-Handling (bleibt identisch) ---
+  // --- 4. Event-Handling ---
   private var result: Option[UserInput] = None
-  listenTo(addButton, removeButton, okButton, cancelButton, newFileField.keys)
+  // NEU: loadButton zu den Listeners hinzufügen
+  listenTo(addButton, removeButton, loadButton, okButton, cancelButton, newFileField.keys)
 
   reactions += {
     case ButtonClicked(`addButton`) | KeyPressed(_, Key.Enter, _, _) if newFileField.text.trim.nonEmpty =>
@@ -90,6 +95,33 @@ class InputWindow extends Dialog {
         }
         fileListView.listData = fileListBuffer
       }
+
+    // NEU: Reaktion für den Load-Button
+    case ButtonClicked(`loadButton`) =>
+      val filePath = "JarFiles.txt" // Der Name der Datei
+      try {
+        val lines = Source.fromFile(filePath).getLines()
+        var filesAddedCount = 0
+        lines.foreach { line =>
+          val trimmedLine = line.trim
+          if (trimmedLine.nonEmpty && !fileListBuffer.contains(trimmedLine)) { // Avoid adding duplicates
+            fileListBuffer += trimmedLine
+            filesAddedCount += 1
+          }
+        }
+        if (filesAddedCount > 0) {
+          fileListView.listData = fileListBuffer // Update the list view
+          Dialog.showMessage(this, s"$filesAddedCount Dateien aus '$filePath' geladen.", "Information", Dialog.Message.Info)
+        } else {
+          Dialog.showMessage(this, "Keine neuen Dateien gefunden oder alle Einträge existieren bereits in der Liste.", "Information", Dialog.Message.Info)
+        }
+      } catch {
+        case e: java.io.FileNotFoundException =>
+          Dialog.showMessage(this, s"Die Datei '$filePath' wurde nicht gefunden.", "Fehler", Dialog.Message.Error)
+        case e: Exception =>
+          Dialog.showMessage(this, s"Fehler beim Lesen der Datei '$filePath': ${e.getMessage}", "Fehler", Dialog.Message.Error)
+      }
+
 
     case ButtonClicked(`okButton`) =>
       val numberOpt = numberField.text.toIntOption
