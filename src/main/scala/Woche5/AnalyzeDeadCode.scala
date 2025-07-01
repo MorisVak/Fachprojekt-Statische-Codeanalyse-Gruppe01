@@ -6,14 +6,20 @@ import org.opalj.ai.BaseAI
 import org.opalj.ai.common.DomainRegistry
 import org.opalj.br.instructions.Instruction
 import org.opalj.collection.BitSet
+import requests._
+import scala.io.Source
+
+import java.net.{HttpURLConnection, URL}
+import java.io.{OutputStreamWriter, BufferedReader, InputStreamReader}
 
 import java.time.LocalDateTime
 import scala.collection.mutable
 import scala.io.StdIn
-
 import io.circe.generic.auto._
 import io.circe.syntax._
-import io.circe.{Encoder, Json} // für den LocalDateTime-Encoder
+import io.circe.{Encoder, Json}
+import ujson.Value.JsonableString
+
 import java.io.{BufferedWriter, FileWriter}
 
 object AnalyzeDeadCode {
@@ -109,7 +115,7 @@ object AnalyzeDeadCode {
   }
   private def saveJsonReport(namedJsonReport: NamedJsonReport): Unit = {
     val reportAsJson: Json = namedJsonReport.asJson
-    val jsonString = reportAsJson.spaces2 // .spaces2 für Einrückung mit 2 Leerzeichen
+    val jsonString = reportAsJson.spaces2
     val file = new java.io.File(s"${namedJsonReport.name}.json")
     val writer = new BufferedWriter(new FileWriter(file))
     try {
@@ -117,6 +123,47 @@ object AnalyzeDeadCode {
       println(s"JSON-Report wurde erfolgreich in '${file.getAbsolutePath}' gespeichert.")
     } finally {
       writer.close()
+    }
+
+    val writeToDb = true
+    if (writeToDb) {
+
+      try {
+        val jsonData = namedJsonReport.asJson.noSpaces
+        val url = new URL("https://exc05.onrender.com/api/exc-results")
+        val connection = url.openConnection().asInstanceOf[HttpURLConnection]
+
+        connection.setRequestMethod("POST")
+        connection.setRequestProperty("Content-Type", "application/json")
+        connection.setDoOutput(true)
+
+        // Send JSON data
+        val writer = new OutputStreamWriter(connection.getOutputStream)
+        writer.write(jsonData)
+        writer.flush()
+        writer.close()
+
+        // Get response
+        val responseCode = connection.getResponseCode
+        println(s"Java HTTP - Status: $responseCode")
+
+        if (responseCode >= 200 && responseCode < 300) {
+          val reader = new BufferedReader(new InputStreamReader(connection.getInputStream))
+          val response = reader.lines().toArray.mkString("\n")
+          reader.close()
+          println(s"Java HTTP - Success: $response")
+        } else {
+          val errorReader = new BufferedReader(new InputStreamReader(connection.getErrorStream))
+          val errorResponse = errorReader.lines().toArray.mkString("\n")
+          errorReader.close()
+          println(s"Java HTTP - Error: $errorResponse")
+        }
+
+      } catch {
+        case e: Exception =>
+          println(s"Java HTTP failed: ${e.getMessage}")
+          e.printStackTrace()
+      }
     }
   }
   private case class NamedJsonReport(
