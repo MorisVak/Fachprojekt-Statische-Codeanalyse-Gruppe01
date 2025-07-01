@@ -1,0 +1,13 @@
+{
+  "name" : "dead_code_report_domain_5_AccessibilityTestJava",
+  "resultJson" : {
+    "filesAnalyzed" : [
+      "AccessibilityTestJava.jar"
+    ],
+    "domainUsed" : "computations are done at the type level; cfg and def/use information is recorded",
+    "timeFinished" : "2025-07-01T16:56:58.114382",
+    "totalRuntimeMs" : 542,
+    "methodsFound" : [
+    ]
+  }
+}

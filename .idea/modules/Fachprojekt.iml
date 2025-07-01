@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="fp_01 [file:/E:/UniStuff/FP_01/]" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
+<module external.linked.project.id="fachprojekt-statische-codeanalyse-gruppe01 [file:/E:/Alles/Studium/Bachelor%20TU/5.%20Semester/Fachprojekt/Fachprojekt-Statische-Codeanalyse-Gruppe01/]" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
   <component name="DisplayModuleName">
     <option name="name" value="Fachprojekt" />
   </component>
@@ -15,52 +15,57 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="sbt: scala-sdk-2.13.12" level="project" />
-    <orderEntry type="library" name="sbt: org.scala-lang:scala-library:2.13.12:jar" level="project" />
-    <orderEntry type="library" name="sbt: de.opal-project:framework_2.13:5.0.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: de.opal-project:bytecode-assembler_2.13:5.0.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: de.opal-project:architecture-validation_2.13:5.0.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: de.opal-project:three-address-code_2.13:5.0.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: de.opal-project:bytecode-creator_2.13:5.0.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: de.opal-project:abstract-interpretation-framework_2.13:5.0.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: de.opal-project:dependencies-extraction-library_2.13:5.0.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: de.opal-project:bytecode-disassembler_2.13:5.0.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: de.opal-project:bytecode-representation_2.13:5.0.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: de.opal-project:bytecode-infrastructure_2.13:5.0.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: de.opal-project:static-analysis-infrastructure_2.13:5.0.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.scala-lang.modules:scala-parser-combinators_2.13:1.1.2:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.scala-lang.modules:scala-xml_2.13:2.1.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: de.opal-project:common_2.13:5.0.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.apache.commons:commons-text:1.9:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.scala-lang:scala-reflect:2.13.12:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.scala-lang.modules:scala-parallel-collections_2.13:1.0.4:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.typesafe.play:play-json_2.13:2.9.2:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.iheart:ficus_2.13:1.5.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: it.unimi.dsi:fastutil:8.5.4:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.apache.commons:commons-lang3:3.11:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.typesafe.play:play-functional_2.13:2.9.2:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-core:2.10.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.chuusai:shapeless_2.13:2.3.13:jar" level="project" />
     <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-annotations:2.10.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-core:2.10.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-databind:2.10.5.1:jar" level="project" />
     <orderEntry type="library" name="sbt: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.10.5:jar" level="project" />
     <orderEntry type="library" name="sbt: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.5:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-databind:2.10.5.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.github.nscala-time:nscala-time_2.13:3.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.iheart:ficus_2.13:1.5.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:geny_2.13:1.1.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:os-lib_2.13:0.11.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:requests_2.13:0.9.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:ujson_2.13:4.1.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:upack_2.13:4.1.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:upickle-core_2.13:4.1.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:upickle-implicits_2.13:4.1.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:upickle_2.13:4.1.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.typesafe.play:play-functional_2.13:2.9.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.typesafe.play:play-json_2.13:2.9.2:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe:config:1.3.4:jar" level="project" />
-    <orderEntry type="library" name="sbt: it.unimi.dsi:fastutil-extra:8.5.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: de.opal-project:abstract-interpretation-framework_2.13:5.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: de.opal-project:architecture-validation_2.13:5.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: de.opal-project:bytecode-assembler_2.13:5.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: de.opal-project:bytecode-creator_2.13:5.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: de.opal-project:bytecode-disassembler_2.13:5.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: de.opal-project:bytecode-infrastructure_2.13:5.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: de.opal-project:bytecode-representation_2.13:5.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: de.opal-project:common_2.13:5.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: de.opal-project:dependencies-extraction-library_2.13:5.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: de.opal-project:framework_2.13:5.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: de.opal-project:static-analysis-infrastructure_2.13:5.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: de.opal-project:three-address-code_2.13:5.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.circe:circe-core_2.13:0.14.13:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.circe:circe-generic_2.13:0.14.13:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.circe:circe-jawn_2.13:0.14.13:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.circe:circe-numbers_2.13:0.14.13:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.circe:circe-parser_2.13:0.14.13:jar" level="project" />
     <orderEntry type="library" name="sbt: it.unimi.dsi:fastutil-core:8.5.4:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-core_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-featurespec_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-flatspec_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-freespec_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-funsuite_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-funspec_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-propspec_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-refspec_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-wordspec_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-diagrams_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-matchers-core_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-shouldmatchers_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-mustmatchers_2.13:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest-compatible:3.2.19:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalactic:scalactic_2.13:3.2.19:jar" level="project" />
+    <orderEntry type="library" name="sbt: it.unimi.dsi:fastutil-extra:8.5.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: it.unimi.dsi:fastutil:8.5.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: joda-time:joda-time:2.13.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.commons:commons-lang3:3.11:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.commons:commons-text:1.9:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.joda:joda-convert:3.0.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.scala-lang.modules:scala-parallel-collections_2.13:1.0.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.scala-lang.modules:scala-parser-combinators_2.13:1.1.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.scala-lang.modules:scala-swing_2.13:3.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.scala-lang.modules:scala-xml_2.13:1.3.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.scala-lang:scala-library:2.13.12:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.scala-lang:scala-reflect:2.13.12:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.typelevel:cats-core_2.13:2.13.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.typelevel:cats-kernel_2.13:2.13.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.typelevel:jawn-parser_2.13:1.6.0:jar" level="project" />
   </component>
 </module>

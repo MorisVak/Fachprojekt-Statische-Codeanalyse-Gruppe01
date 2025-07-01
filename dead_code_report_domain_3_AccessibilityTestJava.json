@@ -1,0 +1,53 @@
+{
+  "name" : "dead_code_report_domain_3_AccessibilityTestJava",
+  "resultJson" : {
+    "filesAnalyzed" : [
+      "AccessibilityTestJava.jar"
+    ],
+    "domainUsed" : "computations related to int/long values are done using sets",
+    "timeFinished" : "2025-07-01T16:56:47.5170901",
+    "totalRuntimeMs" : 573,
+    "methodsFound" : [
+      {
+        "fullSignature" : "void Woche5.AccessibilityTestJava.mFour()",
+        "numberOfTotalInstructions" : 28,
+        "numberOfDeadInstructions" : 3,
+        "enclosingTypeName" : "Woche5/AccessibilityTestJava",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "get static java.lang.System.out : java.io.PrintStream",
+            "programCounter" : 2
+          },
+          {
+            "stringRepresentation" : "INVOKEVIRTUAL(java.io.PrintStream{ void println(java.lang.String) })",
+            "programCounter" : 2
+          },
+          {
+            "stringRepresentation" : "LoadString(\"Das sollte nicht erreichbar sein!\")",
+            "programCounter" : 2
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void Woche5.AccessibilityTestJava.mOne()",
+        "numberOfTotalInstructions" : 19,
+        "numberOfDeadInstructions" : 3,
+        "enclosingTypeName" : "Woche5/AccessibilityTestJava",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "get static java.lang.System.out : java.io.PrintStream",
+            "programCounter" : 3
+          },
+          {
+            "stringRepresentation" : "LoadString(\"Das sollte nicht erreichbar sein!\")",
+            "programCounter" : 3
+          },
+          {
+            "stringRepresentation" : "INVOKEVIRTUAL(java.io.PrintStream{ void println(java.lang.String) })",
+            "programCounter" : 3
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name" : "dead_code_report_domain_0_AccessibilityTestJava",
+  "resultJson" : {
+    "filesAnalyzed" : [
+      "AccessibilityTestJava.jar"
+    ],
+    "domainUsed" : "uses intervals for int values; tracks nullness and must alias information for reference types; records the ai-time def-use information; uses refined signature information",
+    "timeFinished" : "2025-07-01T16:56:37.6251958",
+    "totalRuntimeMs" : 572,
+    "methodsFound" : [
+      {
+        "fullSignature" : "void Woche5.AccessibilityTestJava.mOne()",
+        "numberOfTotalInstructions" : 19,
+        "numberOfDeadInstructions" : 3,
+        "enclosingTypeName" : "Woche5/AccessibilityTestJava",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "get static java.lang.System.out : java.io.PrintStream",
+            "programCounter" : 3
+          },
+          {
+            "stringRepresentation" : "LoadString(\"Das sollte nicht erreichbar sein!\")",
+            "programCounter" : 3
+          },
+          {
+            "stringRepresentation" : "INVOKEVIRTUAL(java.io.PrintStream{ void println(java.lang.String) })",
+            "programCounter" : 3
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -36,6 +36,7 @@ object thirdParty {
 
     // 3. Alle JARs in eine java.util.List konvertieren
     val project = Project(projectJar, GlobalLogContext, config)
+
     var typeOfCallgraph: String = ""
 
 

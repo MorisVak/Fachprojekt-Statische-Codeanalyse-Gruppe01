@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Fachprojekt.iml" filepath="$PROJECT_DIR$/.idea/modules/Fachprojekt.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Fachprojekt.Fachprojekt-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Fachprojekt.Fachprojekt-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Fachprojekt-Statische-Codeanalyse-Gruppe01/Fachprojekt.Fachprojekt-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Fachprojekt-Statische-Codeanalyse-Gruppe01/Fachprojekt.Fachprojekt-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/fachprojekt-statische-codeanalyse-gruppe01_9338.iml" filepath="$PROJECT_DIR$/.idea/modules/fachprojekt-statische-codeanalyse-gruppe01_9338.iml" />
     </modules>
   </component>

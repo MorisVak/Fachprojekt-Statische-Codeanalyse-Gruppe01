@@ -61,12 +61,11 @@ object bytecode_mod {
       val oldCode = oldMethod.body.get
       val newInstructions = buildNewInstructionArrayFrom(cf, oldMethod.body.get.instructions)
       oldMethod.copy(body = Some(oldCode.copy(instructions = newInstructions, exceptionHandlers = NoExceptionHandlers)))
-    }
-    println(newMethods(newMethods.length - 1).body.get.instructions.mkString("Array(", ", ", ")"))
+      }
     cf.copy(methods = newMethods)
   }
 
-  private def buildNewInstructionArrayFrom(classFile: ClassFile, oldInstructions: Array[Instruction]): Array[Instruction] = { //= oldInstructions.clone()
+  private def buildNewInstructionArrayFrom(classFile: ClassFile, oldInstructions: Array[Instruction]): Array[Instruction] = {
     oldInstructions
       .filter(_ != null)
       .filter {

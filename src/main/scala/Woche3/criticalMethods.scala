@@ -75,10 +75,12 @@ object criticalMethods{
           line => line.instructions.foreach{
             case invokedMethod: MethodInvocationInstruction =>
               //check if the critical methods are contained in the project.
-              criticalCands.foreach(cand => if(cand == invokedMethod.name){
-                containsCriticalMethod = true
-                setOfContainedMethods += ((cand, method.fullyQualifiedSignature ,classFile.fqn))
-              })
+              criticalCands.foreach(cand =>
+                if(cand == invokedMethod.name){
+                  containsCriticalMethod = true
+                  setOfContainedMethods += ((cand, method.fullyQualifiedSignature ,classFile.fqn))
+                }
+              )
             case _ =>
           }
         }

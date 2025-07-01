@@ -1,0 +1,75 @@
+{
+  "name" : "dead_code_report_AccessibilityTest$",
+  "resultJson" : {
+    "filesAnalyzed" : [
+      "/AccessibilityTest$$$deserializeLambda$(Ljava$lang$invoke$SerializedLambda:)Ljava$lang$Object::1$Lambda",
+      "/AccessibilityTest$$mTwo()V:73$Lambda",
+      "AccessibilityTest$"
+    ],
+    "domainUsed" : "uses intervals for int values; tracks nullness and must alias information for reference types; records the ai-time def-use information; uses refined signature information",
+    "timeFinished" : "2025-06-30T18:13:58.1734585",
+    "totalRuntimeMs" : -335,
+    "methodsFound" : [
+      {
+        "fullSignature" : "void AccessibilityTest$.mThree()",
+        "numberOfTotalInstructions" : 28,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "mThree",
+        "deadInstructions" : [
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object .AccessibilityTest$$$deserializeLambda$(Ljava$lang$invoke$SerializedLambda:)Ljava$lang$Object::1$Lambda.$deserializeLambda(java.lang.invoke.SerializedLambda)",
+        "numberOfTotalInstructions" : 69,
+        "numberOfDeadInstructions" : 7,
+        "enclosingTypeName" : "$deserializeLambda",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "INVOKEVIRTUAL(java.lang.invoke.CallSite{ java.lang.invoke.MethodHandle getTarget() })",
+            "programCounter" : 1
+          },
+          {
+            "stringRepresentation" : "ASTORE(4)",
+            "programCounter" : 1
+          },
+          {
+            "stringRepresentation" : "INVOKESTATIC(scala.runtime.LambdaDeserialize{ java.lang.invoke.CallSite bootstrap(java.lang.invoke.MethodHandles$Lookup,java.lang.String,java.lang.invoke.MethodType,java.lang.invoke.MethodHandle[]) })",
+            "programCounter" : 1
+          },
+          {
+            "stringRepresentation" : "INVOKEVIRTUAL(java.lang.invoke.MethodHandle{ java.lang.Object invoke(java.lang.invoke.SerializedLambda) })",
+            "programCounter" : 1
+          },
+          {
+            "stringRepresentation" : "ALOAD(4)",
+            "programCounter" : 1
+          },
+          {
+            "stringRepresentation" : "ARETURN",
+            "programCounter" : 1
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void AccessibilityTest$.mOne()",
+        "numberOfTotalInstructions" : 20,
+        "numberOfDeadInstructions" : 4,
+        "enclosingTypeName" : "mOne",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "LoadString(\"Das sollte nicht erreichbar sein!\")",
+            "programCounter" : 12
+          },
+          {
+            "stringRepresentation" : "INVOKEVIRTUAL(scala.Predef${ void println(java.lang.Object) })",
+            "programCounter" : 12
+          },
+          {
+            "stringRepresentation" : "get static scala.Predef$.MODULE$ : scala.Predef$",
+            "programCounter" : 12
+          }
+        ]
+      }
+    ]
+  }
+}
