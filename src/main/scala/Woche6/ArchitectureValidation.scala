@@ -1,10 +1,12 @@
 package Woche6
 
+
 import java.io.File
 import io.circe._
 import io.circe.generic.semiauto._
 import io.circe.jawn.decode
 import org.opalj.br.analyses.Project
+import org.opalj.br.instructions.MethodInvocationInstruction
 
 import java.nio.file.Paths
 import scala.collection.mutable
@@ -43,6 +45,20 @@ object Specification {
 }
 
 object ArchitectureValidation extends App {
+
+  val filesToBenchmark = new File("BenchmarkTwoJars")
+  val project = Project(filesToBenchmark)
+  println("!!!!")
+  project.packages.foreach(pack => {println(pack)})
+
+  //extracting files
+  val files = filesToBenchmark.listFiles().toList
+
+  val fileNames = files.map(f => f.getName)
+
+  println(fileNames)
+
+
   //1. JSON einlesen
   private val filePath = new File("ArchitectureBenchmarkTwo.json")
   private val fileContent: String = {
@@ -76,11 +92,24 @@ object ArchitectureValidation extends App {
         }
         ruleIndex += 1
       }
-      println("Prüfen, ob Jars und Packages vorhanden sind")
-      val project = Project(new File("BenchmarkTwoJars"))
+
       result.foreach { spec =>
         spec.rules.foreach { rule =>
           //TODO: Neben Prüfung der Klassennamen müssen auch die Packages und Jar Namen geprüft werden
+
+          //Prüfugn der Jars
+          if (rule.from.contains(".jar") && !fileNames.contains(rule.from) ||
+            rule.to.contains(".jar") && !fileNames.contains(rule.to)){
+            println("Die gegebene JSON passt nicht zum Projekt. Vorgang wird abgebrochen")
+            System.exit(1)
+          }
+          //Prüfung der packages
+          /*if(!project.packages.exists(pack => pack.replace("/",".") == rule.from) ||
+            !project.packages.exists(pack => pack.replace("/",".") == rule.to)){
+            println("Die gegebene JSON passt nicht zum Projekt. Vorgang wird abgebrochen")
+            System.exit(1)
+          }*/
+
           //Prüfung der Klassennamen
           if(!project.allClassFiles.exists(cf => cf.fqn.replace("/",".") == rule.from ) ||
             !project.allClassFiles.exists(cf => cf.fqn.replace("/",".") == rule.to )){
@@ -94,5 +123,38 @@ object ArchitectureValidation extends App {
     case Left(error) =>
       println(s"Fehler beim Parsen der JSON: $error")
   }
+
+  //analysis
+  val resultSet = mutable.Set[String]()
+
+  val classFiles = project.allClassFiles
+  classFiles.foreach{ classFile =>
+    val methods  = classFile.methods
+    methods.foreach{method =>
+      val body = method.body
+      body.foreach{
+        line => line.instructions.foreach{
+          case invokedMethod: MethodInvocationInstruction =>
+            //check if the critical methods are contained in the project.
+            if(method.classFile.fqn.replace("/",".") != invokedMethod.declaringClass.toJava &&
+              !invokedMethod.declaringClass.toJava.contains("java.")){
+              result.foreach(spec => {
+                spec.rules.foreach( rule => {
+                  if(method.classFile.fqn.replace("/",".").contains(rule.from) &&
+                    invokedMethod.declaringClass.toJava.contains(rule.to) && rule.`type`.toString == "Allowed"){
+                    println("valid")
+                  }else if (spec.defaultRule.toString == "Forbidden"){
+                    resultSet += s"${method.classFile.fqn.replace("/",".")} \n is not allowed to access : \n ${invokedMethod.declaringClass.toJava} \n"
+                  }
+                })
+              })
+            }
+          case _ =>
+        }
+      }
+    }
+  }
+
+  resultSet.foreach(entry => println(entry))
 
 }
