@@ -3,33 +3,6 @@
   "rules": [
     {
       "from": "Woche6.ExampleArchitecture.benchmark_two.service",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.domain",
-      "type": "ALLOWED",
-      "except": [
-        {
-          "from": "Woche6.ExampleArchitecture.benchmark_two.service.ServiceManager",
-          "to": "Woche6.ExampleArchitecture.benchmark_two.domain.User",
-          "type": "FORBIDDEN"
-        },
-        {
-          "from": "Woche6.ExampleArchitecture.benchmark_two.service.Controller",
-          "to": "Woche6.ExampleArchitecture.benchmark_two.domain.User",
-          "type": "FORBIDDEN"
-        },
-        {
-          "from": "Woche6.ExampleArchitecture.benchmark_two.service.ServiceManager",
-          "to": "Woche6.ExampleArchitecture.benchmark_two.domain.Invoice",
-          "type": "FORBIDDEN"
-        },
-        {
-          "from": "Woche6.ExampleArchitecture.benchmark_two.service.Controller",
-          "to": "Woche6.ExampleArchitecture.benchmark_two.domain.Order",
-          "type": "FORBIDDEN"
-        }
-      ]
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service",
       "to": "Woche6.ExampleArchitecture.benchmark_two.util",
       "type": "ALLOWED",
       "except": [
@@ -44,16 +17,6 @@
           "type": "FORBIDDEN"
         }
       ]
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.util",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.domain",
-      "type": "FORBIDDEN"
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.util",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.service",
-      "type": "FORBIDDEN"
     },
     {
       "from": "Woche6.ExampleArchitecture.benchmark_two.domain",

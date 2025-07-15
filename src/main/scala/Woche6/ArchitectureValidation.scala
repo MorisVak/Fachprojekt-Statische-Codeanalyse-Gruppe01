@@ -136,26 +136,84 @@ object ArchitectureValidation extends App {
       body.foreach{
         line => line.instructions.foreach{
           case invokedMethod: MethodInvocationInstruction =>
-            //check if the critical methods are contained in the project.
+            val notAllowedFlag = true
+            /**
+             * Plan --> go through rules and check for the package.
+             * IF FORBIDDEN -> add to result, notAllowedFlag = true
+             * ELSE -> iterate over exceptions
+             *    IF METHOD IS FOUND AND FORBIDDEN -> add to result, notAllowedFlag = true
+             *    ELSE IF METHOD IS FOUND AND ACCEPTED -> break
+             *
+             *
+             *    s"${method.classFile.fqn.replace("/",".")} \n is not allowed to access : \n ${invokedMethod.declaringClass.toJava} \n"
+             * */
+
+            //IF THE METHOD USED IS NOT FROM THE SAME CLASS
             if(method.classFile.fqn.replace("/",".") != invokedMethod.declaringClass.toJava &&
               !invokedMethod.declaringClass.toJava.contains("java.")){
-              result.foreach(spec => {
-                spec.rules.foreach( rule => {
-                  if(method.classFile.fqn.replace("/",".").contains(rule.from) &&
-                    invokedMethod.declaringClass.toJava.contains(rule.to) && rule.`type`.toString == "Allowed"){
-                    //println("valid")
-                  }else if (spec.defaultRule.toString == "Forbidden"){
-                    resultSet += s"${method.classFile.fqn.replace("/",".")} \n is not allowed to access : \n ${invokedMethod.declaringClass.toJava} \n"
-                  }
-                })
+              //Get package names
+              var invokedPackage = ""
+                project.packages.foreach( pack => {
+                if (invokedMethod.declaringClass.toJava.startsWith(pack.replace("/","."))){
+                  invokedPackage = pack.replace("/",".")
+                }
               })
+              var methodPackage = ""
+              project.packages.foreach(pack =>
+                if (method.classFile.fqn.replace("/",".").startsWith(pack.replace("/","."))){
+                  methodPackage = pack.replace("/",".")
+                })
+
+
+              if(invokedPackage != methodPackage){
+                //println("FOUND DIFFERENCE")
+                //println(methodPackage)
+                //println(invokedPackage)
+
+                result.foreach(spec => {
+
+                  if(!spec.rules.exists( rule => rule.from == methodPackage && rule.to == invokedPackage)){
+                    resultSet += s" WARNING PACKAGE : $methodPackage \n is not allowed to access PACKAGE : \n $invokedPackage \n"
+                  }
+                  spec.rules.foreach( rule => {
+                    //convert jar to corresponding package
+                    if(rule.to.contains(".jar")){
+                      val splitJar = rule.to.split('.').dropRight(1).mkString(".")
+                      var toPackage = ""
+                      project.packages.foreach(pack => if (pack.contains(splitJar)){
+                        toPackage = pack
+                      })
+                    }else if (rule.from.contains(".jar")){
+                      val splitJar = rule.from.split('.').dropRight(1).mkString(".")
+                      var toPackage = ""
+                      project.packages.foreach(pack => if (pack.contains(splitJar)){
+                        toPackage = pack
+                      })
+                    }
+
+                    //check if package is allowed to use other package
+                    if(methodPackage == rule.from && invokedPackage == rule.to){
+                      rule.except match {
+                        case Some(exceptions) => exceptions.foreach{ex =>
+                          if(ex.from.contains(method.classFile.fqn.replace("/","."))&&
+                            ex.to.contains(invokedMethod.declaringClass.toJava) &&
+                            ex.`type`.toString == "Forbidden"){
+                          }
+
+                          resultSet += s"WARNING CLASS : ${ex.from} \n is not allowed to access CLASS : \n ${ex.to} \n"
+                        }
+                        case None =>
+                      }
+                    }
+                  })
+                })
+              }
             }
           case _ =>
         }
       }
     }
   }
-
-  //resultSet.foreach(entry => println(entry))
+  resultSet.foreach(entry => println(entry))
 
 }
