@@ -9,6 +9,7 @@ import org.opalj.br.analyses.Project
 import org.opalj.br.instructions.MethodInvocationInstruction
 
 import java.nio.file.Paths
+import scala.collection.convert.ImplicitConversions.`collection asJava`
 import scala.collection.mutable
 import scala.io.Source
 
@@ -94,29 +95,27 @@ object ArchitectureValidation extends App {
       }
 
       result.foreach { spec =>
+        val allPackages = project.packages.map(_.replace("/", "."))
+        val allClasses = project.allClassFiles.map(_.fqn.replace("/", "."))
+
+        def existsAsPackageOrClass(name: String): Boolean = {
+          allPackages.contains(name) || allClasses.contains(name)
+        }
+
         spec.rules.foreach { rule =>
-          //TODO: Neben Prüfung der Klassennamen müssen auch die Packages und Jar Namen geprüft werden
+          // Validate `from` and `to` in the main rule
+          if (!existsAsPackageOrClass(rule.from) || !existsAsPackageOrClass(rule.to)) {
+            println(s"Ungültiges 'from' oder 'to' in Regel:\n  from: ${rule.from}\n  to: ${rule.to}")
+            System.exit(1)
+          }
 
-          //Prüfugn der Jars
-          /*if (rule.from.contains(".jar") && !fileNames.contains(rule.from) ||
-            rule.to.contains(".jar") && !fileNames.contains(rule.to)){
-            println("Die gegebene JSON passt nicht zum Projekt. Vorgang wird abgebrochen")
-            System.exit(1)
-          }*/
-          //Prüfung der packages
-          /*if(!project.packages.exists(pack => pack.replace("/",".") == rule.from) ||
-            !project.packages.exists(pack => pack.replace("/",".") == rule.to)){
-            println("Die gegebene JSON passt nicht zum Projekt. Vorgang wird abgebrochen")
-            System.exit(1)
-          }*/
-
-          //Prüfung der Klassennamen
-          /*if(!project.allClassFiles.exists(cf => cf.fqn.replace("/",".") == rule.from ) ||
-            !project.allClassFiles.exists(cf => cf.fqn.replace("/",".") == rule.to )){
-            println("Die gegebene JSON passt nicht zum Projekt. Vorgang wird abgebrochen")
-            System.exit(1)
-            //TODO: Hier müssen noch die tatsächlichen Verstöße hin
-          }*/
+          // Validate exceptions (if any)
+          rule.except.getOrElse(Nil).foreach { ex =>
+            if (!existsAsPackageOrClass(ex.from) || !existsAsPackageOrClass(ex.to)) {
+              println(s"Ungültiges 'from' oder 'to' in Ausnahme:\n  from: ${ex.from}\n  to: ${ex.to}")
+              System.exit(1)
+            }
+          }
         }
       }
       println("Die JSON ist Fehlerfrei")
@@ -137,16 +136,6 @@ object ArchitectureValidation extends App {
         line => line.instructions.foreach{
           case invokedMethod: MethodInvocationInstruction =>
             val notAllowedFlag = true
-            /**
-             * Plan --> go through rules and check for the package.
-             * IF FORBIDDEN -> add to result, notAllowedFlag = true
-             * ELSE -> iterate over exceptions
-             *    IF METHOD IS FOUND AND FORBIDDEN -> add to result, notAllowedFlag = true
-             *    ELSE IF METHOD IS FOUND AND ACCEPTED -> break
-             *
-             *
-             *    s"${method.classFile.fqn.replace("/",".")} \n is not allowed to access : \n ${invokedMethod.declaringClass.toJava} \n"
-             * */
 
             //IF THE METHOD USED IS NOT FROM THE SAME CLASS
             if(method.classFile.fqn.replace("/",".") != invokedMethod.declaringClass.toJava &&
@@ -166,10 +155,6 @@ object ArchitectureValidation extends App {
 
 
               if(invokedPackage != methodPackage){
-                //println("FOUND DIFFERENCE")
-                //println(methodPackage)
-                //println(invokedPackage)
-
                 result.foreach(spec => {
 
                   if(!spec.rules.exists( rule => rule.from == methodPackage && rule.to == invokedPackage)){
@@ -192,6 +177,7 @@ object ArchitectureValidation extends App {
                     }
 
                     //check if package is allowed to use other package
+                    //RULE IST NOT ALLOWING PACKAGE TO PACKAGE
                     if(methodPackage == rule.from && invokedPackage == rule.to){
                       rule.except match {
                         case Some(exceptions) => exceptions.foreach{ex =>
@@ -204,6 +190,10 @@ object ArchitectureValidation extends App {
                         }
                         case None =>
                       }
+                      //base rule compares two classes
+                    }else if (rule.from == method.classFile.fqn.replace("/",".") &&
+                      rule.to == invokedMethod.declaringClass.toJava && rule.`type`.toString == "Forbidden"){
+                      resultSet += s"WARNING CLASS : ${rule.from} \n is not allowed to access CLASS : \n ${rule.to} \n"
                     }
                   })
                 })
