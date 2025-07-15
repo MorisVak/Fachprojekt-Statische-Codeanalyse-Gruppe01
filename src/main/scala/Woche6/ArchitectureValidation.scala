@@ -98,11 +98,11 @@ object ArchitectureValidation extends App {
           //TODO: Neben Prüfung der Klassennamen müssen auch die Packages und Jar Namen geprüft werden
 
           //Prüfugn der Jars
-          if (rule.from.contains(".jar") && !fileNames.contains(rule.from) ||
+          /*if (rule.from.contains(".jar") && !fileNames.contains(rule.from) ||
             rule.to.contains(".jar") && !fileNames.contains(rule.to)){
             println("Die gegebene JSON passt nicht zum Projekt. Vorgang wird abgebrochen")
             System.exit(1)
-          }
+          }*/
           //Prüfung der packages
           /*if(!project.packages.exists(pack => pack.replace("/",".") == rule.from) ||
             !project.packages.exists(pack => pack.replace("/",".") == rule.to)){
@@ -111,12 +111,12 @@ object ArchitectureValidation extends App {
           }*/
 
           //Prüfung der Klassennamen
-          if(!project.allClassFiles.exists(cf => cf.fqn.replace("/",".") == rule.from ) ||
+          /*if(!project.allClassFiles.exists(cf => cf.fqn.replace("/",".") == rule.from ) ||
             !project.allClassFiles.exists(cf => cf.fqn.replace("/",".") == rule.to )){
             println("Die gegebene JSON passt nicht zum Projekt. Vorgang wird abgebrochen")
             System.exit(1)
             //TODO: Hier müssen noch die tatsächlichen Verstöße hin
-          }
+          }*/
         }
       }
       println("Die JSON ist Fehlerfrei")
@@ -129,6 +129,7 @@ object ArchitectureValidation extends App {
 
   val classFiles = project.allClassFiles
   classFiles.foreach{ classFile =>
+    //println(s"---- ${classFile.fqn}")
     val methods  = classFile.methods
     methods.foreach{method =>
       val body = method.body
@@ -142,7 +143,7 @@ object ArchitectureValidation extends App {
                 spec.rules.foreach( rule => {
                   if(method.classFile.fqn.replace("/",".").contains(rule.from) &&
                     invokedMethod.declaringClass.toJava.contains(rule.to) && rule.`type`.toString == "Allowed"){
-                    println("valid")
+                    //println("valid")
                   }else if (spec.defaultRule.toString == "Forbidden"){
                     resultSet += s"${method.classFile.fqn.replace("/",".")} \n is not allowed to access : \n ${invokedMethod.declaringClass.toJava} \n"
                   }
@@ -155,6 +156,6 @@ object ArchitectureValidation extends App {
     }
   }
 
-  resultSet.foreach(entry => println(entry))
+  //resultSet.foreach(entry => println(entry))
 
 }

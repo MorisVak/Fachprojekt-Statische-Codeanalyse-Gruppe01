@@ -2,89 +2,80 @@
   "defaultRule": "FORBIDDEN",
   "rules": [
     {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.UserService",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.domain.User",
-      "type": "ALLOWED"
+      "from": "Woche6.ExampleArchitecture.benchmark_two.service",
+      "to": "Woche6.ExampleArchitecture.benchmark_two.domain",
+      "type": "ALLOWED",
+      "except": [
+        {
+          "from": "Woche6.ExampleArchitecture.benchmark_two.service.ServiceManager",
+          "to": "Woche6.ExampleArchitecture.benchmark_two.domain.User",
+          "type": "FORBIDDEN"
+        },
+        {
+          "from": "Woche6.ExampleArchitecture.benchmark_two.service.Controller",
+          "to": "Woche6.ExampleArchitecture.benchmark_two.domain.User",
+          "type": "FORBIDDEN"
+        },
+        {
+          "from": "Woche6.ExampleArchitecture.benchmark_two.service.ServiceManager",
+          "to": "Woche6.ExampleArchitecture.benchmark_two.domain.Invoice",
+          "type": "FORBIDDEN"
+        },
+        {
+          "from": "Woche6.ExampleArchitecture.benchmark_two.service.Controller",
+          "to": "Woche6.ExampleArchitecture.benchmark_two.domain.Order",
+          "type": "FORBIDDEN"
+        }
+      ]
     },
     {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.ProductService",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.domain.Product",
-      "type": "ALLOWED"
+      "from": "Woche6.ExampleArchitecture.benchmark_two.service",
+      "to": "Woche6.ExampleArchitecture.benchmark_two.util",
+      "type": "ALLOWED",
+      "except": [
+        {
+          "from": "Woche6.ExampleArchitecture.benchmark_two.service.NotificationService",
+          "to": "Woche6.ExampleArchitecture.benchmark_two.util.Logger",
+          "type": "FORBIDDEN"
+        },
+        {
+          "from": "Woche6.ExampleArchitecture.benchmark_two.service.Router",
+          "to": "Woche6.ExampleArchitecture.benchmark_two.util.ConfigLoader",
+          "type": "FORBIDDEN"
+        }
+      ]
     },
     {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.OrderService",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.domain.Order",
-      "type": "ALLOWED"
+      "from": "Woche6.ExampleArchitecture.benchmark_two.util",
+      "to": "Woche6.ExampleArchitecture.benchmark_two.domain",
+      "type": "FORBIDDEN"
     },
     {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.OrderService",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.domain.User",
-      "type": "ALLOWED"
+      "from": "Woche6.ExampleArchitecture.benchmark_two.util",
+      "to": "Woche6.ExampleArchitecture.benchmark_two.service",
+      "type": "FORBIDDEN"
     },
     {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.OrderService",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.domain.Product",
-      "type": "ALLOWED"
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.InventoryService",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.domain.InventoryItem",
-      "type": "ALLOWED"
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.InvoiceService",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.domain.Order",
-      "type": "ALLOWED"
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.InvoiceService",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.domain.Invoice",
-      "type": "ALLOWED"
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.NotificationService",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.domain.User",
-      "type": "ALLOWED"
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.ApplicationManager",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.service.UserService",
-      "type": "ALLOWED"
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.ApplicationManager",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.service.ProductService",
-      "type": "ALLOWED"
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.ApplicationManager",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.service.OrderService",
-      "type": "ALLOWED"
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.ApplicationManager",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.service.InvoiceService",
-      "type": "ALLOWED"
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.ApplicationManager",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.service.NotificationService",
-      "type": "ALLOWED"
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.Router",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.service.Controller",
-      "type": "ALLOWED"
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.ServiceManager",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.service.ApplicationManager",
-      "type": "ALLOWED"
-    },
-    {
-      "from": "Woche6.ExampleArchitecture.benchmark_two.service.RepositoryManager",
-      "to": "Woche6.ExampleArchitecture.benchmark_two.domain.Invoice",
-      "type": "ALLOWED"
+      "from": "Woche6.ExampleArchitecture.benchmark_two.domain",
+      "to": "Woche6.ExampleArchitecture.benchmark_two.service",
+      "type": "FORBIDDEN",
+      "except": [
+        {
+          "from": "Woche6.ExampleArchitecture.benchmark_two.domain.User",
+          "to": "Woche6.ExampleArchitecture.benchmark_two.service.NotificationService",
+          "type": "ALLOWED"
+        },
+        {
+          "from": "Woche6.ExampleArchitecture.benchmark_two.domain.Order",
+          "to": "Woche6.ExampleArchitecture.benchmark_two.service.InvoiceService",
+          "type": "ALLOWED"
+        },
+        {
+          "from": "Woche6.ExampleArchitecture.benchmark_two.domain.InventoryItem",
+          "to": "Woche6.ExampleArchitecture.benchmark_two.service.InventoryService",
+          "type": "ALLOWED"
+        }
+      ]
     }
   ]
 }
