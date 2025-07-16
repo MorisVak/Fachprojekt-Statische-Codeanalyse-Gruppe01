@@ -1,5 +1,4 @@
 {
-  "name" : "dead_code_report_domain_3_TinfourCore-2.1.9-SNAPSHOT",
   "resultJson" : {
     "filesAnalyzed" : [
       "openmrs-core-master.jar",

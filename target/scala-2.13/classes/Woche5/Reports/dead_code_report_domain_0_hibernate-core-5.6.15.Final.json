@@ -1,5 +1,4 @@
 {
-  "name" : "dead_code_report_domain_0_hibernate-core-5.6.15.Final",
   "resultJson" : {
     "filesAnalyzed" : [
       "openmrs-core-master.jar",

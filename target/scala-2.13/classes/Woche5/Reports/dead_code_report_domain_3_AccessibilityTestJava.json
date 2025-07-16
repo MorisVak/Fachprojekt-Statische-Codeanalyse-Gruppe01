@@ -1,5 +1,4 @@
 {
-  "name" : "dead_code_report_domain_3_AccessibilityTestJava",
   "resultJson" : {
     "filesAnalyzed" : [
       "AccessibilityTestJava.jar"

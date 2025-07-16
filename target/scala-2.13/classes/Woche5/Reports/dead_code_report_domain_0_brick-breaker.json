@@ -1,5 +1,4 @@
 {
-  "name" : "dead_code_report_domain_0_brick-breaker",
   "resultJson" : {
     "filesAnalyzed" : [
       "brick-breaker.jar"

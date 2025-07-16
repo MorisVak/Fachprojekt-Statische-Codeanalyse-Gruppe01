@@ -1,5 +1,4 @@
 {
-  "name" : "dead_code_report_domain_5_pdfbox-2.0.24",
   "resultJson" : {
     "filesAnalyzed" : [
       "openmrs-core-master.jar",

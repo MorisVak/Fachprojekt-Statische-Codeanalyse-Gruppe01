@@ -1,5 +1,4 @@
 {
-  "name" : "dead_code_report_domain_10_spring-core-5.3.30",
   "resultJson" : {
     "filesAnalyzed" : [
       "openmrs-core-master.jar",

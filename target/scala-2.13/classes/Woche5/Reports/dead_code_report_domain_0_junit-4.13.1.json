@@ -1,5 +1,4 @@
 {
-  "name" : "dead_code_report_domain_0_junit-4.13.1",
   "resultJson" : {
     "filesAnalyzed" : [
       "openmrs-core-master.jar",

@@ -1,0 +1,1722 @@
+{
+  "resultJson" : {
+    "filesAnalyzed" : [
+      "log4j-1.2.17.jar",
+      "guava-33.4.8-jre.jar",
+      "mockito-core-5.18.0.jar"
+    ],
+    "domainUsed" : "computations related to int/long values are done using sets",
+    "timeFinished" : "2025-07-01T17:34:38.7180878",
+    "totalRuntimeMs" : 236,
+    "methodsFound" : [
+      {
+        "fullSignature" : "void org.mockito.internal.creation.bytebuddy.InlineDelegateByteBuddyMockMaker.clearMock(java.lang.Object)",
+        "numberOfTotalInstructions" : 89,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/creation/bytebuddy/InlineDelegateByteBuddyMockMaker",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(30)",
+            "programCounter" : 22309
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.graph.MutableNetwork com.google.common.graph.Graphs.inducedSubgraph(com.google.common.graph.Network,java.lang.Iterable)",
+        "numberOfTotalInstructions" : 188,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/graph/Graphs",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-98)",
+            "programCounter" : 8147
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.Iterators.getLast(java.util.Iterator)",
+        "numberOfTotalInstructions" : 21,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Iterators",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-18)",
+            "programCounter" : 15786
+          }
+        ]
+      },
+      {
+        "fullSignature" : "int com.google.common.io.BaseEncoding$StandardBaseEncoding$2.read()",
+        "numberOfTotalInstructions" : 319,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/io/BaseEncoding$StandardBaseEncoding$2",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-316)",
+            "programCounter" : 6112
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.collect.Multiset$Entry com.google.common.collect.Multisets$3$1.computeNext()",
+        "numberOfTotalInstructions" : 123,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Multisets$3$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-56)",
+            "programCounter" : 10133
+          }
+        ]
+      },
+      {
+        "fullSignature" : "int com.google.common.collect.ConcurrentHashMultiset.add(java.lang.Object,int)",
+        "numberOfTotalInstructions" : 189,
+        "numberOfDeadInstructions" : 2,
+        "enclosingTypeName" : "com/google/common/collect/ConcurrentHashMultiset",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-165)",
+            "programCounter" : 16450
+          },
+          {
+            "stringRepresentation" : "GOTO(-33)",
+            "programCounter" : 16450
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.mockito.internal.util.MockCreationValidator.validateExtraInterfaces(java.lang.Class,java.util.Collection)",
+        "numberOfTotalInstructions" : 47,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/util/MockCreationValidator",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-31)",
+            "programCounter" : 20181
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object org.mockito.internal.configuration.injection.ConstructorInjection$SimpleArgumentResolver.objectThatIsAssignableFrom(java.lang.Class)",
+        "numberOfTotalInstructions" : 44,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/configuration/injection/ConstructorInjection$SimpleArgumentResolver",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-29)",
+            "programCounter" : 21322
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.mockito.internal.listeners.VerificationStartedNotifier.assertCompatibleTypes(java.lang.Object,org.mockito.mock.MockCreationSettings)",
+        "numberOfTotalInstructions" : 103,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/listeners/VerificationStartedNotifier",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-53)",
+            "programCounter" : 20348
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.primitives.ImmutableDoubleArray$AsList.equals(java.lang.Object)",
+        "numberOfTotalInstructions" : 129,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/primitives/ImmutableDoubleArray$AsList",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-55)",
+            "programCounter" : 4197
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.Multisets$4$1.computeNext()",
+        "numberOfTotalInstructions" : 61,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Multisets$4$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-53)",
+            "programCounter" : 10124
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.util.Map$Entry com.google.common.collect.ForwardingNavigableMap$StandardDescendingMap$1.next()",
+        "numberOfTotalInstructions" : 91,
+        "numberOfDeadInstructions" : 16,
+        "enclosingTypeName" : "com/google/common/collect/ForwardingNavigableMap$StandardDescendingMap$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "ALOAD_2",
+            "programCounter" : 14688
+          },
+          {
+            "stringRepresentation" : "ASTORE_2",
+            "programCounter" : 14688
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Class com.google.common.base.FinalizableReferenceQueue$DirectLoader.loadFinalizer()",
+        "numberOfTotalInstructions" : 16,
+        "numberOfDeadInstructions" : 6,
+        "enclosingTypeName" : "com/google/common/base/FinalizableReferenceQueue$DirectLoader",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "ALOAD_1",
+            "programCounter" : 18138
+          },
+          {
+            "stringRepresentation" : "ASTORE_1",
+            "programCounter" : 18138
+          },
+          {
+            "stringRepresentation" : "ATHROW",
+            "programCounter" : 18138
+          },
+          {
+            "stringRepresentation" : "NEW java.lang.AssertionError",
+            "programCounter" : 18138
+          },
+          {
+            "stringRepresentation" : "INVOKESPECIAL(java.lang.AssertionError{ void <init>(java.lang.Object) })",
+            "programCounter" : 18138
+          },
+          {
+            "stringRepresentation" : "DUP",
+            "programCounter" : 18138
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.util.concurrent.ServiceManager.isHealthy()",
+        "numberOfTotalInstructions" : 43,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/util/concurrent/ServiceManager",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-30)",
+            "programCounter" : 5360
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.StandardTable$ColumnMap$ColumnMapValues.remove(java.lang.Object)",
+        "numberOfTotalInstructions" : 74,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/StandardTable$ColumnMap$ColumnMapValues",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-56)",
+            "programCounter" : 8810
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.io.CharSource$ConcatenatedCharSource.isEmpty()",
+        "numberOfTotalInstructions" : 43,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/io/CharSource$ConcatenatedCharSource",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-28)",
+            "programCounter" : 6207
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.mockito.internal.handler.InvocationNotifierHandler.notifyMethodCallException(org.mockito.invocation.Invocation,java.lang.Throwable)",
+        "numberOfTotalInstructions" : 63,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/handler/InvocationNotifierHandler",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-49)",
+            "programCounter" : 20759
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.graph.DirectedGraphConnections$3$1.computeNext()",
+        "numberOfTotalInstructions" : 52,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/graph/DirectedGraphConnections$3$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-44)",
+            "programCounter" : 7375
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.base.Optional com.google.common.collect.Iterators.tryFind(java.util.Iterator,com.google.common.base.Predicate)",
+        "numberOfTotalInstructions" : 48,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Iterators",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-31)",
+            "programCounter" : 15808
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.Iterators.find(java.util.Iterator,com.google.common.base.Predicate,java.lang.Object)",
+        "numberOfTotalInstructions" : 43,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Iterators",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-28)",
+            "programCounter" : 15779
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.mockito.internal.handler.InvocationNotifierHandler.notifyMethodCall(org.mockito.invocation.Invocation,java.lang.Object)",
+        "numberOfTotalInstructions" : 63,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/handler/InvocationNotifierHandler",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-49)",
+            "programCounter" : 20758
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.Sets$1$1.computeNext()",
+        "numberOfTotalInstructions" : 67,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Sets$1$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-37)",
+            "programCounter" : 9454
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.primitives.ImmutableIntArray$AsList.equals(java.lang.Object)",
+        "numberOfTotalInstructions" : 126,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/primitives/ImmutableIntArray$AsList",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-52)",
+            "programCounter" : 4099
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.FilteredMultimapValues.remove(java.lang.Object)",
+        "numberOfTotalInstructions" : 88,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/FilteredMultimapValues",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-53)",
+            "programCounter" : 13987
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.io.TempFileCreator com.google.common.io.TempFileCreator.pickSecureCreator()",
+        "numberOfTotalInstructions" : 114,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/io/TempFileCreator",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(33)",
+            "programCounter" : 5737
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void com.google.common.io.FileBackedOutputStream.reset()",
+        "numberOfTotalInstructions" : 187,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/io/FileBackedOutputStream",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(94)",
+            "programCounter" : 6122
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.Maps$FilteredMapValues.remove(java.lang.Object)",
+        "numberOfTotalInstructions" : 73,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Maps$FilteredMapValues",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-53)",
+            "programCounter" : 10957
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void com.google.common.util.concurrent.InterruptibleTask.run()",
+        "numberOfTotalInstructions" : 190,
+        "numberOfDeadInstructions" : 12,
+        "enclosingTypeName" : "com/google/common/util/concurrent/InterruptibleTask",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(59)",
+            "programCounter" : 2853
+          },
+          {
+            "stringRepresentation" : "GOTO(106)",
+            "programCounter" : 2853
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.reflect.TypeToken.isOwnedBySubtypeOf(java.lang.reflect.Type)",
+        "numberOfTotalInstructions" : 57,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/reflect/TypeToken",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-44)",
+            "programCounter" : 4853
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void com.google.common.util.concurrent.FuturesGetChecked$GetCheckedTypeValidatorHolder$WeakSetValidator.validateClass(java.lang.Class)",
+        "numberOfTotalInstructions" : 87,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/util/concurrent/FuturesGetChecked$GetCheckedTypeValidatorHolder$WeakSetValidator",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-31)",
+            "programCounter" : 2558
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.Iterators$5.computeNext()",
+        "numberOfTotalInstructions" : 45,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Iterators$5",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-37)",
+            "programCounter" : 12188
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.TreeTraverser$PostOrderIterator.computeNext()",
+        "numberOfTotalInstructions" : 79,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/TreeTraverser$PostOrderIterator",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-71)",
+            "programCounter" : 8011
+          }
+        ]
+      },
+      {
+        "fullSignature" : "int com.google.common.math.Quantiles.chooseNextSelection(int[],int,int,int,int)",
+        "numberOfTotalInstructions" : 100,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/math/Quantiles",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-53)",
+            "programCounter" : 4888
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.util.List com.google.common.collect.ConcurrentHashMultiset.snapshot()",
+        "numberOfTotalInstructions" : 78,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/ConcurrentHashMultiset",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-55)",
+            "programCounter" : 16472
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean org.mockito.internal.creation.MockSettingsImpl.invocationListenersContainsType(java.lang.Class)",
+        "numberOfTotalInstructions" : 49,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/creation/MockSettingsImpl",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-34)",
+            "programCounter" : 21851
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.util.concurrent.CycleDetectingLockFactory$ExampleStackTrace com.google.common.util.concurrent.CycleDetectingLockFactory$LockGraphNode.findPathTo(com.google.common.util.concurrent.CycleDetectingLockFactory$LockGraphNode,java.util.Set)",
+        "numberOfTotalInstructions" : 139,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/util/concurrent/CycleDetectingLockFactory$LockGraphNode",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-86)",
+            "programCounter" : 3003
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.TreeBasedTable$1.computeNext()",
+        "numberOfTotalInstructions" : 79,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/TreeBasedTable$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-66)",
+            "programCounter" : 8336
+          }
+        ]
+      },
+      {
+        "fullSignature" : "int com.google.common.collect.Multisets.setCountImpl(com.google.common.collect.Multiset,java.lang.Object,int)",
+        "numberOfTotalInstructions" : 56,
+        "numberOfDeadInstructions" : 6,
+        "enclosingTypeName" : "com/google/common/collect/Multisets",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "INVOKEINTERFACE(com.google.common.collect.Multiset{ int remove(java.lang.Object,int) })",
+            "programCounter" : 10789
+          },
+          {
+            "stringRepresentation" : "INEG",
+            "programCounter" : 10789
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void com.google.common.eventbus.SubscriberRegistry.unregister(java.lang.Object)",
+        "numberOfTotalInstructions" : 134,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/eventbus/SubscriberRegistry",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-107)",
+            "programCounter" : 8801
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.Iterables.removeFirstMatching(java.lang.Iterable,com.google.common.base.Predicate)",
+        "numberOfTotalInstructions" : 51,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Iterables",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-34)",
+            "programCounter" : 14080
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.Range.containsAll(java.lang.Iterable)",
+        "numberOfTotalInstructions" : 121,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Range",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-29)",
+            "programCounter" : 11349
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void com.google.common.reflect.ClassPath$LocationInfo.scan(java.io.File,java.util.Set,com.google.common.collect.ImmutableSet$Builder)",
+        "numberOfTotalInstructions" : 73,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/reflect/ClassPath$LocationInfo",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(41)",
+            "programCounter" : 3953
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.base.Utf8.isWellFormedSlowPath(byte[],int,int)",
+        "numberOfTotalInstructions" : 198,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/base/Utf8",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-125)",
+            "programCounter" : 17457
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.Sets$2$1.computeNext()",
+        "numberOfTotalInstructions" : 45,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Sets$2$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-37)",
+            "programCounter" : 9562
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.apache.log4j.pattern.FormattingInfo.format(int,java.lang.StringBuffer)",
+        "numberOfTotalInstructions" : 137,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/apache/log4j/pattern/FormattingInfo",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(45)",
+            "programCounter" : 734
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.apache.log4j.net.JMSSink.main(java.lang.String[])",
+        "numberOfTotalInstructions" : 125,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/apache/log4j/net/JMSSink",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-26)",
+            "programCounter" : 856
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.MinMaxPriorityQueue$QueueIterator.foundAndRemovedExactReference(java.lang.Iterable,java.lang.Object)",
+        "numberOfTotalInstructions" : 43,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/MinMaxPriorityQueue$QueueIterator",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-31)",
+            "programCounter" : 11918
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.StandardTable.containsColumn(java.lang.Object)",
+        "numberOfTotalInstructions" : 55,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/StandardTable",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-29)",
+            "programCounter" : 11632
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.util.Map$Entry com.google.common.collect.StandardTable$Column$EntrySetIterator.computeNext()",
+        "numberOfTotalInstructions" : 70,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/StandardTable$Column$EntrySetIterator",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-59)",
+            "programCounter" : 8838
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.util.Map$Entry com.google.common.collect.TreeRangeMap$SubRangeMap$SubRangeMapAsMap$3.computeNext()",
+        "numberOfTotalInstructions" : 115,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/TreeRangeMap$SubRangeMap$SubRangeMapAsMap$3",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-104)",
+            "programCounter" : 8237
+          }
+        ]
+      },
+      {
+        "fullSignature" : "int com.google.common.collect.Lists.lastIndexOfRandomAccess(java.util.List,java.lang.Object)",
+        "numberOfTotalInstructions" : 75,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Lists",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(38)",
+            "programCounter" : 12566
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.mockito.internal.framework.DefaultMockitoSession.release()",
+        "numberOfTotalInstructions" : 61,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/framework/DefaultMockitoSession",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-47)",
+            "programCounter" : 20901
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void com.google.common.collect.Serialization.writeMultimap(com.google.common.collect.Multimap,java.io.ObjectOutputStream)",
+        "numberOfTotalInstructions" : 127,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Serialization",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-91)",
+            "programCounter" : 10013
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.apache.log4j.FileAppender.setFile(java.lang.String,boolean,boolean,int)",
+        "numberOfTotalInstructions" : 193,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/apache/log4j/FileAppender",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(6)",
+            "programCounter" : 1440
+          }
+        ]
+      },
+      {
+        "fullSignature" : "org.mockito.internal.junit.StubbingArgMismatches org.mockito.internal.junit.ArgMismatchFinder.getStubbingArgMismatches(java.lang.Iterable)",
+        "numberOfTotalInstructions" : 168,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/junit/ArgMismatchFinder",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-145)",
+            "programCounter" : 20753
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.Iterators.elementsEqual(java.util.Iterator,java.util.Iterator)",
+        "numberOfTotalInstructions" : 62,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Iterators",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-44)",
+            "programCounter" : 15772
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.collect.ImmutableSet com.google.common.collect.ImmutableSet.copyOf(java.util.Collection)",
+        "numberOfTotalInstructions" : 90,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/ImmutableSet",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(18)",
+            "programCounter" : 12802
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.String org.mockito.plugins.DoNotMockEnforcer.checkTypeForDoNotMockViolation(org.mockito.mock.MockCreationSettings)",
+        "numberOfTotalInstructions" : 71,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/plugins/DoNotMockEnforcer",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-35)",
+            "programCounter" : 19483
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.collect.ImmutableMap com.google.common.collect.ImmutableMap.copyOf(java.util.Map)",
+        "numberOfTotalInstructions" : 58,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/ImmutableMap",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(20)",
+            "programCounter" : 16540
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.collect.Multiset$Entry com.google.common.collect.Multisets$4$2.computeNext()",
+        "numberOfTotalInstructions" : 71,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Multisets$4$2",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-60)",
+            "programCounter" : 10099
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.graph.DirectedGraphConnections$2$2.computeNext()",
+        "numberOfTotalInstructions" : 45,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/graph/DirectedGraphConnections$2$2",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-37)",
+            "programCounter" : 7380
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.util.Collection org.mockito.internal.util.io.IOUtil.readLines(java.io.InputStream)",
+        "numberOfTotalInstructions" : 73,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/util/io/IOUtil",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(24)",
+            "programCounter" : 19747
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.Multisets.equalsImpl(com.google.common.collect.Multiset,java.lang.Object)",
+        "numberOfTotalInstructions" : 125,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Multisets",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-45)",
+            "programCounter" : 10775
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.StandardTable$ColumnKeyIterator.computeNext()",
+        "numberOfTotalInstructions" : 121,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/StandardTable$ColumnKeyIterator",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-72)",
+            "programCounter" : 8890
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.graph.DirectedGraphConnections$1$1.computeNext()",
+        "numberOfTotalInstructions" : 56,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/graph/DirectedGraphConnections$1$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-48)",
+            "programCounter" : 7384
+          }
+        ]
+      },
+      {
+        "fullSignature" : "org.mockito.invocation.MockHandler org.mockito.internal.util.MockUtil.getMockHandlerOrNull(java.lang.Object)",
+        "numberOfTotalInstructions" : 103,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/util/MockUtil",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-65)",
+            "programCounter" : 20571
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void com.google.common.util.concurrent.Monitor.enterWhen(com.google.common.util.concurrent.Monitor$Guard)",
+        "numberOfTotalInstructions" : 76,
+        "numberOfDeadInstructions" : 3,
+        "enclosingTypeName" : "com/google/common/util/concurrent/Monitor",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(17)",
+            "programCounter" : 2405
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean org.mockito.internal.configuration.injection.filter.NameBasedCandidateFilter.anotherCandidateMatchesMockName(java.util.Collection,java.lang.reflect.Field,java.util.List)",
+        "numberOfTotalInstructions" : 95,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/configuration/injection/filter/NameBasedCandidateFilter",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-61)",
+            "programCounter" : 21440
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.base.Optional$1.computeNext()",
+        "numberOfTotalInstructions" : 45,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/base/Optional$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-37)",
+            "programCounter" : 18050
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.mockito.internal.debugging.WarningsFinder.find(org.mockito.internal.debugging.FindingsListener)",
+        "numberOfTotalInstructions" : 207,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/debugging/WarningsFinder",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-89)",
+            "programCounter" : 20985
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.graph.DirectedGraphConnections$2$1.computeNext()",
+        "numberOfTotalInstructions" : 52,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/graph/DirectedGraphConnections$2$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-44)",
+            "programCounter" : 7382
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.io.ByteSource$ConcatenatedByteSource.isEmpty()",
+        "numberOfTotalInstructions" : 43,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/io/ByteSource$ConcatenatedByteSource",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-28)",
+            "programCounter" : 6177
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object org.mockito.internal.creation.bytebuddy.StackWalkerChecker.lambda$test$0(java.lang.Class,java.lang.Object)",
+        "numberOfTotalInstructions" : 130,
+        "numberOfDeadInstructions" : 2,
+        "enclosingTypeName" : "org/mockito/internal/creation/bytebuddy/StackWalkerChecker",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(13)",
+            "programCounter" : 21172
+          },
+          {
+            "stringRepresentation" : "GOTO(10)",
+            "programCounter" : 21172
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.graph.MutableGraph com.google.common.graph.Graphs.inducedSubgraph(com.google.common.graph.Graph,java.lang.Iterable)",
+        "numberOfTotalInstructions" : 171,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/graph/Graphs",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-81)",
+            "programCounter" : 8145
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.cache.ReferenceEntry com.google.common.cache.LocalCache$Segment.getNextEvictable()",
+        "numberOfTotalInstructions" : 58,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/cache/LocalCache$Segment",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-37)",
+            "programCounter" : 19054
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.util.Map$Entry com.google.common.collect.FilteredEntryMultimap$AsMap$1EntrySetImpl$1.computeNext()",
+        "numberOfTotalInstructions" : 89,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/FilteredEntryMultimap$AsMap$1EntrySetImpl$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-78)",
+            "programCounter" : 14664
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Exception com.google.common.util.concurrent.FuturesGetChecked.newWithCause(java.lang.Class,java.lang.Throwable)",
+        "numberOfTotalInstructions" : 108,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/util/concurrent/FuturesGetChecked",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-54)",
+            "programCounter" : 5210
+          }
+        ]
+      },
+      {
+        "fullSignature" : "int com.google.common.collect.ForwardingMultiset.standardCount(java.lang.Object)",
+        "numberOfTotalInstructions" : 54,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/ForwardingMultiset",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-39)",
+            "programCounter" : 14480
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.collect.Range com.google.common.collect.TreeRangeSet$SubRangeSetRangesByLowerBound.get(java.lang.Object)",
+        "numberOfTotalInstructions" : 152,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/TreeRangeSet$SubRangeSetRangesByLowerBound",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(36)",
+            "programCounter" : 8565
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.reflect.TypeToken.someRawTypeIsSubclassOf(java.lang.Class)",
+        "numberOfTotalInstructions" : 42,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/reflect/TypeToken",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-29)",
+            "programCounter" : 4871
+          }
+        ]
+      },
+      {
+        "fullSignature" : "int com.google.common.collect.LexicographicalOrdering.compare(java.lang.Iterable,java.lang.Iterable)",
+        "numberOfTotalInstructions" : 85,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/LexicographicalOrdering",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-53)",
+            "programCounter" : 12147
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.graph.Traverser$Traversal$1.visitNext(java.util.Deque)",
+        "numberOfTotalInstructions" : 58,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/graph/Traverser$Traversal$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-36)",
+            "programCounter" : 6943
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.Maps$Values.remove(java.lang.Object)",
+        "numberOfTotalInstructions" : 80,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Maps$Values",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-53)",
+            "programCounter" : 10812
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void org.apache.log4j.jdbc.JDBCAppender.flushBuffer()",
+        "numberOfTotalInstructions" : 127,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/apache/log4j/jdbc/JDBCAppender",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-82)",
+            "programCounter" : 873
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.primitives.ImmutableLongArray$AsList.equals(java.lang.Object)",
+        "numberOfTotalInstructions" : 127,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/primitives/ImmutableLongArray$AsList",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-53)",
+            "programCounter" : 3998
+          }
+        ]
+      },
+      {
+        "fullSignature" : "int com.google.common.collect.ConcurrentHashMultiset.remove(java.lang.Object,int)",
+        "numberOfTotalInstructions" : 94,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/ConcurrentHashMultiset",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-52)",
+            "programCounter" : 16467
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.Interners$InternerImpl.intern(java.lang.Object)",
+        "numberOfTotalInstructions" : 54,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Interners$InternerImpl",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-51)",
+            "programCounter" : 12362
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Appendable com.google.common.base.Joiner$2.appendTo(java.lang.Appendable,java.util.Iterator)",
+        "numberOfTotalInstructions" : 109,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/base/Joiner$2",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-38)",
+            "programCounter" : 18156
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.util.List org.mockito.internal.configuration.plugins.PluginFinder.findPluginClasses(java.lang.Iterable)",
+        "numberOfTotalInstructions" : 148,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/configuration/plugins/PluginFinder",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-128)",
+            "programCounter" : 21592
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.AbstractTable.containsValue(java.lang.Object)",
+        "numberOfTotalInstructions" : 51,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/AbstractTable",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-31)",
+            "programCounter" : 16371
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void com.google.common.util.concurrent.AbstractService.awaitTerminated(long,java.util.concurrent.TimeUnit)",
+        "numberOfTotalInstructions" : 88,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/util/concurrent/AbstractService",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(42)",
+            "programCounter" : 3363
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.graph.EndpointPair com.google.common.graph.EndpointPairIterator$Undirected.computeNext()",
+        "numberOfTotalInstructions" : 92,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/graph/EndpointPairIterator$Undirected",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-47)",
+            "programCounter" : 7240
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.graph.DirectedGraphConnections$3$2.computeNext()",
+        "numberOfTotalInstructions" : 45,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/graph/DirectedGraphConnections$3$2",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-37)",
+            "programCounter" : 7371
+          }
+        ]
+      },
+      {
+        "fullSignature" : "int com.google.common.collect.ConcurrentHashMultiset.setCount(java.lang.Object,int)",
+        "numberOfTotalInstructions" : 160,
+        "numberOfDeadInstructions" : 2,
+        "enclosingTypeName" : "com/google/common/collect/ConcurrentHashMultiset",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-92)",
+            "programCounter" : 16469
+          },
+          {
+            "stringRepresentation" : "GOTO(-110)",
+            "programCounter" : 16469
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.RangeSet.enclosesAll(java.lang.Iterable)",
+        "numberOfTotalInstructions" : 43,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/RangeSet",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-31)",
+            "programCounter" : 10016
+          }
+        ]
+      },
+      {
+        "fullSignature" : "double com.google.common.util.concurrent.AtomicDoubleArray.getAndUpdate(int,java.util.function.DoubleUnaryOperator)",
+        "numberOfTotalInstructions" : 52,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/util/concurrent/AtomicDoubleArray",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-49)",
+            "programCounter" : 5475
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.graph.MultiEdgesConnecting$1.computeNext()",
+        "numberOfTotalInstructions" : 59,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/graph/MultiEdgesConnecting$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-51)",
+            "programCounter" : 7360
+          }
+        ]
+      },
+      {
+        "fullSignature" : "int com.google.common.util.concurrent.Monitor.getWaitQueueLength(com.google.common.util.concurrent.Monitor$Guard)",
+        "numberOfTotalInstructions" : 47,
+        "numberOfDeadInstructions" : 6,
+        "enclosingTypeName" : "com/google/common/util/concurrent/Monitor",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "ALOAD_3",
+            "programCounter" : 2413
+          },
+          {
+            "stringRepresentation" : "ASTORE_3",
+            "programCounter" : 2413
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.Iterators.find(java.util.Iterator,com.google.common.base.Predicate)",
+        "numberOfTotalInstructions" : 49,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Iterators",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-28)",
+            "programCounter" : 15778
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.collect.Multiset$Entry com.google.common.collect.Multisets$2$1.computeNext()",
+        "numberOfTotalInstructions" : 73,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Multisets$2$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-62)",
+            "programCounter" : 10136
+          }
+        ]
+      },
+      {
+        "fullSignature" : "double com.google.common.util.concurrent.AtomicDoubleArray.updateAndGet(int,java.util.function.DoubleUnaryOperator)",
+        "numberOfTotalInstructions" : 52,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/util/concurrent/AtomicDoubleArray",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-49)",
+            "programCounter" : 5483
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.String com.google.common.base.Strings.repeat(java.lang.String,int)",
+        "numberOfTotalInstructions" : 160,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/base/Strings",
+        "deadInstructions" : [
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.base.Optional com.google.common.collect.FluentIterable.last()",
+        "numberOfTotalInstructions" : 114,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/FluentIterable",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-21)",
+            "programCounter" : 15260
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean org.mockito.internal.InOrderImpl.objectIsMockToBeVerified(java.lang.Object)",
+        "numberOfTotalInstructions" : 38,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/InOrderImpl",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-23)",
+            "programCounter" : 21884
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.cache.LocalCache$Segment.getAndRecordStats(java.lang.Object,int,com.google.common.cache.LocalCache$LoadingValueReference,com.google.common.util.concurrent.ListenableFuture)",
+        "numberOfTotalInstructions" : 136,
+        "numberOfDeadInstructions" : 11,
+        "enclosingTypeName" : "com/google/common/cache/LocalCache$Segment",
+        "deadInstructions" : [
+        ]
+      },
+      {
+        "fullSignature" : "java.util.Optional com.google.common.collect.Streams.findLast(java.util.stream.Stream)",
+        "numberOfTotalInstructions" : 225,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Streams",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-45)",
+            "programCounter" : 11761
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.Collections2.containsAllImpl(java.util.Collection,java.util.Collection)",
+        "numberOfTotalInstructions" : 40,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Collections2",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-28)",
+            "programCounter" : 15300
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.base.internal.Finalizer.cleanUp(java.lang.ref.Reference)",
+        "numberOfTotalInstructions" : 50,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/base/internal/Finalizer",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-25)",
+            "programCounter" : 17973
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean org.mockito.internal.util.collections.IdentitySet.contains(java.lang.Object)",
+        "numberOfTotalInstructions" : 36,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/util/collections/IdentitySet",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-23)",
+            "programCounter" : 19621
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.util.concurrent.Service com.google.common.util.concurrent.AbstractService.startAsync()",
+        "numberOfTotalInstructions" : 125,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/util/concurrent/AbstractService",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(35)",
+            "programCounter" : 3377
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.CollectSpliterators$1Splitr.tryAdvance(java.util.function.Consumer)",
+        "numberOfTotalInstructions" : 73,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/CollectSpliterators$1Splitr",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-68)",
+            "programCounter" : 15320
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.AbstractMultimap.containsValue(java.lang.Object)",
+        "numberOfTotalInstructions" : 51,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/AbstractMultimap",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-31)",
+            "programCounter" : 17013
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.Multisets.containsOccurrences(com.google.common.collect.Multiset,com.google.common.collect.Multiset)",
+        "numberOfTotalInstructions" : 73,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Multisets",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-46)",
+            "programCounter" : 10771
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.graph.EndpointPair com.google.common.graph.DirectedGraphConnections$4.computeNext()",
+        "numberOfTotalInstructions" : 65,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/graph/DirectedGraphConnections$4",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-54)",
+            "programCounter" : 7378
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void com.google.common.util.concurrent.Monitor.enterWhenUninterruptibly(com.google.common.util.concurrent.Monitor$Guard)",
+        "numberOfTotalInstructions" : 76,
+        "numberOfDeadInstructions" : 3,
+        "enclosingTypeName" : "com/google/common/util/concurrent/Monitor",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(17)",
+            "programCounter" : 2408
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.FilteredEntryMultimap$AsMap$1ValuesImpl.remove(java.lang.Object)",
+        "numberOfTotalInstructions" : 167,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/FilteredEntryMultimap$AsMap$1ValuesImpl",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-124)",
+            "programCounter" : 14142
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.ForwardingSortedSet.standardRemove(java.lang.Object)",
+        "numberOfTotalInstructions" : 61,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/ForwardingSortedSet",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(6)",
+            "programCounter" : 13483
+          }
+        ]
+      },
+      {
+        "fullSignature" : "org.mockito.invocation.Invocation org.mockito.internal.invocation.InvocationsFinder.findFirstUnverified(java.util.List,java.lang.Object)",
+        "numberOfTotalInstructions" : 68,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/invocation/InvocationsFinder",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-56)",
+            "programCounter" : 21222
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void com.google.common.cache.LocalCache$Segment.evictEntries(com.google.common.cache.ReferenceEntry)",
+        "numberOfTotalInstructions" : 106,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/cache/LocalCache$Segment",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-42)",
+            "programCounter" : 19044
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.collect.Range com.google.common.collect.TreeRangeSet$ComplementRangesByLowerBound.get(java.lang.Object)",
+        "numberOfTotalInstructions" : 62,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/TreeRangeSet$ComplementRangesByLowerBound",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(6)",
+            "programCounter" : 8930
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.collect.Multiset$Entry com.google.common.collect.Multisets$1$1.computeNext()",
+        "numberOfTotalInstructions" : 125,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Multisets$1$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-56)",
+            "programCounter" : 10139
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.graph.Graphs.hasCycle(com.google.common.graph.Graph)",
+        "numberOfTotalInstructions" : 105,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/graph/Graphs",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-29)",
+            "programCounter" : 8143
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.annotation.Annotation com.google.common.reflect.Parameter.getAnnotation(java.lang.Class)",
+        "numberOfTotalInstructions" : 54,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/reflect/Parameter",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-36)",
+            "programCounter" : 3756
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.Sets$3$1.computeNext()",
+        "numberOfTotalInstructions" : 45,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Sets$3$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-37)",
+            "programCounter" : 9569
+          }
+        ]
+      },
+      {
+        "fullSignature" : "double com.google.common.util.concurrent.AtomicDouble.getAndUpdate(java.util.function.DoubleUnaryOperator)",
+        "numberOfTotalInstructions" : 47,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/util/concurrent/AtomicDouble",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-44)",
+            "programCounter" : 5593
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.collect.Range com.google.common.collect.TreeRangeSet$RangesByUpperBound.get(java.lang.Object)",
+        "numberOfTotalInstructions" : 77,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/TreeRangeSet$RangesByUpperBound",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(6)",
+            "programCounter" : 8350
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.ForwardingMap.standardRemove(java.lang.Object)",
+        "numberOfTotalInstructions" : 64,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/ForwardingMap",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-49)",
+            "programCounter" : 15557
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.String org.mockito.internal.configuration.plugins.PluginFileReader.readPluginClass(java.io.InputStream)",
+        "numberOfTotalInstructions" : 51,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/configuration/plugins/PluginFileReader",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-36)",
+            "programCounter" : 21272
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.io.ByteStreams.contentsEqual(java.io.InputStream,java.io.InputStream)",
+        "numberOfTotalInstructions" : 62,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/io/ByteStreams",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-51)",
+            "programCounter" : 6956
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.graph.MutableValueGraph com.google.common.graph.Graphs.inducedSubgraph(com.google.common.graph.ValueGraph,java.lang.Iterable)",
+        "numberOfTotalInstructions" : 185,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/graph/Graphs",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-95)",
+            "programCounter" : 8146
+          }
+        ]
+      },
+      {
+        "fullSignature" : "com.google.common.collect.Multiset$Entry com.google.common.collect.ConcurrentHashMultiset$2.computeNext()",
+        "numberOfTotalInstructions" : 64,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/ConcurrentHashMultiset$2",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-61)",
+            "programCounter" : 14733
+          }
+        ]
+      },
+      {
+        "fullSignature" : "double com.google.common.util.concurrent.AtomicDouble.updateAndGet(java.util.function.DoubleUnaryOperator)",
+        "numberOfTotalInstructions" : 47,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/util/concurrent/AtomicDouble",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-44)",
+            "programCounter" : 5602
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean org.mockito.internal.creation.bytebuddy.SubclassBytecodeGenerator.needsSamePackageClassLoader(org.mockito.internal.creation.bytebuddy.MockFeatures)",
+        "numberOfTotalInstructions" : 92,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/creation/bytebuddy/SubclassBytecodeGenerator",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-40)",
+            "programCounter" : 21778
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.ConcurrentHashMultiset.removeExactly(java.lang.Object,int)",
+        "numberOfTotalInstructions" : 83,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/ConcurrentHashMultiset",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-50)",
+            "programCounter" : 16468
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.util.Map$Entry com.google.common.collect.TreeRangeSet$ComplementRangesByLowerBound$2.computeNext()",
+        "numberOfTotalInstructions" : 148,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/TreeRangeSet$ComplementRangesByLowerBound$2",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(48)",
+            "programCounter" : 8124
+          }
+        ]
+      },
+      {
+        "fullSignature" : "boolean com.google.common.collect.Iterators.all(java.util.Iterator,com.google.common.base.Predicate)",
+        "numberOfTotalInstructions" : 38,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/collect/Iterators",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-28)",
+            "programCounter" : 15756
+          }
+        ]
+      },
+      {
+        "fullSignature" : "org.mockito.invocation.Invocation org.mockito.internal.invocation.InvocationsFinder.findFirstMatchingUnverifiedInvocation(java.util.List,org.mockito.invocation.MatchableInvocation,org.mockito.internal.verification.api.InOrderContext)",
+        "numberOfTotalInstructions" : 50,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "org/mockito/internal/invocation/InvocationsFinder",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-34)",
+            "programCounter" : 21220
+          }
+        ]
+      },
+      {
+        "fullSignature" : "java.lang.Object com.google.common.collect.Sets$4$1.computeNext()",
+        "numberOfTotalInstructions" : 85,
+        "numberOfDeadInstructions" : 2,
+        "enclosingTypeName" : "com/google/common/collect/Sets$4$1",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(-37)",
+            "programCounter" : 9338
+          }
+        ]
+      },
+      {
+        "fullSignature" : "void com.google.common.util.concurrent.AbstractService.awaitRunning(long,java.util.concurrent.TimeUnit)",
+        "numberOfTotalInstructions" : 81,
+        "numberOfDeadInstructions" : 1,
+        "enclosingTypeName" : "com/google/common/util/concurrent/AbstractService",
+        "deadInstructions" : [
+          {
+            "stringRepresentation" : "GOTO(35)",
+            "programCounter" : 3360
+          }
+        ]
+      }
+    ]
+  }
+}
