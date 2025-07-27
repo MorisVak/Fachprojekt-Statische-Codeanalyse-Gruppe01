@@ -1,0 +1,88 @@
+JSON erfolgreich geparst:
+Default Rule: Forbidden
+  Rule 1:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.UserService
+    To: Woche6.ExampleArchitecture.benchmark_two.domain.User
+    Type: Allowed
+  Rule 2:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.ProductService
+    To: Woche6.ExampleArchitecture.benchmark_two.domain.Product
+    Type: Allowed
+  Rule 3:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.OrderService
+    To: Woche6.ExampleArchitecture.benchmark_two.domain.Order
+    Type: Allowed
+  Rule 4:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.OrderService
+    To: Woche6.ExampleArchitecture.benchmark_two.domain.User
+    Type: Allowed
+  Rule 5:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.OrderService
+    To: Woche6.ExampleArchitecture.benchmark_two.domain.Product
+    Type: Allowed
+  Rule 6:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.InventoryService
+    To: Woche6.ExampleArchitecture.benchmark_two.domain.InventoryItem
+    Type: Allowed
+  Rule 7:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.InvoiceService
+    To: Woche6.ExampleArchitecture.benchmark_two.domain.Order
+    Type: Allowed
+  Rule 8:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.InvoiceService
+    To: Woche6.ExampleArchitecture.benchmark_two.domain.Invoice
+    Type: Allowed
+  Rule 9:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.NotificationService
+    To: Woche6.ExampleArchitecture.benchmark_two.domain.User
+    Type: Allowed
+  Rule 10:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.ApplicationManager
+    To: Woche6.ExampleArchitecture.benchmark_two.service.UserService
+    Type: Allowed
+  Rule 11:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.ApplicationManager
+    To: Woche6.ExampleArchitecture.benchmark_two.service.ProductService
+    Type: Allowed
+  Rule 12:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.ApplicationManager
+    To: Woche6.ExampleArchitecture.benchmark_two.service.OrderService
+    Type: Allowed
+  Rule 13:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.ApplicationManager
+    To: Woche6.ExampleArchitecture.benchmark_two.service.InvoiceService
+    Type: Allowed
+  Rule 14:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.ApplicationManager
+    To: Woche6.ExampleArchitecture.benchmark_two.service.NotificationService
+    Type: Allowed
+  Rule 15:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.Router
+    To: Woche6.ExampleArchitecture.benchmark_two.service.Controller
+    Type: Allowed
+  Rule 16:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.ServiceManager
+    To: Woche6.ExampleArchitecture.benchmark_two.service.ApplicationManager
+    Type: Allowed
+  Rule 17:
+    From: Woche6.ExampleArchitecture.benchmark_two.service.RepositoryManager
+    To: Woche6.ExampleArchitecture.benchmark_two.domain.Invoice
+    Type: Allowed
+Prüfen, ob Jars und Packages vorhanden sind
+[info][class file reader] information about class files synthesized at parsing time is removed[0m
+[info][class file reader] the control-flow is simplified[0m
+[info][class file reader] control flow simplifications are not logged[0m
+[info][class file reader] invokedynamics are rewritten[0m
+[info][class file reader] rewrites of LambdaMetaFactory based invokedynamics are not logged[0m
+[info][class file reader] rewrites of StringConcatFactory based invokedynamics are not logged[0m
+[info][class file reader] rewrites of StringConcatFactory based invokedynamics are not logged[0m
+[info][class file reader] unknown invokedynamics are logged[0m
+[info][class file reader] dynamic constants are rewritten[0m
+[info][class file reader] rewrites of dynamic constants are not logged[0m
+[info][class file reader] unknown dynamic constants are logged[0m
+[info][class file reader] unresolved dynamic constants are logged[0m
+[info][project configuration] using Java 11+ call semantics (required JVM version is 61)[0m
+[info][project configuration] project validation revealed 0 significant issues[0m
+[info][project setup] validating the project took 0,0003 s[0m
+[info][project setup] creating the project took 0,0090 s[0m
+Die JSON ist Fehlerfrei
