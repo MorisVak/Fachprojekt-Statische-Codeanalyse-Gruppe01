@@ -46,57 +46,31 @@ object AktionenAuswahl {
     //Welche Aktionen (also Wochen) ausgeführt werden sollen steht in der Actions.txt
     //Die benötigten Parameter der einzelnen Methoden stehen in der Params.txt
 
-
-    rules.foreach { rule =>
-      if (rule.split(":")(1).trim == "true"){
-        rule.split(":")(0) match {
-          case "godclass" =>
-            val outFile = new java.io.File(resultFolder, "godClassOut.txt")
-            val fos = new FileOutputStream(outFile)
-            Console.withOut(fos) {
+    val outFile = new java.io.File("Logs.log")
+    val fos = new FileOutputStream(outFile)
+    Console.withOut(fos) {
+      rules.foreach { rule =>
+        if (rule.split(":")(1).trim == "true"){
+          rule.split(":")(0) match {
+            case "godclass" =>
               godclass.main(params("godclass")(0).toInt, params("godclass")(1).toInt, params("godclass")(2).toInt, params("godclass")(3))
-            }
-            fos.close()
-          case "criticalMethods" =>
-            val outFile = new java.io.File(resultFolder, "criticalMethodsOut.txt")
-            val fos = new FileOutputStream(outFile)
-            Console.withOut(fos) {
+            case "criticalMethods" =>
               criticalMethods.main(params("criticalMethods")(0), params("criticalMethods")(1), params("criticalMethods")(2))
-            }
-            fos.close()
-          case "ThirdPartyLibraries" =>
-            val outFile = new java.io.File(resultFolder, "TPLOut.txt")
-            val fos = new FileOutputStream(outFile)
-            Console.withOut(fos) {
+            case "ThirdPartyLibraries" =>
               Analyze_TPL.main(params("ThirdPartyLibraries")(0), params("ThirdPartyLibraries")(1), params("ThirdPartyLibraries")(2))
-            }
-            fos.close()
-          case "ForbiddenMethods" =>
-            val outFile = new java.io.File(resultFolder, "ForbiddenMethodsOut.txt")
-            val fos = new FileOutputStream(outFile)
-            Console.withOut(fos) {
+            case "ForbiddenMethods" =>
               bytecode_mod.main(params("ForbiddenMethods")(0), params("ForbiddenMethods")(1))
-            }
-            fos.close()
-          case "DeadCodeAnalysis" =>
-            val outFile = new java.io.File(resultFolder, "DeadCodeAnalysisOut.txt")
-            val fos = new FileOutputStream(outFile)
-            Console.withOut(fos) {
+            case "DeadCodeAnalysis" =>
               AnalyzeDeadCode.main()
-            }
-            fos.close()
-          case "ArchitectureValidation" =>
-            val outFile = new java.io.File(resultFolder, "ArchitectureValidationOut.txt")
-            val fos = new FileOutputStream(outFile)
-            Console.withOut(fos) {
-              ArchitectureValidation.main(params("ArchitectureValidation")(0),params("ArchitectureValidation")(1))
-            }
-            fos.close()
-          case _ =>
-            println("Ungültiger Eintrag in der Config Datei")
-            System.exit(0)
+            case "ArchitectureValidation" =>
+              ArchitectureValidation.main(params("ArchitectureValidation")(0), params("ArchitectureValidation")(1))
+            case _ =>
+              println("Ungültiger Eintrag in der Config Datei")
+              System.exit(0)
+          }
         }
       }
+      fos.close()
     }
   }
 }
