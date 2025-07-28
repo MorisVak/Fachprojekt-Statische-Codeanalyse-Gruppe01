@@ -39,6 +39,33 @@
           "type": "ALLOWED"
         }
       ]
+    },
+    {
+      "from": "Woche6.ExampleArchitecture.benchmark_two.service",
+      "to": "Woche6.ExampleArchitecture.benchmark_two.domain",
+      "type": "ALLOWED",
+      "except": [
+        {
+        "from": "Woche6.ExampleArchitecture.benchmark_two.service.ProductService",
+        "to": "Woche6.ExampleArchitecture.benchmark_two.domain.Product",
+        "type": "ALLOWED"
+      },
+        {
+          "from": "Woche6.ExampleArchitecture.benchmark_two.service.OrderService",
+          "to": "Woche6.ExampleArchitecture.benchmark_two.domain.Order",
+          "type": "ALLOWED"
+        },
+        {
+          "from": "Woche6.ExampleArchitecture.benchmark_two.service.OrderService",
+          "to": "Woche6.ExampleArchitecture.benchmark_two.domain.User",
+          "type": "ALLOWED"
+        },
+        {
+          "from": "Woche6.ExampleArchitecture.benchmark_two.service.OrderService",
+          "to": "Woche6.ExampleArchitecture.benchmark_two.domain.Product",
+          "type": "ALLOWED"
+        }
+      ]
     }
   ]
 }
