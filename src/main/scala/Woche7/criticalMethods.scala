@@ -14,6 +14,7 @@ import scala.io.Source
 
 object criticalMethods{
   def main(conf: String, supprMethods: String, file: String):Unit = {
+    println("-----------CRITICAL METHODS ANALYZER-----------\n")
     var criticalCands = Array.empty[String]
     var suppressedMethods = Array.empty[String]
     //Get input of the config.txt file
@@ -109,6 +110,8 @@ object criticalMethods{
     }else{
       println("\n No critical methods found :)")
     }
+
+    println("-----------------------------------------------\n")
   }
 
   /*

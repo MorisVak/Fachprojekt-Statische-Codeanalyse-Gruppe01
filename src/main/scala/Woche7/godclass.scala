@@ -36,7 +36,6 @@ object godclass {
         //count amount of methods
         val countMethods = totalClasses(classFile.methods)
         //val totalLoc = 0
-        println(s"Class TYPE = ${classFile.thisType}")
 
         if (countFields > fieldsThreshold) {
           println("CLASS EXCEEDED FIELDS THRESHOLD = might be a god class")
@@ -80,7 +79,6 @@ object godclass {
           results.update(classFile.toString(), updatedArray)
         }
       }
-      println(s"\nProject Class File Count ${project.classFilesCount}")
       println("-----------RESULT-----------")
       results.foreach { case (key, array) =>
         // Only print if array is not empty
@@ -92,6 +90,8 @@ object godclass {
         }
       }
       println(s"\nTotal potential god classes : ${godClassCount} of ${project.classFilesCount} ")
+
+    println("-----------------------------------------------\n")
   }
 
   def totalClasses(methods: br.Methods): Int = {

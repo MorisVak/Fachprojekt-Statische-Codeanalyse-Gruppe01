@@ -1,12 +1,15 @@
-package Woche7
+package Woche6
+
 
 import java.io.File
 import io.circe._
 import io.circe.generic.semiauto._
 import io.circe.jawn.decode
 import org.opalj.br.analyses.Project
+import org.opalj.br.instructions.MethodInvocationInstruction
 
 import java.nio.file.Paths
+import scala.collection.convert.ImplicitConversions.`collection asJava`
 import scala.collection.mutable
 import scala.io.Source
 
@@ -42,58 +45,182 @@ object Specification {
   implicit val decoder: Decoder[Specification] = deriveDecoder[Specification]
 }
 
-object ArchitectureValidation {
-  def main(jsonFile: String, projectFile: String): Unit = {
-    //1. JSON einlesen
-    val filePath = new File(jsonFile)
-    val fileContent: String = {
-      val source = Source.fromFile(filePath)
-      val content = source.mkString
-      source.close()
-      content
-    }
-    //2. Prüfen der JSON
-    val result: Either[Error, Specification] = decode[Specification](fileContent)
-    result match {
-      case Right(spec) =>
-        println("JSON erfolgreich geparst:")
-        println(s"Default Rule: ${spec.defaultRule}")
-        var ruleIndex = 0
+object ArchitectureValidation extends App {
+  println("-----------ARCHITECTURE ANALYZER-----------\n")
+  var continueAnalysis = true
+  val filesToBenchmark = new File("BenchmarkTwoJars")
+  val project = Project(filesToBenchmark)
+  project.packages.foreach(pack => {println(pack)})
+  //extracting files
+  val files = filesToBenchmark.listFiles().toList
+
+  val fileNames = files.map(f => f.getName)
+
+
+  //1. JSON einlesen
+  private val filePath = new File("ArchitectureBenchmarkTwo.json")
+  private val fileContent: String = {
+    val source = Source.fromFile(filePath)
+    val content = source.mkString
+    source.close()
+    content
+  }
+  //2. Prüfen der JSON
+  val result: Either[Error, Specification] = decode[Specification](fileContent)
+  result match {
+    case Right(spec) =>
+      println("JSON erfolgreich geparst:")
+      println(s"Default Rule: ${spec.defaultRule}")
+      var ruleIndex = 0
+      spec.rules.foreach { rule =>
+        println(s"  Rule ${ruleIndex + 1}:")
+        println(s"    From: ${rule.from}")
+        println(s"    To: ${rule.to}")
+        println(s"    Type: ${rule.`type`}")
+        var exIndex = 0
+        rule.except.foreach { exceptions =>
+          println("    Exceptions:")
+          exceptions.foreach { ex =>
+            println(s"      Exception ${exIndex + 1}:")
+            println(s"        From: ${ex.from}")
+            println(s"        To: ${ex.to}")
+            println(s"        Type: ${ex.`type`}")
+          }
+          exIndex += 1
+        }
+        ruleIndex += 1
+      }
+
+      result.foreach { spec =>
+        val allPackages = project.packages.map(_.replace("/", "."))
+        val allClasses = project.allClassFiles.map(_.fqn.replace("/", "."))
+
+        def existsAsPackageOrClass(name: String): Boolean = {
+          allPackages.contains(name) || allClasses.contains(name)
+        }
+
         spec.rules.foreach { rule =>
-          println(s"  Rule ${ruleIndex + 1}:")
-          println(s"    From: ${rule.from}")
-          println(s"    To: ${rule.to}")
-          println(s"    Type: ${rule.`type`}")
-          var exIndex = 0
-          rule.except.foreach { exceptions =>
-            println("    Exceptions:")
-            exceptions.foreach { ex =>
-              println(s"      Exception ${exIndex + 1}:")
-              println(s"        From: ${ex.from}")
-              println(s"        To: ${ex.to}")
-              println(s"        Type: ${ex.`type`}")
+
+          // Validate `from` and `to` in the main rule
+          if(rule.from.contains(".jar") && rule.to.contains(".jar")){
+            if(!fileNames.contains(rule.from) || !fileNames.contains(rule.to)){
+              println(s"Ungültiges JAR 'from' oder 'to' in Regel:\n  from: ${rule.from}\n  to: ${rule.to}")
+              continueAnalysis = false
             }
-            exIndex += 1
-          }
-          ruleIndex += 1
-        }
-        println("Prüfen, ob Jars und Packages vorhanden sind")
-        val project = Project(new File(projectFile))
-        result.foreach { spec =>
-          spec.rules.foreach { rule =>
-            //TODO: Neben Prüfung der Klassennamen müssen auch die Packages und Jar Namen geprüft werden
-            //Prüfung der Klassennamen
-            if (!project.allClassFiles.exists(cf => cf.fqn.replace("/", ".") == rule.from) ||
-              !project.allClassFiles.exists(cf => cf.fqn.replace("/", ".") == rule.to)) {
-              println("Die gegebene JSON passt nicht zum Projekt. Vorgang wird abgebrochen")
-              System.exit(1)
-              //TODO: Hier müssen noch die tatsächlichen Verstöße hin
+          }else if (rule.from.contains(".jar") && !rule.to.contains(".jar")){
+            if(!fileNames.contains(rule.from) || !existsAsPackageOrClass(rule.to)){
+              println(s"Ungültiges 'from' oder 'to' in Regel:\n  from: ${rule.from}\n  to: ${rule.to}")
+              continueAnalysis = false
+            }
+          }else if (rule.to.contains(".jar") && !rule.from.contains(".jar")){
+            if(!fileNames.contains(rule.to) || !existsAsPackageOrClass(rule.from)){
+              println(s"Ungültiges 'from' oder 'to' in Regel:\n  from: ${rule.from}\n  to: ${rule.to}")
+              continueAnalysis = false
+            }
+          }else{
+            if (!existsAsPackageOrClass(rule.from) || !existsAsPackageOrClass(rule.to)) {
+              println(s"Ungültiges 'from' oder 'to' in Regel:\n  from: ${rule.from}\n  to: ${rule.to}")
+              continueAnalysis = false
+            }
+
+            // Validate exceptions (if any)
+            rule.except.getOrElse(Nil).foreach { ex =>
+              if (!existsAsPackageOrClass(ex.from) || !existsAsPackageOrClass(ex.to)) {
+                println(s"Ungültiges 'from' oder 'to' in Ausnahme:\n  from: ${ex.from}\n  to: ${ex.to}")
+                continueAnalysis = false
+              }
             }
           }
         }
-        println("Die JSON ist Fehlerfrei")
-      case Left(error) =>
-        println(s"Fehler beim Parsen der JSON: $error")
+      }
+      println("Die JSON ist Fehlerfrei")
+    case Left(error) =>
+      println(s"Fehler beim Parsen der JSON: $error")
+  }
+
+  //analysis
+  val resultSet = mutable.Set[String]()
+
+  val classFiles = project.allClassFiles
+  classFiles.foreach{ classFile =>
+    //println(s"---- ${classFile.fqn}")
+    val methods  = classFile.methods
+    methods.foreach{method =>
+      val body = method.body
+      body.foreach{
+        line => line.instructions.foreach{
+          case invokedMethod: MethodInvocationInstruction =>
+            val notAllowedFlag = true
+
+            //IF THE METHOD USED IS NOT FROM THE SAME CLASS
+            if(method.classFile.fqn.replace("/",".") != invokedMethod.declaringClass.toJava &&
+              !invokedMethod.declaringClass.toJava.contains("java.")){
+              //Get package names
+              var invokedPackage = ""
+              project.packages.foreach( pack => {
+                if (invokedMethod.declaringClass.toJava.startsWith(pack.replace("/","."))){
+                  invokedPackage = pack.replace("/",".")
+                }
+              })
+              var methodPackage = ""
+              project.packages.foreach(pack =>
+                if (method.classFile.fqn.replace("/",".").startsWith(pack.replace("/","."))){
+                  methodPackage = pack.replace("/",".")
+                })
+
+
+              if(invokedPackage != methodPackage){
+                result.foreach(spec => {
+
+                  if(!spec.rules.exists( rule => rule.from == methodPackage && rule.to == invokedPackage)){
+                    resultSet += s" WARNING PACKAGE : $methodPackage \n is not allowed to access PACKAGE : \n $invokedPackage \n"
+                  }
+                  spec.rules.foreach( rule => {
+                    //convert jar to corresponding package
+                    if(rule.to.contains(".jar")){
+                      val splitJar = rule.to.split('.').dropRight(1).mkString(".")
+                      var toPackage = ""
+                      project.packages.foreach(pack => if (pack.contains(splitJar)){
+                        toPackage = pack
+                      })
+                    }else if (rule.from.contains(".jar")){
+                      val splitJar = rule.from.split('.').dropRight(1).mkString(".")
+                      var toPackage = ""
+                      project.packages.foreach(pack => if (pack.contains(splitJar)){
+                        toPackage = pack
+                      })
+                    }
+
+                    //check if package is allowed to use other package
+                    //RULE IST NOT ALLOWING PACKAGE TO PACKAGE
+                    if(methodPackage == rule.from && invokedPackage == rule.to){
+                      rule.except match {
+                        case Some(exceptions) => exceptions.foreach{ex =>
+                          if(ex.from.contains(method.classFile.fqn.replace("/","."))&&
+                            ex.to.contains(invokedMethod.declaringClass.toJava) &&
+                            ex.`type`.toString == "Forbidden"){
+                          }
+
+                          resultSet += s"WARNING CLASS : ${ex.from} \n is not allowed to access CLASS : \n ${ex.to} \n"
+                        }
+                        case None =>
+                      }
+                      //base rule compares two classes
+                    }else if (rule.from == method.classFile.fqn.replace("/",".") &&
+                      rule.to == invokedMethod.declaringClass.toJava && rule.`type`.toString == "Forbidden"){
+                      resultSet += s"WARNING CLASS : ${rule.from} \n is not allowed to access CLASS : \n ${rule.to} \n"
+                    }
+                  })
+                })
+              }
+            }
+          case _ =>
+        }
+      }
     }
   }
+  resultSet.foreach(entry => println(entry))
+
+  println("-------------------------------------------\n")
+
 }

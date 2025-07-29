@@ -21,6 +21,7 @@ import java.net.URL
 
 object Analyze_TPL {
   def main(jarFile: String, libraries: String, typeOfCallgraph: String): Unit = {
+    println("-----------TPL ANALYZER-----------\n")
     // Pfade zu Projekt- und Bibliotheks-JARs
     val projectJar = new File(jarFile)
     val libraryJarNames = Source.fromFile(libraries).getLines().map(_.trim).filter(_.nonEmpty).toSet
@@ -116,5 +117,6 @@ object Analyze_TPL {
       println(f"  Nutzungsanteil:       $percent%2.2f%%")
       println()
     }
+    println("----------------------------------\n")
   }
 }

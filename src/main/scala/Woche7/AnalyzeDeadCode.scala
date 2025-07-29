@@ -18,6 +18,7 @@ import scala.collection.mutable
 object AnalyzeDeadCode {
 
   def main(): Unit = {
+    println("-----------DEAD CODE ANALYZER-----------\n")
     // *** KORREKTUR: Erstelle eine neue Instanz der Dialog-Klasse ***
     val userInputOpt = new InputWindow().showAndGetInput()
     val allFiles: mutable.Set[String] = mutable.Set.empty
@@ -32,7 +33,6 @@ object AnalyzeDeadCode {
 
       case None =>
         println("\nAnalyse vom Benutzer abgebrochen.")
-        System.exit(1)
     }
   }
 
@@ -122,8 +122,8 @@ object AnalyzeDeadCode {
     } finally {
       writer.close()
     }
-
-    val writeToDb = true
+    println("----------------------------------------\n")
+    val writeToDb = false
     if (writeToDb) {
 
       try {

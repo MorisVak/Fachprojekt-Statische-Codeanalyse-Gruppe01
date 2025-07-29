@@ -1,0 +1,13 @@
+{
+  "name" : "dead_code_report_domain_2_benchmarkOne",
+  "resultJson" : {
+    "filesAnalyzed" : [
+      "benchmarkOne.jar"
+    ],
+    "domainUsed" : "called methods are context-sensitively analyzed (up to two levels per default)",
+    "timeFinished" : "2025-07-29T09:32:54.5064467",
+    "totalRuntimeMs" : 138,
+    "methodsFound" : [
+    ]
+  }
+}

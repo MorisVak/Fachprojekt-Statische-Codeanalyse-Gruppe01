@@ -12,6 +12,7 @@ import scala.collection.mutable
 import scala.io.Source
 
 object bytecode_mod {
+  println("-----------FORBIDDEN METHODS ANALYZER-----------\n")
   private val forbiddenMethods: mutable.Map[String, mutable.Set[String]] = mutable.Map.empty //= list.map(k => k -> mutable.Set.empty[String]).toMap
   private type forbiddenMethodsType = Map[ClassFile, mutable.Set[Method]]
   private var forbiddenMethodsMap: forbiddenMethodsType = Map()
@@ -80,4 +81,5 @@ object bytecode_mod {
           true
       }
   }
+  println("------------------------------------------------\n")
 }
