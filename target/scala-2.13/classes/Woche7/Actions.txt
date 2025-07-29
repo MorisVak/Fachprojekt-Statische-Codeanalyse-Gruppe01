@@ -1,7 +1,0 @@
-godclass: true
-criticalMethods: true
-ThirdPartyLibraries: true
-ForbiddenMethods: true
-DeadCodeAnalysis: true
-ArchitectureValidation: true
-Ausgabeordner: Results

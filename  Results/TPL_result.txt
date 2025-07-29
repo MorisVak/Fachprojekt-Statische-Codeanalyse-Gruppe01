@@ -3,7 +3,7 @@
 Number of classfiles: 1038 
 === Ergebnisse der TPL-Analyse === 
  
- Laufzeit des Callgraphs: 3155 Millisekunden 
+ Laufzeit des Callgraphs: 2713 Millisekunden 
  
 Library: hibernate.jar 
    Gesamtmethoden:       45061 

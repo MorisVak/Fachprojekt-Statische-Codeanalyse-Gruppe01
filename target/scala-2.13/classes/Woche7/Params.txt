@@ -1,6 +1,0 @@
-godclass; fieldsThreshold: 20, methodsThreshold: 5, differentClassFieldsThreshold: 5, jarPath: pdfbox-2.0.24.jar
-criticalMethods; config: src/main/scala/Woche2/config.txt, suppressedMethods: src/main/scala/Woche2/supressedMethods.txt, fileSrc: "pdfbox-2.0.24.jar"
-ThirdPartyLibraries; jarFile: openmrs-api-2.8.0-SNAPSHOT.jar, libraries: libraries.txt, typeOfCallgraph: cha
-ForbiddenMethods; fbMethodsSrcFile: src/main/scala/Woche4/src_fbMethods.txt, jarFileSrc:ForbiddenMethods.jar
-AnalyzeDeadCode; -
-ArchitectureValidation; jsonFile: ArchitectureBenchmarkTwo.json, projectFile: BenchmarkTwoJars

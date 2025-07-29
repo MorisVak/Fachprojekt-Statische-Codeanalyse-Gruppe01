@@ -3,6 +3,8 @@ name := "Fachprojekt"
 version := "0.1"
 
 scalaVersion := "2.13.12"
+Compile / mainClass := Some("Woche7.AktionenAuswahl")
+
 
 libraryDependencies += "de.opal-project" % "framework_2.13" % "5.0.0"
 libraryDependencies += "com.lihaoyi" %% "upickle" % "4.1.0"

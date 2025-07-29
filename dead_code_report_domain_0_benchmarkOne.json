@@ -5,8 +5,8 @@
       "benchmarkOne.jar"
     ],
     "domainUsed" : "uses intervals for int values; tracks nullness and must alias information for reference types; records the ai-time def-use information; uses refined signature information",
-    "timeFinished" : "2025-07-29T13:53:28.7951663",
-    "totalRuntimeMs" : 112,
+    "timeFinished" : "2025-07-29T16:20:44.0750696",
+    "totalRuntimeMs" : 141,
     "methodsFound" : [
     ]
   }

@@ -76,19 +76,10 @@ PACKAGES TO ANALYZE :
  
  WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
  is not allowed to access PACKAGE : 
- Woche6.ExampleArchitecture.benchmark_two.util 
- WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
- is not allowed to access PACKAGE : 
  Woche6.ExampleArchitecture.benchmark_two.domain 
  WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
  is not allowed to access PACKAGE : 
  Woche6.ExampleArchitecture.benchmark_two.util 
- WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
- is not allowed to access PACKAGE : 
- Woche6.ExampleArchitecture.benchmark_two.domain 
- WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
- is not allowed to access PACKAGE : 
- Woche6.ExampleArchitecture.benchmark_two.domain 
  WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
  is not allowed to access PACKAGE : 
  Woche6.ExampleArchitecture.benchmark_two.util 
@@ -98,18 +89,6 @@ PACKAGES TO ANALYZE :
  WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
  is not allowed to access PACKAGE : 
  Woche6.ExampleArchitecture.benchmark_two.util 
- WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
- is not allowed to access PACKAGE : 
- Woche6.ExampleArchitecture.benchmark_two.domain 
- WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
- is not allowed to access PACKAGE : 
- Woche6.ExampleArchitecture.benchmark_two.domain 
- WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
- is not allowed to access PACKAGE : 
- Woche6.ExampleArchitecture.benchmark_two.util 
- WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
- is not allowed to access PACKAGE : 
- Woche6.ExampleArchitecture.benchmark_two.domain 
  WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
  is not allowed to access PACKAGE : 
  Woche6.ExampleArchitecture.benchmark_two.util 
@@ -127,10 +106,31 @@ PACKAGES TO ANALYZE :
  Woche6.ExampleArchitecture.benchmark_two.domain 
  WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
  is not allowed to access PACKAGE : 
+ Woche6.ExampleArchitecture.benchmark_two.domain 
+ WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
+ is not allowed to access PACKAGE : 
  Woche6.ExampleArchitecture.benchmark_two.util 
  WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
  is not allowed to access PACKAGE : 
  Woche6.ExampleArchitecture.benchmark_two.domain 
+ WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
+ is not allowed to access PACKAGE : 
+ Woche6.ExampleArchitecture.benchmark_two.domain 
+ WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
+ is not allowed to access PACKAGE : 
+ Woche6.ExampleArchitecture.benchmark_two.domain 
+ WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
+ is not allowed to access PACKAGE : 
+ Woche6.ExampleArchitecture.benchmark_two.util 
+ WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
+ is not allowed to access PACKAGE : 
+ Woche6.ExampleArchitecture.benchmark_two.domain 
+ WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
+ is not allowed to access PACKAGE : 
+ Woche6.ExampleArchitecture.benchmark_two.domain 
+ WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
+ is not allowed to access PACKAGE : 
+ Woche6.ExampleArchitecture.benchmark_two.util 
  WARNING PACKAGE : Woche6.ExampleArchitecture.benchmark_two.service 
  is not allowed to access PACKAGE : 
  Woche6.ExampleArchitecture.benchmark_two.domain 
