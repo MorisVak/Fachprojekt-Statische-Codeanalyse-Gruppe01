@@ -15,3 +15,5 @@ libraryDependencies += "io.circe" %% "circe-parser" % "0.14.13"
 libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "3.0.0"
 libraryDependencies += "com.lihaoyi" %% "requests" % "0.9.0"
 libraryDependencies += "com.github.nscala-time" %% "nscala-time" % "3.0.0"
+
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % "test"
