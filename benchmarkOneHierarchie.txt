@@ -1,0 +1,25 @@
+api/ApiClient -> -
+api/ApiController -> model/ModelMapper
+api/ApiService -> shared/SharedException
+api/ApiServiceImpl -> core/CoreService | shared/SharedException
+
+core/AbstractController -> -
+core/CoreManager -> shared/SharedUtil
+core/CoreService -> shared/SharedException
+core/CoreServiceImpl -> shared/SharedException | api/ApiClient
+
+helper/DateHelper -> -
+helper/HelperA -> shared/SharedUtil
+helper/HelperB -> utils/CryptoUtil | shared/Version
+
+model/ModelA -> helper/HelperA
+model/ModelB -> helper/HelperA
+model/ModelConstants -> -
+model/ModelMapper -> ModelB
+
+shared/SharedException -> -
+shared/SharedUtil -> -
+shared/Version -> -
+
+utils/CryptoUtil -> -
+utils/HttpHelper -> -

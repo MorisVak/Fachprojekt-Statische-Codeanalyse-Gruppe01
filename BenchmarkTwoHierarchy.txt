@@ -1,0 +1,11 @@
+UserService -> Woche6.ExampleArchitecture.benchmark_two.domain.User
+ProductService -> Woche6.ExampleArchitecture.benchmark_two.domain.Product
+OrderService -> Woche6.ExampleArchitecture.benchmark_two.domain.User
+		Woche6.ExampleArchitecture.benchmark_two.domain.Product
+		Woche6.ExampleArchitecture.benchmark_two.domain.Order
+InventoryService -> Woche6.ExampleArchitecture.benchmark_two.domain.InventoryItem
+InvoiceService -> Woche6.ExampleArchitecture.benchmark_two.domain.Order
+		  Woche6.ExampleArchitecture.benchmark_two.domain.Invoice
+NotificationService -> Woche6.ExampleArchitecture.benchmark_two.domain.User
+ApplicationManager -> alle Services
+ServiceManager -> Woche6.ExampleArchitecture.benchmark_two.service.

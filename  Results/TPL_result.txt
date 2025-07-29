@@ -1,0 +1,17 @@
+-----------TPL ANALYZER-----------
+ 
+Number of classfiles: 1038 
+=== Ergebnisse der TPL-Analyse === 
+ 
+ Laufzeit des Callgraphs: 2713 Millisekunden 
+ 
+Library: hibernate.jar 
+   Gesamtmethoden:       45061 
+   Davon aufgerufen:     211 
+   Nutzungsanteil:       0,47% 
+ 
+Library: spring.jar 
+   Gesamtmethoden:       8240 
+   Davon aufgerufen:     30 
+   Nutzungsanteil:       0,36% 
+ 

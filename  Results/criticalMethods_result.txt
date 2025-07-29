@@ -1,0 +1,3 @@
+-----------CRITICAL METHODS ANALYZER----------- 
+ 
+ No critical methods found :) 

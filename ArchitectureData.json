@@ -1,0 +1,21 @@
+{
+  "defaultRule": "FORBIDDEN",
+  "rules": [
+  {
+    "from": "com.reg.core",
+    "to": "Address-Manager.jar",
+    "type": "ALLOWED",
+    "except":[
+      {
+        "from": "com.reg.core.impl",
+        "to": "Address-Manager.jar",
+        "type": "FORBIDDEN"
+        }
+      ]
+    },{
+    "from": "com.reg.utils.Foo",
+    "to": "com.xdb.adapter.Bar",
+    "type": "ALLOWED"
+    }
+  ]
+}

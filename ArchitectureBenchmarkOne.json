@@ -1,0 +1,22 @@
+{
+  "defaultRule": "FORBIDDEN",
+  "rules": [
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.api.ApiController",    "to": "Woche6.ExampleArchitecture.benchmarkOne.model.ModelMapper",    "type": "ALLOWED" },
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.api.ApiService",       "to": "Woche6.ExampleArchitecture.benchmarkOne.shared.SharedException", "type": "ALLOWED" },
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.api.ApiServiceImpl",   "to": "Woche6.ExampleArchitecture.benchmarkOne.core.CoreService",      "type": "ALLOWED" },
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.api.ApiServiceImpl",   "to": "com.example.shared.SharedException","type": "ALLOWED" },
+
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.core.CoreManager",     "to": "Woche6.ExampleArchitecture.benchmarkOne.shared.SharedUtil",     "type": "ALLOWED" },
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.core.CoreService",     "to": "Woche6.ExampleArchitecture.benchmarkOne.shared.SharedException","type": "ALLOWED" },
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.core.CoreServiceImpl", "to": "Woche6.ExampleArchitecture.benchmarkOne.shared.SharedException","type": "ALLOWED" },
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.core.CoreServiceImpl", "to": "Woche6.ExampleArchitecture.benchmarkOne.api.ApiClient",       "type": "ALLOWED" },
+
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.helper.HelperA",       "to": "Woche6.ExampleArchitecture.benchmarkOne.shared.SharedUtil",     "type": "ALLOWED" },
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.helper.HelperB",       "to": "Woche6.ExampleArchitecture.benchmarkOne.utils.CryptoUtil",      "type": "ALLOWED" },
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.helper.HelperB",       "to": "Woche6.ExampleArchitecture.benchmarkOne.shared.Version",        "type": "ALLOWED" },
+
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.model.ModelA",         "to": "Woche6.ExampleArchitecture.benchmarkOne.helper.HelperA",       "type": "ALLOWED" },
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.model.ModelB",         "to": "Woche6.ExampleArchitecture.benchmarkOne.helper.HelperA",       "type": "ALLOWED" },
+    { "from": "Woche6.ExampleArchitecture.benchmarkOne.model.ModelMapper",    "to": "Woche6.ExampleArchitecture.benchmarkOne.model.ModelB",        "type": "ALLOWED" }
+  ]
+}

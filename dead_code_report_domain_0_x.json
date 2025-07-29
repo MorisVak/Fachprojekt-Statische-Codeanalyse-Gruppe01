@@ -1,0 +1,13 @@
+{
+  "name" : "dead_code_report_domain_0_x",
+  "resultJson" : {
+    "filesAnalyzed" : [
+      "x"
+    ],
+    "domainUsed" : "uses intervals for int values; tracks nullness and must alias information for reference types; records the ai-time def-use information; uses refined signature information",
+    "timeFinished" : "2025-07-27T20:41:06.0413365",
+    "totalRuntimeMs" : 54,
+    "methodsFound" : [
+    ]
+  }
+}
