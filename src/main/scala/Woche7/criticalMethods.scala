@@ -1,6 +1,7 @@
 package Woche7
 
 import com.typesafe.config.{Config, ConfigValueFactory}
+import java.io.PrintWriter
 import org.opalj.BaseConfig
 import org.opalj.ai.domain.l2.DefaultPerformInvocationsDomainWithCFGAndDefUse
 import org.opalj.ai.fpcf.properties.AIDomainFactoryKey
@@ -14,7 +15,9 @@ import scala.io.Source
 
 object criticalMethods{
   def main(conf: String, supprMethods: String, file: String):Unit = {
+    var outputString = ""
     println("-----------CRITICAL METHODS ANALYZER-----------\n")
+    outputString += s"-----------CRITICAL METHODS ANALYZER----------- \n \n"
     var criticalCands = Array.empty[String]
     var suppressedMethods = Array.empty[String]
     //Get input of the config.txt file
@@ -79,9 +82,13 @@ object criticalMethods{
     //if critical method is contained, create an RTA CallGraph
     if(containsCriticalMethod){
       println("FOUND CRITICAL METHOD : ")
-      setOfContainedMethods.foreach(contained => println(s"- ${contained._1} in class ${contained._2} "))
+      outputString += s"FOUND CRITICAL METHOD : \n \n"
+      setOfContainedMethods.foreach(contained => {
+        println(s"- ${contained._1} in class ${contained._2} ")
+        outputString += s"- ${contained._1} in class ${contained._2} \n"
+      })
       println("Validating if critical methods are being used : ")
-
+      outputString += "Validating if critical methods are being used : \n \n"
       //Create RTA Callgraph
       val cg = project.get(RTACallGraphKey)
 
@@ -99,18 +106,30 @@ object criticalMethods{
       })
       if(criticalMethodUsed){
         println("WARNING CRITICAL METHODS ARE BEING USED : ")
-        setOfUsedMethods.foreach(contained => println(s"- ${contained._1} in method ${contained._2}" +
-          s" in class ${contained._3} "))
+        outputString += s"WARNING CRITICAL METHODS ARE BEING USED : \n"
+        setOfUsedMethods.foreach(contained => {
+          println(s"- ${contained._1} in method ${contained._2}" +
+            s" in class ${contained._3} ")
+          outputString += s"- ${contained._1} in method ${contained._2}" +
+            s" in class ${contained._3}  \n"
+        })
       }else{
         println("CRITICAL METHODS EXIST BUT ARE NOT BEING USED")
         println("please check : ")
-        setOfContainedMethods.foreach(method =>
-          println(s"- ${method._1} in method ${method._2} in class ${method._3} "))
+        outputString += "CRITICAL METHODS EXIST BUT ARE NOT BEING USED \n please check : \n \n"
+        setOfContainedMethods.foreach(method => {
+          println(s"- ${method._1} in method ${method._2} in class ${method._3} ")
+          outputString += s"- ${method._1} in method ${method._2} in class ${method._3} \n"
+        })
       }
     }else{
       println("\n No critical methods found :)")
+      outputString += " No critical methods found :) \n"
     }
 
+    val pw = new PrintWriter(" Results/criticalMethods_result.txt")
+    pw.write(outputString)
+    pw.close()
     println("-----------------------------------------------\n")
   }
 

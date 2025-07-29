@@ -5,8 +5,8 @@
       "AccessibilityTestJava.jar"
     ],
     "domainUsed" : "uses intervals for int values; tracks nullness and must alias information for reference types; records the ai-time def-use information; uses refined signature information",
-    "timeFinished" : "2025-07-01T16:56:37.6251958",
-    "totalRuntimeMs" : 572,
+    "timeFinished" : "2025-07-29T13:06:54.4777327",
+    "totalRuntimeMs" : 96,
     "methodsFound" : [
       {
         "fullSignature" : "void Woche5.AccessibilityTestJava.mOne()",

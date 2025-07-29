@@ -1,6 +1,7 @@
 package Woche7
 
 import org.opalj.ba.toDA
+import java.io.PrintWriter
 import org.opalj.bc.Assembler
 import org.opalj.br.analyses.Project
 import org.opalj.br.instructions.Instruction
@@ -17,6 +18,8 @@ object bytecode_mod {
   private type forbiddenMethodsType = Map[ClassFile, mutable.Set[Method]]
   private var forbiddenMethodsMap: forbiddenMethodsType = Map()
   def main(fbMethodsSrcFile: String, jarFileSrc: String): Unit = {
+    var outputString =""
+    outputString += "-----------FORBIDDEN METHODS ANALYZER-----------\n \n"
     //Lese datei aus
     val lines: List[String] = Source.fromFile(fbMethodsSrcFile).getLines().toList
     lines.foreach(l => l.replace(" ", ""))
@@ -50,11 +53,23 @@ object bytecode_mod {
       forbiddenMethodsMap += (classFile -> methodSet)
     }
     println(forbiddenMethodsMap)
-    forbiddenMethodsMap.foreach { classFile =>
-      val newClassFileA = modifyCode(forbiddenMethodsMap(classFile._1).toArray)
-      val newClassFileABytes: Array[Byte] = Assembler(toDA(newClassFileA))
-      Files.write(Paths.get(s"${classFile._1.thisType.simpleName}_copy.class"), newClassFileABytes)
+    if(forbiddenMethodsMap.size > 0) {
+      outputString += s"ALL FORBIDDEN METHODS \n "
+      forbiddenMethodsMap.foreach { classFile =>
+        outputString += s"All forbidden Methods of ${classFile._1.fqn} : \n"
+        classFile._2.foreach(method => {
+          outputString += s" - ${method.fullyQualifiedSignature} \n"
+        })
+        val newClassFileA = modifyCode(forbiddenMethodsMap(classFile._1).toArray)
+        val newClassFileABytes: Array[Byte] = Assembler(toDA(newClassFileA))
+        Files.write(Paths.get(s"${classFile._1.thisType.simpleName}_copy.class"), newClassFileABytes)
+      }
+    }else{
+      outputString += "NO FORBIDDEN METHODS EXIST!"
     }
+    val pw = new PrintWriter(" Results/forbiddenMethods_result.txt")
+    pw.write(outputString)
+    pw.close()
   }
 
   private def modifyCode(m: Array[Method]): ClassFile ={

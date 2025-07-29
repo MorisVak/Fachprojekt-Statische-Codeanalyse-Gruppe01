@@ -1,6 +1,7 @@
 package Woche7
 
 import io.circe.Json
+import java.io.PrintWriter
 import io.circe.generic.auto._
 import io.circe.syntax._
 import org.joda.time.{DateTime, Duration}
@@ -16,9 +17,11 @@ import java.time.LocalDateTime
 import scala.collection.mutable
 
 object AnalyzeDeadCode {
-
+  var outputString = ""
   def main(): Unit = {
+
     println("-----------DEAD CODE ANALYZER-----------\n")
+    outputString = "-----------DEAD CODE ANALYZER-----------\n \n"
     // *** KORREKTUR: Erstelle eine neue Instanz der Dialog-Klasse ***
     val userInputOpt = new InputWindow().showAndGetInput()
     val allFiles: mutable.Set[String] = mutable.Set.empty
@@ -29,8 +32,9 @@ object AnalyzeDeadCode {
         println(s"Gewählter Domain-Index: ${input.someNumber}")
         println("Dateien:")
         input.filePaths.foreach(file => allFiles += file)
+        outputString += s"Gewählter Domain-Index: ${input.someNumber} \n"
+        outputString += s" Alle Datein: $allFiles \n \n"
         runAnalysis(input.someNumber, allFiles)
-
       case None =>
         println("\nAnalyse vom Benutzer abgebrochen.")
     }
@@ -70,6 +74,7 @@ object AnalyzeDeadCode {
 
             if (evaluatedInstructionPCs.size < methodCode.size) {
               println(s"${methodCode.size - evaluatedInstructionPCs.size} instructions not reachable in ${method.fullyQualifiedSignature}")
+              outputString += s"${methodCode.size - evaluatedInstructionPCs.size} instructions not reachable in ${method.fullyQualifiedSignature} \n"
               val evaluated: BitSet = result.evaluatedInstructions
               val instructions: Seq[Instruction] = methodCode.instructions
               val allSet: mutable.Set[Instruction] = mutable.Set(instructions: _*)
@@ -119,9 +124,13 @@ object AnalyzeDeadCode {
     try {
       writer.write(jsonString)
       println(s"JSON-Report wurde erfolgreich in '${file.getAbsolutePath}' gespeichert.")
+      outputString += jsonString
     } finally {
       writer.close()
     }
+    val pw = new PrintWriter(" Results/deadCode_result.txt")
+    pw.write(outputString)
+    pw.close()
     println("----------------------------------------\n")
     val writeToDb = false
     if (writeToDb) {

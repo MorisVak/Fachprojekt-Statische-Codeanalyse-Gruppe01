@@ -2,7 +2,7 @@ package Woche7
 
 import com.typesafe.config.{Config, ConfigFactory, ConfigValueFactory}
 import org.opalj.BaseConfig
-
+import java.io.PrintWriter
 import scala.io.{Source, StdIn}
 import scala.collection.mutable
 import org.opalj.br.{ClassFile, DeclaredMethod, Type}
@@ -21,7 +21,9 @@ import java.net.URL
 
 object Analyze_TPL {
   def main(jarFile: String, libraries: String, typeOfCallgraph: String): Unit = {
+    var outputString = ""
     println("-----------TPL ANALYZER-----------\n")
+    outputString += "-----------TPL ANALYZER-----------\n \n"
     // Pfade zu Projekt- und Bibliotheks-JARs
     val projectJar = new File(jarFile)
     val libraryJarNames = Source.fromFile(libraries).getLines().map(_.trim).filter(_.nonEmpty).toSet
@@ -44,6 +46,7 @@ object Analyze_TPL {
 
     //val callGraph = project.get(CHACallGraphKey)
     println(s"Number of classfiles: ${project.classFilesCount}")
+    outputString += s"Number of classfiles: ${project.classFilesCount} \n"
     val totalMethodsPerLibrary = scala.collection.mutable.Map[String, Int]()
     val usedMethodsPerLibrary = scala.collection.mutable.Map[String, Int]().withDefaultValue(0)
 
@@ -101,6 +104,7 @@ object Analyze_TPL {
     val end = System.nanoTime()
     val duration = (end - start) / 1000000
     println(s"Laufzeit des Callgraphs: $duration Millisekunden")
+    outputString += s"=== Ergebnisse der TPL-Analyse === \n \n Laufzeit des Callgraphs: $duration Millisekunden \n \n"
     // Ergebnisse ausgeben
     println("=== Ergebnisse der TPL-Analyse ===")
     list.toSeq.sorted.foreach { libName =>
@@ -116,7 +120,14 @@ object Analyze_TPL {
       println(s"  Davon aufgerufen:     $used")
       println(f"  Nutzungsanteil:       $percent%2.2f%%")
       println()
+      outputString += s"Library: $libName.jar \n   Gesamtmethoden:       $total \n   Davon aufgerufen:     $used \n " +
+        f"  Nutzungsanteil:       $percent%2.2f%% \n \n"
     }
+
+    val pw = new PrintWriter(" Results/TPL_result.txt")
+    pw.write(outputString)
+    pw.close()
+
     println("----------------------------------\n")
   }
 }

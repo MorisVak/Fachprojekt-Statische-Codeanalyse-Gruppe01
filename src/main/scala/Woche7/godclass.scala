@@ -2,6 +2,7 @@ package Woche7
 
 import org.opalj.br
 import org.opalj.br.analyses.Project
+import java.io.PrintWriter
 
 import java.io.{File, FileOutputStream, PrintStream}
 import scala.collection.mutable
@@ -11,8 +12,10 @@ object godclass {
 
   def main(fieldsThreshold: Int, methodsThreshold: Int, differentClassFieldsThreshold: Int, jarPath: String): Unit = {
     val jarFile = new java.io.File(jarPath)
+    var outputString = ""
 
     println("-----------GOD CLASS ANALYZER-----------\n")
+    outputString += "-----------GOD CLASS ANALYZER-----------\n \n "
 
     //Result map that saves all potential god classes
     val results = mutable.Map[String, Array[String]]()
@@ -41,12 +44,15 @@ object godclass {
           println("CLASS EXCEEDED FIELDS THRESHOLD = might be a god class")
           println(s"Fields Threshold = ${fieldsThreshold}")
           println(s"Count of FIELDS for Class ${classFile} = ${countFields} ")
+          outputString +=s"CLASS EXCEEDED FIELDS THRESHOLD = " +
+            s"might be a god class \n Fields Threshold = ${fieldsThreshold} " +
+            s"\n Count of FIELDS for Class ${classFile} = ${countFields} \n "
           // Get the current array (or an empty array if missing)
           val currentArray = results.getOrElse(classFile.toString(), Array[String]())
 
           // Create a new array by concatenating the new value
           val updatedArray = currentArray :+ s"Field Count EXCEEDED : ${countFields} instead of ${fieldsThreshold}"
-
+          outputString += s"Field Count EXCEEDED : ${countFields} instead of ${fieldsThreshold} \n"
           // Update the map entry
           results.update(classFile.fqn, updatedArray)
         }
@@ -55,11 +61,15 @@ object godclass {
           println("CLASS EXCEEDED METHODS THRESHOLD = might be a god class")
           println(s"Methods Threshold = ${methodsThreshold}")
           println(s"Count of METHODS for Class ${classFile} = ${countMethods} ")
+          outputString += s"CLASS EXCEEDED METHODS THRESHOLD = might be a god class \n " +
+            s"Methods Threshold = ${methodsThreshold} \n " +
+            s"Count of METHODS for Class ${classFile} = ${countMethods} \n"
           // Get the current array (or an empty array if missing)
           val currentArray = results.getOrElse(classFile.toString(), Array[String]())
 
           // Create a new array by concatenating the new value
           val updatedArray = currentArray :+ s"Method Count EXCEEDED : ${countMethods} instead of ${methodsThreshold}"
+          outputString += s"Method Count EXCEEDED : ${countMethods} instead of ${methodsThreshold} \n"
 
           // Update the map entry
           results.update(classFile.fqn, updatedArray)
@@ -72,26 +82,41 @@ object godclass {
           val currentArray = results.getOrElse(classFile.toString(), Array[String]())
 
           // Create a new array by concatenating the new value
-          val updatedArray = currentArray :+ s"Different Object Count EXCEEDED : ${countDifferentObjectFields} instead of" +
-            s" ${differentClassFieldsThreshold}"
+          val updatedArray = currentArray :+ s"Different Object Count EXCEEDED : ${countDifferentObjectFields} instead " +
+            s"of ${differentClassFieldsThreshold}"
+          outputString += s"CLASS EXCEEDEDS DIFFERENT OBJECT FIELDS = might be a god class \n " +
+            s"Different Object Threshold = ${differentClassFieldsThreshold} \n " +
+            s"Count of Different Objects for Class ${classFile} = ${countDifferentObjectFields}  \n " +
+            s"Different Object Count EXCEEDED : ${countDifferentObjectFields} instead of ${differentClassFieldsThreshold} \n"
 
           // Update the map entry
           results.update(classFile.toString(), updatedArray)
         }
       }
       println("-----------RESULT-----------")
+    outputString += s"-----------RESULT----------- \n"
       results.foreach { case (key, array) =>
         // Only print if array is not empty
         if (array.nonEmpty) {
           godClassCount += 1
           println(s"\n$key:")
-          array.foreach(value => println(s"  - $value"))
+          outputString += s"$key: \n "
+          array.foreach(value => {
+            println(s"  - $value")
+            outputString += s"  - $value \n"
+          })
           println("_____________________________________________________")
+          outputString += s"_____________________________________________________\n"
         }
       }
       println(s"\nTotal potential god classes : ${godClassCount} of ${project.classFilesCount} ")
+    outputString += s"Total potential god classes : ${godClassCount} of ${project.classFilesCount}"
 
     println("-----------------------------------------------\n")
+
+    val printer = new PrintWriter(" Results/godclass_result.txt")
+    printer.write(outputString)
+    printer.close()
   }
 
   def totalClasses(methods: br.Methods): Int = {
@@ -110,7 +135,6 @@ object godclass {
     fields.foreach{field =>
         if(!field.fieldType.toString.contains("java/") && field.fieldType.toString.contains("ObjectType")){
           if(fieldClass.thisType.toString != field.fieldType.toString){
-            println(s"TYPE ________   ${field.fieldType} _____________")
 
             count += 1
           }

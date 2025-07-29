@@ -5,6 +5,7 @@ import io.circe._
 import io.circe.generic.semiauto._
 import io.circe.jawn.decode
 import org.opalj.br.analyses.Project
+import java.io.PrintWriter
 
 import java.nio.file.Paths
 import scala.collection.mutable
@@ -57,19 +58,21 @@ object Specification {
 }
 
 object ArchitectureValidation {
+  var outputString = ""
   def main(jsonFile: String, projectFile: String): Unit = {
     println("-----------ARCHITECTURE ANALYZER-----------\n")
+    outputString += "-----------ARCHITECTURE ANALYZER-----------\n \n"
     val filesToBenchmark = new File(projectFile)
     var continueAnalysis = true
     val project = Project(filesToBenchmark)
-    project.packages.foreach(pack => {println(pack)})
+    outputString += "PACKAGES TO ANALYZE : \n"
+    project.packages.foreach(pack => {
+    outputString += s" - $pack \n"})
 
     //extracting files
     val files = filesToBenchmark.listFiles().toList
 
     val fileNames = files.map(f => f.getName)
-
-    println(fileNames)
 
 
     //1. JSON einlesen
@@ -86,6 +89,8 @@ object ArchitectureValidation {
       case Right(spec) =>
         println("JSON erfolgreich geparst:")
         println(s"Default Rule: ${spec.defaultRule}")
+        outputString += s" ________________________________________ \n" +
+          s" - Default Rule: ${spec.defaultRule} - \n"
         var ruleIndex = 0
         spec.rules.foreach { rule =>
           println(s"  Rule ${ruleIndex + 1}:")
@@ -93,13 +98,17 @@ object ArchitectureValidation {
           println(s"    To: ${rule.to}")
           println(s"    Type: ${rule.`type`}")
           var exIndex = 0
+          outputString += s"  Rule ${ruleIndex + 1}: \n    From: ${rule.from} \n    To: ${rule.to}     Type: ${rule.`type`}" +
+            s" \n \n"
           rule.except.foreach { exceptions =>
             println("    Exceptions:")
+            outputString+= "    Exceptions: \n"
             exceptions.foreach { ex =>
               println(s"      Exception ${exIndex + 1}:")
               println(s"        From: ${ex.from}")
               println(s"        To: ${ex.to}")
               println(s"        Type: ${ex.`type`}")
+              outputString+= s"      Exception ${exIndex + 1}: \n         From: ${ex.from} \n        To: ${ex.to} \n         Type: ${ex.`type`}\n"
             }
             exIndex += 1
           }
@@ -120,21 +129,25 @@ object ArchitectureValidation {
             if(rule.from.contains(".jar") && rule.to.contains(".jar")){
               if(!fileNames.contains(rule.from) || !fileNames.contains(rule.to)){
                 println(s"Ungültiges JAR 'from' oder 'to' in Regel:\n  from: ${rule.from}\n  to: ${rule.to}")
+                outputString += s"Ungültiges JAR 'from' oder 'to' in Regel:\n  from: ${rule.from}\n  to: ${rule.to} \n"
                 continueAnalysis = false
               }
             }else if (rule.from.contains(".jar") && !rule.to.contains(".jar")){
               if(!fileNames.contains(rule.from) || !existsAsPackageOrClass(rule.to)){
                 println(s"Ungültiges 'from' oder 'to' in Regel:\n  from: ${rule.from}\n  to: ${rule.to}")
+                outputString += s"Ungültiges 'from' oder 'to' in Regel:\n  from: ${rule.from}\n  to: ${rule.to} \n"
                 continueAnalysis = false
               }
             }else if (rule.to.contains(".jar") && !rule.from.contains(".jar")){
               if(!fileNames.contains(rule.to) || !existsAsPackageOrClass(rule.from)){
                 println(s"Ungültiges 'from' oder 'to' in Regel:\n  from: ${rule.from}\n  to: ${rule.to}")
+                outputString += s"Ungültiges 'from' oder 'to' in Regel:\n  from: ${rule.from}\n  to: ${rule.to} \n"
                 continueAnalysis = false
               }
             }else{
               if (!existsAsPackageOrClass(rule.from) || !existsAsPackageOrClass(rule.to)) {
                 println(s"Ungültiges 'from' oder 'to' in Regel:\n  from: ${rule.from}\n  to: ${rule.to}")
+                outputString += s"Ungültiges 'from' oder 'to' in Regel:\n  from: ${rule.from}\n  to: ${rule.to} \n"
                 continueAnalysis = false
               }
 
@@ -142,6 +155,7 @@ object ArchitectureValidation {
               rule.except.getOrElse(Nil).foreach { ex =>
                 if (!existsAsPackageOrClass(ex.from) || !existsAsPackageOrClass(ex.to)) {
                   println(s"Ungültiges 'from' oder 'to' in Ausnahme:\n  from: ${ex.from}\n  to: ${ex.to}")
+                  outputString += s"Ungültiges 'from' oder 'to' in Ausnahme:\n  from: ${rule.from}\n  to: ${rule.to} \n"
                   continueAnalysis = false
                 }
               }
@@ -190,6 +204,7 @@ object ArchitectureValidation {
 
                         if (!spec.rules.exists(rule => rule.from == methodPackage && rule.to == invokedPackage)) {
                           resultSet += s" WARNING PACKAGE : $methodPackage \n is not allowed to access PACKAGE : \n $invokedPackage \n"
+                          outputString += s" WARNING PACKAGE : $methodPackage \n is not allowed to access PACKAGE : \n $invokedPackage \n"
                         }
                         spec.rules.foreach(rule => {
                           //convert jar to corresponding package
@@ -235,9 +250,18 @@ object ArchitectureValidation {
           }
         }
       }
-      resultSet.foreach(entry => println(entry))
+      resultSet.foreach(entry => {
+        println(entry)
+        outputString += s"$entry"
+      })
+      val pw = new PrintWriter(" Results/architechtureValidation_result.txt")
+      pw.write(outputString)
+      pw.close()
     }else{
       println("ANALYSIS TERMINATED CHECK ABOVE FOR ERROR")
+      val pw = new PrintWriter(" Results/architechtureValidation_result.txt")
+      pw.write(outputString)
+      pw.close()
     }
     println("-------------------------------------------\n")
   }
