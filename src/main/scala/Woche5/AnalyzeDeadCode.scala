@@ -43,7 +43,7 @@ object AnalyzeDeadCode {
     }
   }
 
-  private def runAnalysis(domainIndex: Int, allFiles: mutable.Set[String]): Unit = {
+  def runAnalysis(domainIndex: Int, allFiles: mutable.Set[String]): Unit = {
     val domainDescriptions = DomainRegistry.domainDescriptions
     var cnt = 0
     val domainMap = domainDescriptions.map { descr =>
